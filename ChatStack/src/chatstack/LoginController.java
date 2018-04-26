@@ -3,6 +3,7 @@ package chatstack;
 
 
 
+import java.awt.Color;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -60,10 +61,13 @@ public class LoginController implements Initializable {
         stage.setIconified(true);
     }
     
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }  
+    
     
     
     
