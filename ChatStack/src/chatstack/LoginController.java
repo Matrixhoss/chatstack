@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package chatstack;
 
 import java.net.URL;
@@ -16,7 +12,7 @@ import javafx.scene.control.Label;
  *
  * @author Hesham-Desktop
  */
-public class FXMLDocumentController implements Initializable {
+public class LoginController implements Initializable {
     
     @FXML
     private Label label;
