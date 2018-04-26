@@ -21,7 +21,7 @@
       <Label layoutX="54.0" layoutY="60.0" />
       <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="176.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="StackLogo.png" />
+            <Image url="@StackLogo.png" />
          </image></ImageView>
       <ToolBar prefHeight="17.0" prefWidth="500.0">
          <items>

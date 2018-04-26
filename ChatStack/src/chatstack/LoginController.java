@@ -19,8 +19,7 @@ public class LoginController implements Initializable {
     
     @FXML
     private Label label;
-    @FXML
-    private ImageView iv_stack;
+    
     
     
     
