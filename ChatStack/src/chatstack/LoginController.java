@@ -38,32 +38,27 @@ public class LoginController implements Initializable {
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
-
     @FXML
     void pressToolBar(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
-    
         @FXML
     void close(MouseEvent event) {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
     }
-
     @FXML
     void maximize(MouseEvent event) {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setFullScreenExitHint(" ");
         stage.setFullScreen(true);
     }
-
     @FXML
     void minimize(MouseEvent event) {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
-
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

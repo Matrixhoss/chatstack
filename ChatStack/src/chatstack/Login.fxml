@@ -17,25 +17,25 @@
       <JFXTextField blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="177.0" layoutY="115.0" promptText="UserName" unFocusColor="WHITE" />
       <JFXPasswordField blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="177.0" layoutY="174.0" promptText="Password" unFocusColor="WHITE" />
       <JFXButton layoutX="208.0" layoutY="233.0" prefHeight="17.0" prefWidth="74.0" style="-fx-background-color: #03add7;" text="Login" textFill="#2d3447" />
-      <JFXButton layoutX="418.0" layoutY="301.0" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #071016;" text="Sign up" />
+      <JFXButton layoutX="418.0" layoutY="301.0" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #6897bb;" text="Sign up" />
       <Label layoutX="54.0" layoutY="60.0" />
       <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="176.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@StackLogo.png" />
          </image></ImageView>
-      <ToolBar onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0">
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;">
          <items>
-            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="0.0" prefWidth="3.0" text="X" fx:id="xIcon">
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="0.0" prefWidth="3.0" style="-fx-background-color: #f10505; -fx-border-radius: 70; -fx-background-radius: 70;" fx:id="xIcon">
                <font>
                   <Font size="6.0" />
                </font>
             </Button>
-            <Button fx:id="maxIcon" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="0.0" prefWidth="3.0" text="[ ]">
+            <Button fx:id="maxIcon" disable="true" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="0.0" prefWidth="3.0" style="-fx-background-color: #f7ea13;" textFill="#f7ea13">
                <font>
                   <Font size="6.0" />
                </font>
             </Button>
-            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="0.0" prefWidth="3.0" text="-">
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="0.0" prefWidth="3.0" style="-fx-background-color: #09ee15;" textFill="#09ee15">
                <font>
                   <Font size="6.0" />
                </font>
