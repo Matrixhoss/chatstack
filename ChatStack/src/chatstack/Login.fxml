@@ -23,14 +23,19 @@
          <image>
             <Image url="@StackLogo.png" />
          </image></ImageView>
-      <ToolBar prefHeight="17.0" prefWidth="500.0">
+      <ToolBar onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0">
          <items>
-            <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="3.0" text="X">
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="0.0" prefWidth="3.0" text="X" fx:id="xIcon">
                <font>
                   <Font size="6.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="3.0" text="-">
+            <Button fx:id="maxIcon" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="0.0" prefWidth="3.0" text="[ ]">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="0.0" prefWidth="3.0" text="-">
                <font>
                   <Font size="6.0" />
                </font>
