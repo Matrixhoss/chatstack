@@ -13,14 +13,11 @@
 <AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.LoginController">
    <children>
       <Pane layoutX="176.0" layoutY="32.0" />
-      <JFXTextField focusColor="#03add7" layoutX="177.0" layoutY="96.0" promptText="UserName" unFocusColor="#89b2c9" />
-      <JFXPasswordField focusColor="#03add7" layoutX="177.0" layoutY="138.0" promptText="Password" />
-      <JFXButton layoutX="110.0" layoutY="213.0" prefHeight="39.0" prefWidth="74.0" style="-fx-background-color: #03add7;" text="Login" />
+      <JFXTextField focusColor="#03add7" layoutX="177.0" layoutY="113.0" promptText="UserName" unFocusColor="#89b2c9" />
+      <JFXPasswordField focusColor="#03add7" layoutX="177.0" layoutY="150.0" promptText="Password" unFocusColor="#89b2c9" />
+      <JFXButton layoutX="102.0" layoutY="213.0" prefHeight="39.0" prefWidth="74.0" style="-fx-background-color: #03add7;" text="Login" />
       <JFXButton layoutX="312.0" layoutY="213.0" prefHeight="39.0" prefWidth="74.0" style="-fx-background-color: #03add7;" text="Sign up" />
       <Label layoutX="54.0" layoutY="60.0" />
-      <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="176.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../StackLogo.png" />
-         </image></ImageView>
+      <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="158.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
