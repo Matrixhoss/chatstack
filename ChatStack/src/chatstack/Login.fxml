@@ -25,17 +25,17 @@
          </image></ImageView>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;">
          <items>
-            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="0.0" prefWidth="3.0" style="-fx-background-color: #f10505; -fx-border-radius: 70; -fx-background-radius: 70;" stylesheets="@hoverStyle.css" fx:id="xIcon">
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
                <font>
                   <Font size="6.0" />
                </font>
             </Button>
-            <Button fx:id="maxIcon" disable="true" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="0.0" prefWidth="3.0" style="-fx-background-color: #f7ea13;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
+            <Button fx:id="maxIcon" disable="true" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
                <font>
                   <Font size="6.0" />
                </font>
             </Button>
-            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="0.0" prefWidth="3.0" style="-fx-background-color: #09ee15;" stylesheets="@hoverStyle.css" textFill="#09ee15">
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #09ee15; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#09ee15">
                <font>
                   <Font size="6.0" />
                </font>
