@@ -43,7 +43,7 @@ public class SignupController implements Initializable {
 
     }
     
-    
+    //start of title bar code
     double x,y;
     @FXML
     void dragToolBar(MouseEvent event) {
