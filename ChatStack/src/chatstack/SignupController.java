@@ -1,56 +1,35 @@
 
 package chatstack;
 
-
-
-import com.jfoenix.controls.JFXButton;
-import java.awt.Color;
+import static chatstack.ChatStack.StageOpened;
 import java.io.IOException;
-import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import static chatstack.ChatStack.StageOpened;
+
 /**
+ * FXML Controller class
  *
  * @author Hesham-Desktop
  */
-public class LoginController implements Initializable {
+public class SignupController implements Initializable {
+
     
     @FXML
-    private JFXButton singup_btn;
-
-    @FXML
-    private ImageView iv_stack;
-
-    @FXML
-    private JFXButton login_btn;
-    
-    
-    @FXML
-    void handeLogin(ActionEvent event) {
-        //login code goes here   var: login_btn
-    }
-
-    @FXML
-    void handleSignup(ActionEvent event) {
-        //sign up code hoes here var: signup_btn 
-         try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Signup.fxml"));
+    void handleCancel(ActionEvent event) {
+        
+        try {   
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
             Parent root = loader.load();
             Scene sc1 = new Scene(root);
             StageOpened.setScene(sc1);
@@ -59,14 +38,12 @@ public class LoginController implements Initializable {
         }
     }
     
+    @FXML
+    void handleCreate(ActionEvent event) {
 
+    }
     
     
-    
-    
-    
-    
-    //Start of title bar code
     double x,y;
     @FXML
     void dragToolBar(MouseEvent event) {
@@ -96,14 +73,12 @@ public class LoginController implements Initializable {
         stage.setIconified(true);
     }
     //end of title bar code
-
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-    }  
-    
-    
-    
+        // TODO
+    }    
     
 }

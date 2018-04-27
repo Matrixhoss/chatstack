@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="500.0" style="-fx-background-color: #2D3447;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="chatstack.SignupController">
+   <children>
+      <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="177.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@StackLogo.png" />
+         </image>
+      </ImageView>
+      <JFXTextField blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="179.0" layoutY="94.0" promptText="UserName" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
+      <JFXPasswordField blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="179.0" layoutY="140.0" promptText="Password" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
+      <JFXPasswordField blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="179.0" layoutY="186.0" promptText="Retype Password" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
+      <JFXTextField blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="179.0" layoutY="239.0" promptText="Email" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
+      <JFXButton fx:id="crate_btn" layoutX="199.0" layoutY="289.0" onAction="#handleCreate" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #03add7;" text="Create Acount" textFill="#2d3447" />
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;">
+         <items>
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="maxIcon" disable="true" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #09ee15; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#09ee15">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
+      <JFXButton fx:id="cancel_btn" layoutX="20.0" layoutY="289.0" onAction="#handleCancel" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #6897bb;" text="Cancel" textFill="#2d3447" />
+      <Label layoutX="323.0" layoutY="107.0" prefHeight="17.0" prefWidth="138.0" text="Will be displayed in chat" textFill="#cdcccc" />
+   </children>
+</AnchorPane>

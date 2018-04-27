@@ -18,15 +18,19 @@ import javafx.stage.StageStyle;
  */
 public class ChatStack extends Application {
     
+    public static Stage StageOpened;
+    public static Scene sc;
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
+        StageOpened=stage;
+        StageOpened.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        
-        stage.initStyle(StageStyle.UNDECORATED);
-        Scene scene = new Scene(root);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        StageOpened.setResizable(false);
+        sc = new Scene(root);
+        StageOpened.setScene(sc);
+        StageOpened.show();
        
     }
 
