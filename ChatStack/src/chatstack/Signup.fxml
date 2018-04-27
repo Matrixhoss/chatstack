@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="500.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.SignupController">
+<AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="500.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.SignupController">
    <children>
       <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="176.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -40,7 +40,11 @@
             </Button>
          </items>
       </ToolBar>
-      <JFXButton fx:id="cancel_btn" layoutX="20.0" layoutY="289.0" onAction="#handleCancel" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #6897bb;" text="Cancel" textFill="#2d3447" />
+      <JFXButton fx:id="cancel_btn" layoutX="14.0" layoutY="336.0" onAction="#handleCancel" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #6897bb;" text="Cancel" textFill="#2d3447" />
       <Label layoutX="323.0" layoutY="107.0" prefHeight="17.0" prefWidth="138.0" text="Will be displayed in chat" textFill="#cdcccc" />
+      <Label fx:id="SignupError" alignment="CENTER" layoutX="130.0" layoutY="328.0" prefHeight="17.0" prefWidth="235.0" textFill="#f53030">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>

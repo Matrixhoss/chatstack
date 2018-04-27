@@ -39,12 +39,20 @@ public class LoginController implements Initializable {
     @FXML
     private JFXButton login_btn;
     
+    @FXML
+    private Label LoginError ; 
+    
+ 
+    
+    
     
     @FXML
     void handeLogin(ActionEvent event) {
-        //login code goes here   var: login_btn
+        LoginError.setText("Comming Soon");
     }
 
+
+    
     @FXML
     void handleSignup(ActionEvent event) {
         //sign up code hoes here var: signup_btn 
@@ -59,6 +67,7 @@ public class LoginController implements Initializable {
         }
     }
     
+
 
     
     

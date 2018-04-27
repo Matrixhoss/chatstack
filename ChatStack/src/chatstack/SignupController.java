@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -24,6 +25,8 @@ import javafx.scene.Scene;
  */
 public class SignupController implements Initializable {
 
+    @FXML
+    private Label SignupError ;
     
     @FXML
     void handleCancel(ActionEvent event) {
@@ -40,7 +43,7 @@ public class SignupController implements Initializable {
     
     @FXML
     void handleCreate(ActionEvent event) {
-
+     SignupError.setText("Comming Soon");
     }
     
     //start of title bar code
