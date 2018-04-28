@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
     
     
     
-    
+    //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
     //Start of title bar code
     double x,y;
     @FXML
@@ -105,7 +105,7 @@ public class LoginController implements Initializable {
         stage.setIconified(true);
     }
     //end of title bar code
-
+//</editor-fold>
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

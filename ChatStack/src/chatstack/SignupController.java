@@ -46,7 +46,9 @@ public class SignupController implements Initializable {
      SignupError.setText("Comming Soon");
     }
     
-    //start of title bar code
+
+    //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
+    //Start of title bar code
     double x,y;
     @FXML
     void dragToolBar(MouseEvent event) {
@@ -76,6 +78,8 @@ public class SignupController implements Initializable {
         stage.setIconified(true);
     }
     //end of title bar code
+//</editor-fold>
+    
     
     
     
