@@ -1,5 +1,6 @@
 package chatstack;
 
+import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 public class MainPanelController implements Initializable {
 
     ObservableList<String> items = FXCollections.observableArrayList("test1", "test2");
-    ListView<String> list = new ListView<>(items);
+//    JFXListView<Object>list=JFXListView<Object>;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

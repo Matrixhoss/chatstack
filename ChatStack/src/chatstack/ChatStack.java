@@ -27,18 +27,22 @@ public class ChatStack extends Application {
         StageOpened=stage;
         StageOpened.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        StageOpened.setResizable(false);
+//        StageOpened.setResizable(false);
         sc = new Scene(root);
         StageOpened.setScene(sc);
         StageOpened.show();
+        
+        
        
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch(args);
+        Database db = new Database();
+        db.createTable();
     }
     // Hiiii 
 }
