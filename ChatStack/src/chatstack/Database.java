@@ -4,11 +4,17 @@ package chatstack;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Database {
     protected Connection con;
+    ResultSet s  = null;
+     Statement stmt;
 
     public Database() {
     }
@@ -17,15 +23,15 @@ public class Database {
     public Connection connectDatabase() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/chatstack", "root", "12345");
+            con = DriverManager.getConnection( "jdbc:mysql://db4free.net/stackusers", "stackchat", "12345678");
             System.out.println("asdasd");
 
-            Statement stmt = con.createStatement();
+             stmt = con.createStatement();
             System.out.println("Connected");
 
             return con;
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Fuck");
             e.printStackTrace();
         }
 
@@ -38,20 +44,38 @@ public class Database {
             this.con = connectDatabase();
             //////Token for all documents
             {  
-                PreparedStatement create = this.con.prepareStatement("Create Table Users (" +
-                        "id int primary key," +
-                        "name varchar(255))");
-                create.executeUpdate();
+
+            }
+            
+            //con.prepareStatement("INSERT INTO `Users` (`id`, `username`, `password`, `email`) VALUES (NULL, 'vvv', 'vvv', 'vvv'); ").executeUpdate();
+            addUser("1","2","3");
+            s = stmt.executeQuery("select * from Users");
+            
+            while (s.next()){
+                System.out.println(s.getString("username"));
             }
             ///////////Inverted index database
 
             
         } catch (Exception e) {
-            System.out.println(e);
-            
+         //   System.out.println(e);
+          //  System.out.println("Table Created");
+          //  e.printStackTrace();
             
         } finally {
-            System.out.println("Table Created");
+           
         }
     }
+    
+    public void addUser (String Username , String Password , String Email ){
+        
+        try {
+            con.prepareStatement("INSERT INTO `Users` (`id`, `username`, `password`, `email`) VALUES (NULL, '"+Username+"', '"+Password+"', '"+Email+"'); ").executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("Erron in database ");
+        }
+    
+    }
+    
+    
 }
