@@ -48,7 +48,16 @@ public class LoginController implements Initializable {
     
     @FXML
     void handeLogin(ActionEvent event) {
-        LoginError.setText("Comming Soon");
+         try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPanel.fxml"));
+            Parent root = loader.load();
+            Scene sc1 = new Scene(root);
+            StageOpened.setScene(sc1);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 
