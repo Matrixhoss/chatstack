@@ -27,7 +27,7 @@ public class ChatStack extends Application {
     public void start(Stage stage) throws Exception {
         
         StageOpened=stage;
-//        StageOpened.initStyle(StageStyle.UNDECORATED);
+        StageOpened.initStyle(StageStyle.UNDECORATED);
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 //        StageOpened.setResizable(false);
         sc = new Scene(root);
