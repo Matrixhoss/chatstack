@@ -235,8 +235,10 @@ public class MainPanelController implements Initializable {
 
         } else {
 
-            if (!((event.getX() + dx) < 600) || !((event.getY() + dx) < 500)) {
+            if (!((event.getX() + dx) < 600) ) {
                 StageOpened.setWidth(event.getX() + dx);
+            }
+            if(!((event.getY() + dx) < 500)){
                 StageOpened.setHeight(event.getY() + dy);
             }
         }
