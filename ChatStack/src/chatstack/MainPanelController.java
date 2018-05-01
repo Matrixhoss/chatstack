@@ -17,6 +17,7 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -71,6 +72,7 @@ public class MainPanelController implements Initializable {
     private double dy;
     private double xOffset;
     private double yOffset;
+    boolean clicked = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -185,21 +187,22 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void maximize(MouseEvent event) {
-        
-        boolean clicked=false;
-         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        if(clicked==false){
-//        AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
-//        AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
-        stage.setFullScreenExitHint("Press ESC to exit Full Screen");
-        stage.setFullScreen(true);
-        adjustNodes();
-        clicked =true;}
-        else{
-        stage.setFullScreen(false);
-        
+    void maximize(ActionEvent event) {
+        if (clicked == false) {
+            StageOpened.setFullScreenExitHint("Press ESC to exit Full Screen");
+            StageOpened.setFullScreen(true);
+            clicked = true;
+        } else {
+            StageOpened.setFullScreen(false);
+            clicked = false;
+            sc.setOnKeyPressed(e -> {
+                if (e.getCode() == KeyCode.ESCAPE) {
+                    StageOpened.setFullScreen(false);
+                    adjustNodes();
+                }
+            });
         }
+        adjustNodes();
     }
 
     @FXML
@@ -226,15 +229,17 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void adjustWindow(MouseEvent event) {
-        if (resizebottom == false ) {
+        if (resizebottom == false) {
 //                StageOpened.setX(event.getScreenX() - xOffset);
 //                StageOpened.setY(event.getScreenY() - yOffset);
 
         } else {
- 
-            if(!((event.getX()+dx)<600)||!((event.getY()+dx)<500)){
-            StageOpened.setWidth(event.getX() + dx);
-            StageOpened.setHeight(event.getY() + dy);}}
+
+            if (!((event.getX() + dx) < 600) || !((event.getY() + dx) < 500)) {
+                StageOpened.setWidth(event.getX() + dx);
+                StageOpened.setHeight(event.getY() + dy);
+            }
+        }
         adjustNodes();
     }
     //end of title bar code
