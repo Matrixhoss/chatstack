@@ -32,9 +32,16 @@ public class MainPanelController implements Initializable {
     double oldW;
     double oldH;
 
+    private Boolean resizebottom = false;
+    private double dx;
+    private double dy;
+    private double xOffset;
+    private double yOffset;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        StageOpened.setWidth(1020);
+        StageOpened.setHeight(800);
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
@@ -51,7 +58,7 @@ public class MainPanelController implements Initializable {
     public void adjustNodes() {
 //        AP.setPrefHeight(1080);
 //        AP.setPrefWidth(2560);
-       
+
         System.out.println("old Height: " + oldH);
         System.out.println("New Height: " + AP.getPrefHeight());
         System.out.println("old X Online_LV: " + Online_LV.getLayoutX());
@@ -65,7 +72,7 @@ public class MainPanelController implements Initializable {
         Online_LV.setLayoutY(AP.getPrefHeight() * (Online_LV.getLayoutY() / oldH));
         Online_LV.setLayoutX(AP.getPrefWidth() * (Online_LV.getLayoutX() / oldW));
         System.out.println("new X Online_LV: " + Online_LV.getLayoutX());
-         oldW = AP.getPrefWidth();
+        oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
 
     }
@@ -107,6 +114,34 @@ public class MainPanelController implements Initializable {
     void minimize(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    @FXML
+    void getCords(MouseEvent event) {
+        if (event.getX() > StageOpened.getWidth() - 10
+                && event.getX() < StageOpened.getWidth() + 10
+                && event.getY() > StageOpened.getHeight() - 10
+                && event.getY() < StageOpened.getHeight() + 10) {
+            resizebottom = true;
+            dx = StageOpened.getWidth() - event.getX();
+            dy = StageOpened.getHeight() - event.getY();
+        } else {
+            resizebottom = false;
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        }
+    }
+
+    @FXML
+    void adjustWindow(MouseEvent event) {
+       if (resizebottom == false) {
+                StageOpened.setX(event.getScreenX() - xOffset);
+                StageOpened.setY(event.getScreenY() - yOffset);
+            } else {
+                StageOpened.setWidth(event.getX() + dx);
+                StageOpened.setHeight(event.getY() + dy);
+            }
+       adjustNodes();
     }
     //end of title bar code
 //</editor-fold>
