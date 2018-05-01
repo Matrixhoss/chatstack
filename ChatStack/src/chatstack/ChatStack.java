@@ -5,6 +5,10 @@
  */
 package chatstack;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,9 +46,21 @@ public class ChatStack extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        db = new Database();
-        launch(args);
-
+//        db = new Database();
+//        launch(args);
+        try {
+            Socket s=new Socket("127.0.0.1",4520);
+            String name="hassan";
+            DataInputStream in=new DataInputStream(s.getInputStream());
+            DataOutputStream out=new DataOutputStream(s.getOutputStream());
+            out.writeUTF(name);
+            String st=new String(in.readUTF());
+            System.out.print(st);
+            in.close();
+            s.close();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
     // Hiiii 
 }
