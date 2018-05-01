@@ -20,10 +20,11 @@ public class ChatStack extends Application {
     
     public static Stage StageOpened;
     public static Scene sc;
-    
+    public static Database db;
     
     @Override
     public void start(Stage stage) throws Exception {
+        
         StageOpened=stage;
         StageOpened.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -40,9 +41,9 @@ public class ChatStack extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
+        db = new Database();
         launch(args);
-        Database db = new Database();
-        db.createTable();
+
     }
     // Hiiii 
 }

@@ -1,7 +1,4 @@
-
 package chatstack;
-
-
 
 import com.jfoenix.controls.JFXButton;
 import java.awt.Color;
@@ -24,12 +21,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import static chatstack.ChatStack.StageOpened;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import java.sql.SQLException;
+
 /**
  *
  * @author Hesham-Desktop
  */
 public class LoginController implements Initializable {
-    
+
+
     @FXML
     private JFXButton singup_btn;
 
@@ -38,35 +40,47 @@ public class LoginController implements Initializable {
 
     @FXML
     private JFXButton login_btn;
-    
+
     @FXML
-    private Label LoginError ; 
-    
- 
-    
-    
-    
+    private Label LoginError;
+
+    @FXML
+    private JFXTextField userText;
+
+    @FXML
+    private JFXPasswordField passText;
+
     @FXML
     void handeLogin(ActionEvent event) {
-         try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPanel.fxml"));
-            Parent root = loader.load();
-            Scene sc1 = new Scene(root);
-            StageOpened.setScene(sc1);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        if (!userText.getText().equals("") && !passText.getText().equals("")) {
+            try {
+
+                boolean check = ChatStack.db.checkLogin(userText.getText(), passText.getText());
+                if (check == true) {
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPanel.fxml"));
+                    Parent root = loader.load();
+                    Scene sc1 = new Scene(root);
+                    StageOpened.setScene(sc1);
+                } else {
+                    LoginError.setText("Invalid Username or password");
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException e) {
+                System.err.println("Error in database Connection Login ");
+            }
+        } else {
+            LoginError.setText("Enter Username and password ");
         }
-        
     }
 
-
-    
     @FXML
     void handleSignup(ActionEvent event) {
         //sign up code hoes here var: signup_btn 
-         try {
-            
+        try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Signup.fxml"));
             Parent root = loader.load();
             Scene sc1 = new Scene(root);
@@ -75,53 +89,51 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
-
-    
-    
-    
-    
-    
     //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
     //Start of title bar code
-    double x,y;
+    double x, y;
+
     @FXML
     void dragToolBar(MouseEvent event) {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
+
     @FXML
     void pressToolBar(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
-        @FXML
+
+    @FXML
     void close(MouseEvent event) {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.close();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
+
     @FXML
     void maximize(MouseEvent event) {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setFullScreenExitHint(" ");
         stage.setFullScreen(true);
     }
+
     @FXML
     void minimize(MouseEvent event) {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
     //end of title bar code
 //</editor-fold>
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       
+        
+        
 
-    }  
-    
-    
-    
-    
+    }
+
 }
