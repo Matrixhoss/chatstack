@@ -32,22 +32,26 @@ public class MainPanelController implements Initializable {
     double oldW;
     double oldH;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
+
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
+
+        AP.setPrefHeight(800);
+        AP.setPrefWidth(1280);
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
+        adjustNodes();
 
     }
 
+    @FXML
     public void adjustNodes() {
 //        AP.setPrefHeight(1080);
 //        AP.setPrefWidth(2560);
+       
         System.out.println("old Height: " + oldH);
         System.out.println("New Height: " + AP.getPrefHeight());
         System.out.println("old X Online_LV: " + Online_LV.getLayoutX());
@@ -61,6 +65,8 @@ public class MainPanelController implements Initializable {
         Online_LV.setLayoutY(AP.getPrefHeight() * (Online_LV.getLayoutY() / oldH));
         Online_LV.setLayoutX(AP.getPrefWidth() * (Online_LV.getLayoutX() / oldW));
         System.out.println("new X Online_LV: " + Online_LV.getLayoutX());
+         oldW = AP.getPrefWidth();
+        oldH = AP.getPrefHeight();
 
     }
 
@@ -89,6 +95,8 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void maximize(MouseEvent event) {
+        AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
+        AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setFullScreenExitHint(" ");
         stage.setFullScreen(true);
