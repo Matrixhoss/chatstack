@@ -186,12 +186,20 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void maximize(MouseEvent event) {
-        AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
-        AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setFullScreenExitHint(" ");
+        
+        boolean clicked=false;
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if(clicked==false){
+//        AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
+//        AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
+        stage.setFullScreenExitHint("Press ESC to exit Full Screen");
         stage.setFullScreen(true);
         adjustNodes();
+        clicked =true;}
+        else{
+        stage.setFullScreen(false);
+        
+        }
     }
 
     @FXML

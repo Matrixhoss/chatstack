@@ -1,6 +1,8 @@
 package chatstack;
 
 import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.root;
+import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -47,10 +49,9 @@ public class SignupController implements Initializable {
     void handleCancel(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-            Parent root = loader.load();
-            Scene sc1 = new Scene(root);
-            StageOpened.setScene(sc1);
+            root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            sc = new Scene(root);
+            StageOpened.setScene(sc);
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,7 +60,7 @@ public class SignupController implements Initializable {
     @FXML
     void handleCreate(ActionEvent event) {
         SignupError.setTextFill(Color.web("#f53030"));
-        
+
         String UserName = userText.getText();
         String PassWord = passText.getText();
         String RPassword = rpassText.getText();
@@ -81,6 +82,9 @@ public class SignupController implements Initializable {
                     ChatStack.db.addUser(UserName, PassWord, Email);
                     SignupError.setTextFill(Color.web("#00C853"));
                     SignupError.setText("Sign Up Success");
+                    root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                    sc = new Scene(root);
+                    StageOpened.setScene(sc);
                 }
 
             } else {
