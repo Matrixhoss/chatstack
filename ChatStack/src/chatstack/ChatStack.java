@@ -32,7 +32,7 @@ public class ChatStack extends Application {
         sc = new Scene(root);
         StageOpened.setScene(sc);
         StageOpened.show();
-        
+        StageOpened.setTitle("StackChat");
         
        
     }
