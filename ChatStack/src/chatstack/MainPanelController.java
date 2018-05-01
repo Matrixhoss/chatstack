@@ -201,11 +201,10 @@ public class MainPanelController implements Initializable {
         if(StageOpened.isFullScreen()){
         sc.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.ESCAPE) {
-                    System.out.println("casdfasdfasdfasdfasdfasdf");
                     StageOpened.setFullScreen(false);
                     adjustNodes();
                     clicked = false;
-                    System.out.println("casdfasdfasdfasdfasdfasdf");
+
                 }
             });}
         adjustNodes();

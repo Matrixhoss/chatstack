@@ -42,7 +42,7 @@
             <Image url="@StackLogo.png" />
          </image>
       </ImageView>
-      <Label fx:id="Channel_label" layoutX="87.0" layoutY="72.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Active Channels" textFill="#03add7">
+      <Label fx:id="Channel_label" layoutX="87.0" layoutY="72.0" minHeight="33.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Active Channels" textFill="#03add7">
          <font>
             <Font name="Trebuchet MS" size="18.0" />
          </font>
@@ -50,7 +50,7 @@
             <Insets left="10.0" right="5.0" />
          </padding>
       </Label>
-      <Label fx:id="Online_Label" layoutX="982.0" layoutY="72.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Online Members" textFill="#03add7">
+      <Label fx:id="Online_Label" layoutX="982.0" layoutY="72.0" minHeight="33.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Online Members" textFill="#03add7">
          <font>
             <Font name="Trebuchet MS" size="18.0" />
          </font>
