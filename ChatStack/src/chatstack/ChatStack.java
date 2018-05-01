@@ -21,18 +21,19 @@ public class ChatStack extends Application {
     public static Stage StageOpened;
     public static Scene sc;
     public static Database db;
+    public static Parent root;
     
     @Override
     public void start(Stage stage) throws Exception {
         
         StageOpened=stage;
         StageOpened.initStyle(StageStyle.UNDECORATED);
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        StageOpened.setResizable(false);
+        root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+//        StageOpened.setResizable(false);
         sc = new Scene(root);
         StageOpened.setScene(sc);
         StageOpened.show();
-        StageOpened.setTitle("StackChat");
+
         
        
     }

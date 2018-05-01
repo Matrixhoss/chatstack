@@ -21,6 +21,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.root;
+import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.sql.SQLException;
@@ -57,11 +59,9 @@ public class LoginController implements Initializable {
 
                 boolean check = ChatStack.db.checkLogin(userText.getText(), passText.getText());
                 if (check == true) {
-
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPanel.fxml"));
-                    Parent root = loader.load();
-                    Scene sc1 = new Scene(root);
-                    StageOpened.setScene(sc1);
+                    root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                    sc = new Scene(root);
+                    StageOpened.setScene(sc);
                 } else {
                     LoginError.setText("Invalid Username or password");
                 }
@@ -82,9 +82,9 @@ public class LoginController implements Initializable {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Signup.fxml"));
-            Parent root = loader.load();
-            Scene sc1 = new Scene(root);
-            StageOpened.setScene(sc1);
+            root = loader.load();
+            sc = new Scene(root);
+            StageOpened.setScene(sc);
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
@@ -9,46 +10,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.MainPanelController">
-   <top>
-      <AnchorPane prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <ToolBar nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: #abaaaa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <items>
-                  <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
-                     <font>
-                        <Font size="6.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="maxIcon" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
-                     <font>
-                        <Font size="6.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #09ee15; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#09ee15">
-                     <font>
-                        <Font size="6.0" />
-                     </font>
-                  </Button>
-               </items>
-            </ToolBar>
-         </children>
-      </AnchorPane>
-   </top>
-   <left>
-      <AnchorPane prefHeight="666.0" prefWidth="818.0" style="-fx-background-color: #2D3447;" BorderPane.alignment="CENTER">
-         <children>
-            <JFXListView layoutX="52.0" layoutY="82.0" prefHeight="502.0" prefWidth="455.0" />
-         </children>
-      </AnchorPane>
-   </left>
-   <bottom>
-      <AnchorPane prefHeight="109.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <center>
-      <AnchorPane prefHeight="666.0" prefWidth="21.0" BorderPane.alignment="CENTER" />
-   </center>
-   <right>
-      <AnchorPane prefHeight="666.0" prefWidth="485.0" style="-fx-background-color: #2D3447;" BorderPane.alignment="CENTER" />
-   </right>
-</BorderPane>
+
+<AnchorPane fx:id="AP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.MainPanelController">
+   <children>
+      <ToolBar layoutY="-1.0" nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="1280.0" style="-fx-background-color: #abaaaa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <items>
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="maxIcon" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #09ee15; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#09ee15">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
+      <JFXListView fx:id="Channel_LV" layoutX="65.0" layoutY="104.0" prefHeight="592.0" prefWidth="637.0" />
+      <JFXListView fx:id="Online_LV" layoutX="917.0" layoutY="98.0" prefHeight="604.0" prefWidth="299.0" />
+   </children>
+</AnchorPane>
