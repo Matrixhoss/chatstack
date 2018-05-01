@@ -191,7 +191,7 @@ public class MainPanelController implements Initializable {
     void maximize(ActionEvent event) {
         if (clicked == false) {
             StageOpened.setFullScreenExitHint("Press ESC to exit Full Screen");
-            StageOpened.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+//            StageOpened.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             StageOpened.setFullScreen(true);
             clicked = true;
         } else if (clicked == true && StageOpened.isFullScreen()) {
