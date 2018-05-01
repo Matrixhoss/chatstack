@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -190,18 +191,23 @@ public class MainPanelController implements Initializable {
     void maximize(ActionEvent event) {
         if (clicked == false) {
             StageOpened.setFullScreenExitHint("Press ESC to exit Full Screen");
+            StageOpened.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             StageOpened.setFullScreen(true);
             clicked = true;
-        } else {
+        } else if (clicked == true && StageOpened.isFullScreen()) {
             StageOpened.setFullScreen(false);
-            clicked = false;
-            sc.setOnKeyPressed(e -> {
+            clicked=false;
+        }
+        if(StageOpened.isFullScreen()){
+        sc.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.ESCAPE) {
+                    System.out.println("casdfasdfasdfasdfasdfasdf");
                     StageOpened.setFullScreen(false);
                     adjustNodes();
+                    clicked = false;
+                    System.out.println("casdfasdfasdfasdfasdfasdf");
                 }
-            });
-        }
+            });}
         adjustNodes();
     }
 
@@ -235,10 +241,10 @@ public class MainPanelController implements Initializable {
 
         } else {
 
-            if (!((event.getX() + dx) < 600) ) {
+            if (!((event.getX() + dx) < 600)) {
                 StageOpened.setWidth(event.getX() + dx);
             }
-            if(!((event.getY() + dx) < 500)){
+            if (!((event.getY() + dx) < 500)) {
                 StageOpened.setHeight(event.getY() + dy);
             }
         }
