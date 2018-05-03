@@ -161,7 +161,7 @@ public class Database {
 
     public boolean CheckIfOnline(String IP) throws IOException {
 
-        Socket s = new Socket(IP, 5555);
+        Socket s = new Socket(IP, 55555);
         DataInputStream in = new DataInputStream(s.getInputStream());
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
         out.writeUTF("online ?");
