@@ -173,7 +173,7 @@ public class GroupChatController implements Initializable {
         ChatScroll.setPrefWidth(AP.getPrefWidth() * (ChatScroll.getPrefWidth() / oldW));
         ChatScroll.setLayoutY(AP.getPrefHeight() * (ChatScroll.getLayoutY() / oldH));
         ChatScroll.setLayoutX(AP.getPrefWidth() * (ChatScroll.getLayoutX() / oldW));
-
+//
         Send_btn.setPrefHeight(AP.getPrefHeight() * (Send_btn.getPrefHeight() / oldH));
         Send_btn.setPrefWidth(AP.getPrefWidth() * (Send_btn.getPrefWidth() / oldW));
         Send_btn.setLayoutY(AP.getPrefHeight() * (Send_btn.getLayoutY() / oldH));
