@@ -10,7 +10,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="AP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#adjustWindow" onMousePressed="#getCords" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.MainPanelController">
    <children>
       <ToolBar layoutY="-1.0" nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="1280.0" style="-fx-background-color: #abaaaa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -32,17 +31,17 @@
             </Button>
          </items>
       </ToolBar>
-      <JFXListView fx:id="Channel_LV" layoutX="65.0" layoutY="116.0" prefHeight="592.0" prefWidth="637.0" style="-fx-background-color: #495572;" />
-      <JFXListView fx:id="Online_LV" layoutX="918.0" layoutY="116.0" prefHeight="592.0" prefWidth="299.0" style="-fx-background-color: #495572;" />
-      <JFXButton fx:id="Create_Btn" layoutX="87.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#createClicked" style="-fx-background-color: #03add7;" text="Create" />
-      <JFXButton fx:id="Join_btn" layoutX="588.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#joinClicked" style="-fx-background-color: #03add7;" text="Join" />
+      <JFXListView fx:id="Channel_LV" layoutX="65.0" layoutY="116.0" prefHeight="592.0" prefWidth="637.0" style="-fx-background-color: #495572; -fx-background-radius: 3%;" />
+      <JFXListView fx:id="Online_LV" layoutX="918.0" layoutY="116.0" prefHeight="592.0" prefWidth="299.0" style="-fx-background-color: #495572; -fx-background-radius: 3%;" />
+      <JFXButton fx:id="Create_Btn" layoutX="159.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#createClicked" style="-fx-background-color: #03add7;" text="Create" />
+      <JFXButton fx:id="Join_btn" layoutX="521.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#joinClicked" style="-fx-background-color: #03add7;" text="Join" />
       <JFXButton fx:id="Chat_btn" layoutX="1018.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#chatClicked" style="-fx-background-color: #03add7;" text="Chat" />
       <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="571.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@StackLogo.png" />
          </image>
       </ImageView>
-      <Label fx:id="Channel_label" layoutX="87.0" layoutY="72.0" minHeight="33.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Active Channels" textFill="#03add7">
+      <Label fx:id="Channel_label" alignment="CENTER" contentDisplay="CENTER" layoutX="87.0" layoutY="72.0" minHeight="33.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Active Channels" textFill="#03add7">
          <font>
             <Font name="Trebuchet MS" size="18.0" />
          </font>
@@ -50,7 +49,7 @@
             <Insets left="10.0" right="5.0" />
          </padding>
       </Label>
-      <Label fx:id="Online_Label" layoutX="982.0" layoutY="72.0" minHeight="33.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Online Members" textFill="#03add7">
+      <Label fx:id="Online_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="982.0" layoutY="72.0" minHeight="33.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Online Members" textFill="#03add7">
          <font>
             <Font name="Trebuchet MS" size="18.0" />
          </font>
