@@ -58,14 +58,23 @@ public class LoginController implements Initializable {
     void handeLogin(ActionEvent event) {
         if (!userText.getText().equals("") && !passText.getText().equals("")) {
             try {
-
-                boolean check = ChatStack.db.checkLogin(userText.getText(), passText.getText());
+                boolean check = false;
+                boolean databaseCheck = ChatStack.db.checkLogin(userText.getText(), passText.getText());
+                if(databaseCheck){
+                    String IP = ChatStack.db.CheckServerIP();
+                    if(IP.equals("0"))
+                        check = false;
+                    else check = true;
+                }
                 if (check == true) {
                     Client client= new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
                     root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
                     sc = new Scene(root);
                     StageOpened.setScene(sc);
-                } else {
+                } else if(databaseCheck){
+                    LoginError.setText("server offline");
+                }
+                else {
                     LoginError.setText("Invalid Username or password");
                 }
 
