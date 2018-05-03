@@ -125,7 +125,7 @@ public class Database {
         IP = s.getString("IP");
         boolean online = false;
         try{
-        online = CheckIfOnline();
+        online = CheckIfOnline(IP);
         }
         catch(IOException ex){
         System.out.println(ex);
@@ -144,14 +144,17 @@ public class Database {
         return Group;
     }
     
-    public boolean CheckIfOnline() throws IOException {
-        Socket s=new Socket("127.0.0.1",4520);
+    public boolean CheckIfOnline(String IP) throws IOException {
+        
+        Socket s=new Socket(IP,5555);
             DataInputStream in=new DataInputStream(s.getInputStream());
             DataOutputStream out=new DataOutputStream(s.getOutputStream());
             out.writeUTF("online ?");
             String response=new String(in.readUTF());
-            
-            if(response.equals("yes"))
+            in.close();
+            out.close();
+            s.close();
+            if(response.equals("yes online"))
                 return true;
             else 
                 return false;
