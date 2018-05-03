@@ -36,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class GroupChatController implements Initializable {
@@ -112,7 +113,13 @@ public class GroupChatController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-
+        
+        Vbox.setAlignment(Pos.TOP_CENTER);
+        Label init = new Label("--- Groub Chat Start ---");
+            init.setAlignment(Pos.CENTER);
+            init.setFont(new Font("Verdana", 14));
+            init.setTextFill(Color.web("#6c7a9d"));
+            Vbox.getChildren().add(init);
     }
     @FXML
     public void hand(ActionEvent e) {
@@ -220,10 +227,10 @@ public class GroupChatController implements Initializable {
         });
     }
 
-    class SpeechBox extends HBox {
+        class SpeechBox extends HBox {
 
         private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
-        private Color DEFAULT_RECEIVER_COLOR = Color.LIMEGREEN;
+        private Color DEFAULT_RECEIVER_COLOR = Color.web("#6c7a9d");
         private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
 
         private String message;
@@ -238,7 +245,7 @@ public class GroupChatController implements Initializable {
             initialiseDefaults();
             setupElements();
         }
-        
+
         private void initialiseDefaults() {
             DEFAULT_SENDER_BACKGROUND = new Background(
                     new BackgroundFill(DEFAULT_SENDER_COLOR, new CornerRadii(5, 0, 5, 5, false), Insets.EMPTY));
@@ -262,6 +269,7 @@ public class GroupChatController implements Initializable {
         private void configureForSender() {
             displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
             displayedText.setAlignment(Pos.CENTER_RIGHT);
+            displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
             directionIndicator.setFill(DEFAULT_SENDER_COLOR);
 
@@ -275,6 +283,7 @@ public class GroupChatController implements Initializable {
         private void configureForReceiver() {
             displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
             displayedText.setAlignment(Pos.CENTER_LEFT);
+            displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
             directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
 
@@ -285,8 +294,8 @@ public class GroupChatController implements Initializable {
             setAlignment(Pos.CENTER_LEFT);
         }
     }
-
-    //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
+        
+        //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
     //Start of title bar code
     double x, y;
 
