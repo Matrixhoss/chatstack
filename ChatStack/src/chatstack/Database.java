@@ -104,6 +104,11 @@ public class Database {
         }
     }
     
-
+    public String CheckServerIP() throws SQLException{
+        String IP = "N/A";
+        s = stmt.executeQuery("SELECT `username` FROM `Users` WHERE `username` LIKE '" + "'");
+        IP = s.getString("IP");
+        return IP;
+    }
 
 }
