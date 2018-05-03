@@ -101,12 +101,12 @@ public class Database {
 
     }
 
-    public ArrayList getOnlineMemebr() throws SQLException {
+    public ArrayList<String> getOnlineMemebers() throws SQLException {
 
         ArrayList<String> OM = new ArrayList<String>();
-        s = stmt.executeQuery("SELECT `username` FROM `Users` WHERE `online` = 1'" + "'");
+        s = stmt.executeQuery("SELECT `username` FROM `Users` WHERE `online` = 1");
         while (s.next()) {
-            OM.add (s.getString("username"));
+            OM.add(s.getString("username"));
         }
         return OM;
 
