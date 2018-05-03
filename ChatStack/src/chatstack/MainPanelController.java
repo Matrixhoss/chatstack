@@ -189,6 +189,8 @@ public class MainPanelController implements Initializable {
 
         for (int i = 0; i < 10; i++) {
             Label x = new Label("Test +" + i);
+            Image image = new Image(getClass().getResourceAsStream("test.png"));
+            x.setGraphic(new ImageView(image));
             Online_LV.getItems().add(x);
             
         }
