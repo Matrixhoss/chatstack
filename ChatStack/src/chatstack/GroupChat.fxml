@@ -74,5 +74,6 @@
          </image>
       </ImageView>
       <Separator fx:id="Seperator_3" blendMode="MULTIPLY" layoutX="270.0" layoutY="65.0" prefHeight="14.0" prefWidth="591.0" />
+      <Pane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
