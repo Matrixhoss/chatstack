@@ -15,8 +15,8 @@
 <AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="500.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.LoginController">
    <children>
       <Pane layoutX="176.0" layoutY="32.0" />
-      <JFXTextField fx:id="userText" blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="178.0" layoutY="124.0" promptText="UserName" style="-fx-text-fill: #ffffff;" text="admin" unFocusColor="WHITE" />
-      <JFXPasswordField fx:id="passText" blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="177.0" layoutY="188.0" promptText="Password" style="-fx-text-fill: #ffffff;" text="123" unFocusColor="WHITE" />
+      <JFXTextField fx:id="userText" blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="178.0" layoutY="124.0" promptText="UserName" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
+      <JFXPasswordField fx:id="passText" blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="177.0" layoutY="188.0" promptText="Password" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
       <JFXButton fx:id="login_btn" layoutX="208.0" layoutY="268.0" onAction="#handeLogin" prefHeight="17.0" prefWidth="74.0" style="-fx-background-color: #03add7;" text="Login" textFill="#2d3447" />
       <JFXButton fx:id="singup_btn" layoutX="419.0" layoutY="328.0" onAction="#handleSignup" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #6897bb;" text="Sign up" />
       <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="176.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">

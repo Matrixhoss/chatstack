@@ -56,6 +56,7 @@ public class LoginController implements Initializable {
 
     @FXML
     void handeLogin(ActionEvent event) {
+        
         String IP = "0";
         if (!userText.getText().equals("") && !passText.getText().equals("")) {
             try {
@@ -95,6 +96,13 @@ public class LoginController implements Initializable {
                 
             }
         } else {
+            try{
+                    root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                    sc = new Scene(root);
+                    StageOpened.setScene(sc);
+            }catch(Exception e){
+                System.out.println("Error in test");
+            }
             LoginError.setText("Enter Username and password ");
         }
     }
