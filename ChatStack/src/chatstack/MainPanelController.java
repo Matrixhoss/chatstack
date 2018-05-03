@@ -26,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
 
@@ -168,7 +169,14 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void createClicked(ActionEvent event) {
+    void createClicked(ActionEvent event) throws IOException {
+        Stage newWindow = new Stage();
+        Scene sx = new Scene(FXMLLoader.load(getClass().getResource("CreateGroup.fxml")));
+        newWindow.setScene(sx);
+        newWindow.setX(StageOpened.getX() + 200);
+        newWindow.setY(StageOpened.getY() + 100);
+        newWindow.initStyle(StageStyle.UNDECORATED);
+        newWindow.show();
 
     }
 
