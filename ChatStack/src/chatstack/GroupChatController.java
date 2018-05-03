@@ -203,9 +203,27 @@ public class GroupChatController implements Initializable {
         LEFT, RIGHT
     }
 
+     
+//     void Enterhand(ActionEvent event) {
+//                 sc.setOnKeyPressed(e -> {
+//                if (e.getCode() == KeyCode.ENTER) {
+//        if (testChat) {
+//            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+//            testChat = false;
+//        } else {
+//            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+//            testChat = true;
+//        }
+//        System.out.println(testChat);
+//                }
+//            });
+//     }
+    
+    
+    
     class SpeechBox extends HBox {
 
-        private Color DEFAULT_SENDER_COLOR = Color.CHOCOLATE;
+        private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
         private Color DEFAULT_RECEIVER_COLOR = Color.LIMEGREEN;
         private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
 
