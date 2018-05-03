@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
                 
                 if (check == true) {
                     Client client= new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
-                    root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
                     sc = new Scene(root);
                     StageOpened.setScene(sc);
                 } else if(databaseCheck){

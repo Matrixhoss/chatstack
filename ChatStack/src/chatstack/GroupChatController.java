@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -197,10 +198,27 @@ public class GroupChatController implements Initializable {
     }
 
     @FXML
-    void maximize(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setFullScreenExitHint(" ");
-        stage.setFullScreen(true);
+      void maximize(ActionEvent event) {
+        if (clicked == false) {
+            StageOpened.setFullScreenExitHint("Press ESC to exit Full Screen");
+//            StageOpened.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            StageOpened.setFullScreen(true);
+            clicked = true;
+        } else if (clicked == true && StageOpened.isFullScreen()) {
+            StageOpened.setFullScreen(false);
+            clicked = false;
+        }
+        if (StageOpened.isFullScreen()) {
+            sc.setOnKeyPressed(e -> {
+                if (e.getCode() == KeyCode.ESCAPE) {
+                    StageOpened.setFullScreen(false);
+                    adjustNodes();
+                    clicked = false;
+
+                }
+            });
+        }
+        adjustNodes();
     }
 
     @FXML

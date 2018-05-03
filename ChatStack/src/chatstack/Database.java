@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,17 +24,16 @@ public class Database {
     public Database() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("\u001B[34m"+"initialize connection to database"+"\u001B[0m");
+            System.out.println("\u001B[34m" + "initialize connection to database" + "\u001B[0m");
             con = DriverManager.getConnection("jdbc:mysql://db4free.net/stackusers", "stackchat", "12345678");
             stmt = con.createStatement();
-            System.out.println("\u001B[32m"+"Connected to database successfully"+"\u001B[0m");
+            System.out.println("\u001B[32m" + "Connected to database successfully" + "\u001B[0m");
 
         } catch (Exception e) {
             System.err.println("Error in database Connection");
         }
 
     }
-
 
     public void addUser(String Username, String Password, String Email) throws SQLException {
 
@@ -44,7 +44,6 @@ public class Database {
             System.out.println("Username or email is arraly used");
         }
     }
-    
 
     public boolean checkUsername(String Username) throws SQLException {
         String name = "";
@@ -52,7 +51,7 @@ public class Database {
 
         while (s.next()) {
             name = s.getString("username");
-            
+
         }
         if (name.equals(Username)) {
             return false;
@@ -61,13 +60,14 @@ public class Database {
         return true;
 
     }
-    
-     public int getID(String Username) throws SQLException {
+
+    public int getID(String Username) throws SQLException {
         String id = "";
-        s = stmt.executeQuery("SELECT `id` FROM `Users` WHERE `username` LIKE '" +Username + "'");
+        s = stmt.executeQuery("SELECT `id` FROM `Users` WHERE `username` LIKE '" + Username + "'");
         while (s.next()) {
             id = s.getString("id");
-        }return Integer.parseInt(id);
+        }
+        return Integer.parseInt(id);
     }
 
     public boolean checkEmail(String Email) throws SQLException {
@@ -101,67 +101,79 @@ public class Database {
 
     }
 
+    public ArrayList getOnlineMemebr() throws SQLException {
+
+        ArrayList<String> OM = new ArrayList<String>();
+        s = stmt.executeQuery("SELECT `username` FROM `Users` WHERE `online` = 1'" + "'");
+        while (s.next()) {
+            OM.add (s.getString("username"));
+        }
+        return OM;
+
+    }
+
     public void CloseDatabaseConnection() throws SQLException {
         this.con.close();
     }
-    
-    public void OpenDatabaseConnection(){
-         try {
+
+    public void OpenDatabaseConnection() {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("\u001B[34m"+"initialize connection to database"+"\u001B[0m");
+            System.out.println("\u001B[34m" + "initialize connection to database" + "\u001B[0m");
             con = DriverManager.getConnection("jdbc:mysql://db4free.net/stackusers", "stackchat", "12345678");
             stmt = con.createStatement();
-            System.out.println("\u001B[32m"+"Connected to database successfully"+"\u001B[0m");
+            System.out.println("\u001B[32m" + "Connected to database successfully" + "\u001B[0m");
 
         } catch (Exception e) {
             System.err.println("Error in database Connection");
         }
     }
-        public String CheckServerIP() throws SQLException{
-        
+
+    public String CheckServerIP() throws SQLException {
+
         s = stmt.executeQuery("SELECT ip FROM `Server` WHERE online=1");
-        
+
         while (s.next()) {
             IP = s.getString("IP");
         }
-        
+
         System.out.println(IP);
         boolean online = false;
-        try{
-        online = CheckIfOnline(IP);
+        try {
+            online = CheckIfOnline(IP);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
-        catch(IOException ex){
-        System.out.println(ex);
-        }
-        if(IP.equals("") || !online)
+        if (IP.equals("") || !online) {
             return "0";
+        }
         return IP;
     }
-        
-    public String getGroup(String Username) throws SQLException{
+
+    public String getGroup(String Username) throws SQLException {
         s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
-        String Group="";
+        String Group = "";
         while (s.next()) {
             Group = s.getString("Group");
         }
         return Group;
     }
-    
+
     public boolean CheckIfOnline(String IP) throws IOException {
-        
-        Socket s=new Socket(IP,5555);
-            DataInputStream in=new DataInputStream(s.getInputStream());
-            DataOutputStream out=new DataOutputStream(s.getOutputStream());
-            out.writeUTF("online ?");
-            String response=new String(in.readUTF());
-            in.close();
-            out.close();
-            s.close();
-            if(response.equals("yes online"))
-                return true;
-            else 
-                return false;
+
+        Socket s = new Socket(IP, 5555);
+        DataInputStream in = new DataInputStream(s.getInputStream());
+        DataOutputStream out = new DataOutputStream(s.getOutputStream());
+        out.writeUTF("online ?");
+        String response = new String(in.readUTF());
+        in.close();
+        out.close();
+        s.close();
+        if (response.equals("yes online")) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
 
 }

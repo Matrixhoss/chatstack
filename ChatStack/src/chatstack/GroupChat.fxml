@@ -21,7 +21,7 @@
                   <Font size="6.0" />
                </font>
             </Button>
-            <Button fx:id="maxIcon" disable="true" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
+            <Button fx:id="maxIcon" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
                <font>
                   <Font size="6.0" />
                </font>
