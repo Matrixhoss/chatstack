@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AP" onMouseDragged="#adjustWindow" onMousePressed="#getCords" prefHeight="538.0" prefWidth="870.0" style="-fx-background-color: #414b66;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.PeerChatController">
+   <children>
+      <ToolBar layoutY="2.0" nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="maxIcon" mnemonicParsing="false" onAction="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #09ee15; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#09ee15">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
+      <TextField fx:id="txt_field" layoutX="277.0" layoutY="498.0" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572;" />
+      <Pane fx:id="pane" layoutY="26.0" prefHeight="510.0" prefWidth="262.0" style="-fx-background-color: #2D3447;">
+         <children>
+            <JFXListView fx:id="member_LV" layoutY="89.0" prefHeight="422.0" prefWidth="262.0" style="-fx-background-color: #2D3447;" />
+            <TextField fx:id="Search_txt" layoutX="50.0" layoutY="14.0" prefHeight="25.0" prefWidth="162.0" promptText="Search" style="-fx-background-color: #495572;" />
+            <Label fx:id="members_label" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="55.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" stylesheets="@test.css" text="Channel members " textFill="#03add7">
+               <font>
+                  <Font name="Trebuchet MS" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" right="5.0" />
+               </padding>
+            </Label>
+            <Separator fx:id="Seperator_1" blendMode="MULTIPLY" layoutX="31.0" layoutY="39.0" prefHeight="14.0" prefWidth="200.0" />
+         </children>
+      </Pane>
+      <JFXButton fx:id="Send_btn" layoutX="817.0" layoutY="498.0" onAction="#hand" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: #03add7;" text="Send" textFill="#495572" />
+      <Label fx:id="Name_Label" layoutX="262.0" layoutY="25.0" prefHeight="54.0" prefWidth="610.0" style="-fx-background-color: #495572;" text="Name" textFill="#03add7">
+         <font>
+            <Font name="Trebuchet MS Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Separator fx:id="Seperator" blendMode="MULTIPLY" layoutX="277.0" layoutY="475.0" prefHeight="14.0" prefWidth="578.0" />
+      <ScrollPane fx:id="ChatScroll" hbarPolicy="NEVER" hmax="0.0" layoutX="262.0" layoutY="78.0" prefHeight="400.0" prefViewportHeight="398.0" prefViewportWidth="608.0" prefWidth="610.0" style="-fx-background: #414b66; -fx-border-color: #414b66;">
+         <content>
+            <VBox fx:id="Vbox" layoutX="262.0" layoutY="78.0" prefHeight="396.0" prefWidth="610.0" spacing="1.0" style="-fx-background-color: #414b66;">
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <ImageView fx:id="iv_stack" fitHeight="33.0" fitWidth="112.0" layoutX="763.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@StackLogo.png" />
+         </image>
+      </ImageView>
+      <Separator fx:id="Seperator_3" blendMode="MULTIPLY" layoutX="270.0" layoutY="65.0" prefHeight="14.0" prefWidth="591.0" />
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

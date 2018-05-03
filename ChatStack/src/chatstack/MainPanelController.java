@@ -220,8 +220,11 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void chatClicked(ActionEvent event) {
-
+    void chatClicked(ActionEvent event) throws IOException{
+        root = FXMLLoader.load(getClass().getResource("PeerChat.fxml"));
+        sc = new Scene(root);
+        StageOpened.setScene(sc);
+        items.add("test");
     }
 
     //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
