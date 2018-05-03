@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
-
+    ObservableList<String> OnlineMembers = FXCollections.observableArrayList();
     ObservableList<String> items = FXCollections.observableArrayList("test1", "test2");
 //    JFXListView<Object>list=JFXListView<Object>;
     @FXML
@@ -168,6 +169,14 @@ public class MainPanelController implements Initializable {
 
     }
 
+    @FXML
+    void showmembers(ActionEvent event){
+        ArrayList<String> x = new ArrayList<String>();
+        //x = chatstack.Database.getOnlineMembers();
+        //Online_LV.getItems().add(Online_LV.getItems().size(),x);
+        //Online_LV.scrollTo(x);
+    }
+    
     @FXML
     void createClicked(ActionEvent event) throws IOException {
         Stage newWindow = new Stage();
