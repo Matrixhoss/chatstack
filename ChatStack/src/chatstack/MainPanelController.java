@@ -189,7 +189,6 @@ public class MainPanelController implements Initializable {
 
         for (int i = 0; i < 10; i++) {
             Label x = new Label("Test +" + i);
-            x.setGraphic(new ImageView(new Image(new FileInputStream("test.png"))));
             Online_LV.getItems().add(x);
             
         }
@@ -215,6 +214,7 @@ public class MainPanelController implements Initializable {
         root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
+        items.add("asdasd");
     }
 
     @FXML

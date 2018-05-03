@@ -1,0 +1,20 @@
+label {
+	position: relative;
+	background: #00aabb;
+	border-radius: .4em;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 29px solid transparent;
+	border-right-color: #00aabb;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -14.5px;
+	margin-left: -29px;
+}
