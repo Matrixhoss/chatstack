@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
@@ -37,6 +38,12 @@ public class MainPanelController implements Initializable {
 
     @FXML
     private ImageView iv_stack;
+
+    @FXML
+    private Separator Seperator;
+
+    @FXML
+    private Separator Seperator_1;
 
     @FXML
     private JFXButton Chat_btn;
@@ -77,8 +84,8 @@ public class MainPanelController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        StageOpened.setWidth(1020);
-        StageOpened.setHeight(800);
+        StageOpened.setWidth(970);
+        StageOpened.setHeight(600);
         StageOpened.setX(850);
         StageOpened.setY(190);
         StageOpened.setMinHeight(500);
@@ -122,6 +129,16 @@ public class MainPanelController implements Initializable {
         Online_Label.setPrefWidth(AP.getPrefWidth() * (Online_Label.getPrefWidth() / oldW));
         Online_Label.setLayoutY(AP.getPrefHeight() * (Online_Label.getLayoutY() / oldH));
         Online_Label.setLayoutX(AP.getPrefWidth() * (Online_Label.getLayoutX() / oldW));
+
+        Seperator.setPrefHeight(AP.getPrefHeight() * (Seperator.getPrefHeight() / oldH));
+        Seperator.setPrefWidth(AP.getPrefWidth() * (Seperator.getPrefWidth() / oldW));
+        Seperator.setLayoutY(AP.getPrefHeight() * (Seperator.getLayoutY() / oldH));
+        Seperator.setLayoutX(AP.getPrefWidth() * (Seperator.getLayoutX() / oldW));
+
+        Seperator_1.setPrefHeight(AP.getPrefHeight() * (Seperator_1.getPrefHeight() / oldH));
+        Seperator_1.setPrefWidth(AP.getPrefWidth() * (Seperator_1.getPrefWidth() / oldW));
+        Seperator_1.setLayoutY(AP.getPrefHeight() * (Seperator_1.getLayoutY() / oldH));
+        Seperator_1.setLayoutX(AP.getPrefWidth() * (Seperator_1.getLayoutX() / oldW));
 
         Create_Btn.setPrefHeight(AP.getPrefHeight() * (Create_Btn.getPrefHeight() / oldH));
         Create_Btn.setPrefWidth(AP.getPrefWidth() * (Create_Btn.getPrefWidth() / oldW));
@@ -196,17 +213,18 @@ public class MainPanelController implements Initializable {
             clicked = true;
         } else if (clicked == true && StageOpened.isFullScreen()) {
             StageOpened.setFullScreen(false);
-            clicked=false;
+            clicked = false;
         }
-        if(StageOpened.isFullScreen()){
-        sc.setOnKeyPressed(e -> {
+        if (StageOpened.isFullScreen()) {
+            sc.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.ESCAPE) {
                     StageOpened.setFullScreen(false);
                     adjustNodes();
                     clicked = false;
 
                 }
-            });}
+            });
+        }
         adjustNodes();
     }
 
@@ -249,7 +267,7 @@ public class MainPanelController implements Initializable {
         }
         adjustNodes();
     }
+
     //end of title bar code
 //</editor-fold>
-
 }
