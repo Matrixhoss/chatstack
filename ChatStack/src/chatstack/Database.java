@@ -63,7 +63,6 @@ public class Database {
 
         while (s.next()) {
             id = s.getString("id");
-            
         }return Integer.parseInt(id);
 
     }

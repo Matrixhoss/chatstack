@@ -27,6 +27,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.sql.SQLException;
 
+
+
 /**
  *
  * @author Hesham-Desktop
@@ -59,6 +61,7 @@ public class LoginController implements Initializable {
 
                 boolean check = ChatStack.db.checkLogin(userText.getText(), passText.getText());
                 if (check == true) {
+                    Client client= new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
                     root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
                     sc = new Scene(root);
                     StageOpened.setScene(sc);
