@@ -114,6 +114,8 @@ public class GroupChatController implements Initializable {
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
         
+       
+        
         Vbox.setAlignment(Pos.TOP_CENTER);
         Label init = new Label("--- Groub Chat Start ---");
             init.setAlignment(Pos.CENTER);
@@ -130,7 +132,8 @@ public class GroupChatController implements Initializable {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
             testChat = true;
         }
-        System.out.println(testChat);
+         ChatScroll.setVvalue(1.0);  
+        
     }
 
     public void adjustNodes() {
@@ -222,7 +225,7 @@ public class GroupChatController implements Initializable {
                     Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
                     testChat = true;
                 }
-                System.out.println(testChat);
+                 ChatScroll.setVvalue(1.0);  
             }
         });
     }
