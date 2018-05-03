@@ -30,7 +30,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
-    ObservableList<String> OnlineMembers = FXCollections.observableArrayList();
     ObservableList<String> items = FXCollections.observableArrayList("test1", "test2");
 //    JFXListView<Object>list=JFXListView<Object>;
     @FXML
@@ -170,11 +169,14 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void showmembers(ActionEvent event){
+    void showmembers(ActionEvent event) throws Exception{
         ArrayList<String> x = new ArrayList<String>();
-        //x = chatstack.Database.getOnlineMembers();
-        //Online_LV.getItems().add(Online_LV.getItems().size(),x);
+        x = ChatStack.db.getOnlineMemebers();
+        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
         //Online_LV.scrollTo(x);
+        for (int i = 0; i < x.size(); i++) {
+            //items;
+        }
     }
     
     @FXML
