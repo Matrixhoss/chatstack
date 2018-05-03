@@ -41,7 +41,7 @@
             <Image url="@StackLogo.png" />
          </image>
       </ImageView>
-      <Label fx:id="Channel_label" alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" layoutY="72.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Active Channels" textFill="#03add7">
+      <Label fx:id="Channel_label" alignment="CENTER" contentDisplay="CENTER" layoutX="296.0" layoutY="72.0" minWidth="172.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" text="Active Channels" textFill="#03add7">
          <font>
             <Font name="Trebuchet MS" size="18.0" />
          </font>
