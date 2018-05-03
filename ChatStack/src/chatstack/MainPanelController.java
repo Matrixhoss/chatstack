@@ -51,7 +51,7 @@ public class MainPanelController implements Initializable {
     private JFXButton Chat_btn;
 
     @FXML
-    private JFXListView<?> Channel_LV;
+    private JFXListView<String> Channel_LV;
 
     @FXML
     private JFXButton Create_Btn;
@@ -63,7 +63,7 @@ public class MainPanelController implements Initializable {
     private Button xIcon;
 
     @FXML
-    private JFXListView<?> Online_LV;
+    private JFXListView<String> Online_LV;
 
     @FXML
     private AnchorPane AP;
@@ -177,6 +177,7 @@ public class MainPanelController implements Initializable {
         for (int i = 0; i < x.size(); i++) {
             items.add(x.get(i));
         }
+        Online_LV.setItems(items);
     }
     
     @FXML
