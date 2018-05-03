@@ -100,6 +100,10 @@ public class Database {
         return false;
 
     }
+    
+    public void setMemeberOnline(String Username) throws SQLException{
+        stmt.executeQuery("UPDATE `Users` SET `online` = 1 WHERE `username` LIKE '" + Username + "'");
+    }
 
     public ArrayList<String> getOnlineMemebers() throws SQLException {
 
