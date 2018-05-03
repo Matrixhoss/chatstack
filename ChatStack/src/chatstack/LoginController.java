@@ -67,6 +67,9 @@ public class LoginController implements Initializable {
                         check = false;
                     else check = true;
                 }
+                //REMOVE AFTER TEST
+                check = true;
+                
                 if (check == true) {
                     Client client= new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
                     root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));

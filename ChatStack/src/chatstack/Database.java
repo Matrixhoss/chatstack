@@ -138,7 +138,6 @@ public class Database {
         return IP;
     }
         
-        
     public String getGroup(String Username) throws SQLException{
         s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
         String Group="";
