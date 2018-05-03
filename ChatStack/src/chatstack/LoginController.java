@@ -68,7 +68,7 @@ public class LoginController implements Initializable {
                     else check = true;
                 }
                 //REMOVE AFTER TEST
-                //check = true;
+                check = true;
                 
                 if (check == true) {
                     Client client= new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
