@@ -198,7 +198,7 @@ public class GroupChatController implements Initializable {
     }
 
     @FXML
-      void maximize(ActionEvent event) {
+    void maximize(ActionEvent event) {
         if (clicked == false) {
             StageOpened.setFullScreenExitHint("Press ESC to exit Full Screen");
 //            StageOpened.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);

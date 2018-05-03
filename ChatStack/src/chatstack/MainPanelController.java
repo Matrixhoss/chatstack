@@ -5,6 +5,7 @@ import static chatstack.ChatStack.StageOpened;
 import static chatstack.ChatStack.root;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -172,8 +173,11 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void joinClicked(ActionEvent event) {
+    void joinClicked(ActionEvent event) throws IOException {
 
+        root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
+        sc = new Scene(root);
+        StageOpened.setScene(sc);
     }
 
     @FXML
