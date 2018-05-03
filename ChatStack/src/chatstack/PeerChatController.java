@@ -10,12 +10,7 @@ import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -68,7 +62,7 @@ public class PeerChatController implements Initializable {
     private AnchorPane AP;
 
     @FXML
-    private JFXListView<Label> member_LV;
+    private JFXListView<?> member_LV;
 
     @FXML
     private Separator Seperator;
@@ -118,11 +112,6 @@ public class PeerChatController implements Initializable {
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
 
-        try {
-            peermembers();
-        } catch (Exception ex) {
-            Logger.getLogger(PeerChatController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void hand(ActionEvent e) {
@@ -208,16 +197,6 @@ public class PeerChatController implements Initializable {
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
 
-    }
-
-    public void peermembers() throws Exception {
-        for (int i = 0; i < 10; i++) {
-            Label x = new Label("Test +" + i);
-            Image image = new Image(getClass().getResourceAsStream("test.png"));
-            x.setGraphic(new ImageView(image));
-            member_LV.getItems().add(x);
-            
-        }
     }
 
     enum SpeechDirection {
