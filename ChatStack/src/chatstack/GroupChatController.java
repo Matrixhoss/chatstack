@@ -295,6 +295,7 @@ public class GroupChatController implements Initializable {
         }
     }
         
+        //
         //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
     //Start of title bar code
     double x, y;
