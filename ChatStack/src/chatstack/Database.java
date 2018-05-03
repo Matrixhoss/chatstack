@@ -117,8 +117,7 @@ public class Database {
             System.err.println("Error in database Connection");
         }
     }
-    
-    public String CheckServerIP() throws SQLException{
+        public String CheckServerIP() throws SQLException{
         
         s = stmt.executeQuery("SELECT ip FROM `Server` WHERE online=1");
         
@@ -138,7 +137,8 @@ public class Database {
             return "0";
         return IP;
     }
-    
+        
+        
     public String getGroup(String Username) throws SQLException{
         s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
         String Group="";
