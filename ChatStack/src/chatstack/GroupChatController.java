@@ -19,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -78,6 +79,9 @@ public class GroupChatController implements Initializable {
     private Pane pane;
 
     @FXML
+    private ScrollPane ChatScroll;
+
+    @FXML
     private JFXButton Send_btn;
 
     @FXML
@@ -88,7 +92,8 @@ public class GroupChatController implements Initializable {
     @FXML
     private ImageView iv_stack;
 
-    boolean testChat  = true; 
+    boolean testChat = true;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StageOpened.setWidth(870);
@@ -106,19 +111,16 @@ public class GroupChatController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-        
-       
 
     }
 
     public void hand(ActionEvent e) {
-        if(testChat){
-        Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-        testChat = false; 
-        }
-        else {
-        Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-        testChat= true;
+        if (testChat) {
+            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+            testChat = false;
+        } else {
+            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+            testChat = true;
         }
         System.out.println(testChat);
     }
@@ -167,6 +169,11 @@ public class GroupChatController implements Initializable {
         pane.setLayoutY(AP.getPrefHeight() * (pane.getLayoutY() / oldH));
         pane.setLayoutX(AP.getPrefWidth() * (pane.getLayoutX() / oldW));
 
+        ChatScroll.setPrefHeight(AP.getPrefHeight() * (ChatScroll.getPrefHeight() / oldH));
+        ChatScroll.setPrefWidth(AP.getPrefWidth() * (ChatScroll.getPrefWidth() / oldW));
+        ChatScroll.setLayoutY(AP.getPrefHeight() * (ChatScroll.getLayoutY() / oldH));
+        ChatScroll.setLayoutX(AP.getPrefWidth() * (ChatScroll.getLayoutX() / oldW));
+
         Send_btn.setPrefHeight(AP.getPrefHeight() * (Send_btn.getPrefHeight() / oldH));
         Send_btn.setPrefWidth(AP.getPrefWidth() * (Send_btn.getPrefWidth() / oldW));
         Send_btn.setLayoutY(AP.getPrefHeight() * (Send_btn.getLayoutY() / oldH));
@@ -191,77 +198,76 @@ public class GroupChatController implements Initializable {
         oldH = AP.getPrefHeight();
 
     }
-    
-    enum SpeechDirection{
-    LEFT, RIGHT
-}
 
- class SpeechBox extends HBox{
-    private Color DEFAULT_SENDER_COLOR = Color.CHOCOLATE;
-    private Color DEFAULT_RECEIVER_COLOR = Color.LIMEGREEN;
-    private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
-
-    private String message;
-    private SpeechDirection direction;
-
-    private Label displayedText;
-    private SVGPath directionIndicator;
-
-    public SpeechBox(String message, SpeechDirection direction){
-        this.message = message;
-        this.direction = direction;
-        initialiseDefaults();
-        setupElements();
+    enum SpeechDirection {
+        LEFT, RIGHT
     }
 
-    private void initialiseDefaults(){
-        DEFAULT_SENDER_BACKGROUND = new Background(
-                new BackgroundFill(DEFAULT_SENDER_COLOR, new CornerRadii(5,0,5,5,false), Insets.EMPTY));
-        DEFAULT_RECEIVER_BACKGROUND = new Background(
-                new BackgroundFill(DEFAULT_RECEIVER_COLOR, new CornerRadii(0,5,5,5,false), Insets.EMPTY));
-    }
+    class SpeechBox extends HBox {
 
-    private void setupElements(){
-        displayedText = new Label(message);
-        displayedText.setPadding(new Insets(5));
-        displayedText.setWrapText(true);
-        directionIndicator = new SVGPath();
+        private Color DEFAULT_SENDER_COLOR = Color.CHOCOLATE;
+        private Color DEFAULT_RECEIVER_COLOR = Color.LIMEGREEN;
+        private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
 
-        if(direction == SpeechDirection.LEFT){
-            configureForReceiver();
+        private String message;
+        private SpeechDirection direction;
+
+        private Label displayedText;
+        private SVGPath directionIndicator;
+
+        public SpeechBox(String message, SpeechDirection direction) {
+            this.message = message;
+            this.direction = direction;
+            initialiseDefaults();
+            setupElements();
         }
-        else{
-            configureForSender();
+
+        private void initialiseDefaults() {
+            DEFAULT_SENDER_BACKGROUND = new Background(
+                    new BackgroundFill(DEFAULT_SENDER_COLOR, new CornerRadii(5, 0, 5, 5, false), Insets.EMPTY));
+            DEFAULT_RECEIVER_BACKGROUND = new Background(
+                    new BackgroundFill(DEFAULT_RECEIVER_COLOR, new CornerRadii(0, 5, 5, 5, false), Insets.EMPTY));
+        }
+
+        private void setupElements() {
+            displayedText = new Label(message);
+            displayedText.setPadding(new Insets(5));
+            displayedText.setWrapText(true);
+            directionIndicator = new SVGPath();
+
+            if (direction == SpeechDirection.LEFT) {
+                configureForReceiver();
+            } else {
+                configureForSender();
+            }
+        }
+
+        private void configureForSender() {
+            displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
+            displayedText.setAlignment(Pos.CENTER_RIGHT);
+            directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
+            directionIndicator.setFill(DEFAULT_SENDER_COLOR);
+
+            HBox container = new HBox(displayedText, directionIndicator);
+            //Use at most 75% of the width provided to the SpeechBox for displaying the message
+            container.maxWidthProperty().bind(widthProperty().multiply(0.75));
+            getChildren().setAll(container);
+            setAlignment(Pos.CENTER_RIGHT);
+        }
+
+        private void configureForReceiver() {
+            displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
+            displayedText.setAlignment(Pos.CENTER_LEFT);
+            directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
+            directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
+
+            HBox container = new HBox(directionIndicator, displayedText);
+            //Use at most 75% of the width provided to the SpeechBox for displaying the message
+            container.maxWidthProperty().bind(widthProperty().multiply(0.75));
+            getChildren().setAll(container);
+            setAlignment(Pos.CENTER_LEFT);
         }
     }
-
-    private void configureForSender(){
-        displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
-        displayedText.setAlignment(Pos.CENTER_RIGHT);
-        directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
-        directionIndicator.setFill(DEFAULT_SENDER_COLOR);
-
-        HBox container = new HBox(displayedText, directionIndicator);
-        //Use at most 75% of the width provided to the SpeechBox for displaying the message
-        container.maxWidthProperty().bind(widthProperty().multiply(0.75));
-        getChildren().setAll(container);
-        setAlignment(Pos.CENTER_RIGHT);
-    }
-
-    private void configureForReceiver(){
-        displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
-        displayedText.setAlignment(Pos.CENTER_LEFT);
-        directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
-        directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
-
-        HBox container = new HBox(directionIndicator, displayedText);
-        //Use at most 75% of the width provided to the SpeechBox for displaying the message
-        container.maxWidthProperty().bind(widthProperty().multiply(0.75));
-        getChildren().setAll(container);
-        setAlignment(Pos.CENTER_LEFT);
-    }
-}
-    
 
     //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
     //Start of title bar code

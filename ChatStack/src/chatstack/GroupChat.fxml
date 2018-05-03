@@ -59,7 +59,7 @@
          </padding>
       </Label>
       <Separator fx:id="Seperator" blendMode="MULTIPLY" layoutX="277.0" layoutY="475.0" prefHeight="14.0" prefWidth="578.0" />
-      <ScrollPane hbarPolicy="NEVER" hmax="0.0" layoutX="262.0" layoutY="78.0" prefHeight="400.0" prefViewportHeight="398.0" prefViewportWidth="608.0" prefWidth="610.0" style="-fx-background: #414b66; -fx-border-color: #414b66;">
+      <ScrollPane fx:id="ChatScroll" hbarPolicy="NEVER" hmax="0.0" layoutX="262.0" layoutY="78.0" prefHeight="400.0" prefViewportHeight="398.0" prefViewportWidth="608.0" prefWidth="610.0" style="-fx-background: #414b66; -fx-border-color: #414b66;">
          <content>
             <VBox fx:id="Vbox" layoutX="262.0" layoutY="78.0" prefHeight="396.0" prefWidth="610.0" spacing="1.0" style="-fx-background-color: #414b66;">
                <padding>
