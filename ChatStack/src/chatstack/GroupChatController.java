@@ -24,6 +24,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -113,7 +114,7 @@ public class GroupChatController implements Initializable {
         adjustNodes();
 
     }
-
+    @FXML
     public void hand(ActionEvent e) {
         if (testChat) {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
@@ -202,25 +203,23 @@ public class GroupChatController implements Initializable {
     enum SpeechDirection {
         LEFT, RIGHT
     }
+    @FXML
+    void Enterhand(KeyEvent event) {
+        sc.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                System.out.println("ENTER PRESSED");
+                if (testChat) {
+                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+                    testChat = false;
+                } else {
+                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+                    testChat = true;
+                }
+                System.out.println(testChat);
+            }
+        });
+    }
 
-     
-//     void Enterhand(ActionEvent event) {
-//                 sc.setOnKeyPressed(e -> {
-//                if (e.getCode() == KeyCode.ENTER) {
-//        if (testChat) {
-//            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-//            testChat = false;
-//        } else {
-//            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-//            testChat = true;
-//        }
-//        System.out.println(testChat);
-//                }
-//            });
-//     }
-    
-    
-    
     class SpeechBox extends HBox {
 
         private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
@@ -239,7 +238,7 @@ public class GroupChatController implements Initializable {
             initialiseDefaults();
             setupElements();
         }
-
+        
         private void initialiseDefaults() {
             DEFAULT_SENDER_BACKGROUND = new Background(
                     new BackgroundFill(DEFAULT_SENDER_COLOR, new CornerRadii(5, 0, 5, 5, false), Insets.EMPTY));
