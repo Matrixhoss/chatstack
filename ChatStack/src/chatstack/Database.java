@@ -117,9 +117,13 @@ public class Database {
     
     public String CheckServerIP() throws SQLException{
         String IP = "N/A";
-        s = stmt.executeQuery("SELECT `username` FROM `Users` WHERE `username` LIKE '" + "'");
+        s = stmt.executeQuery("SELECT `IP` FROM `Server` WHERE `online` LIKE '1'");
         IP = s.getString("IP");
+        
+        if(IP.equals(""))
+            return "0";
         return IP;
     }
+    
 
 }
