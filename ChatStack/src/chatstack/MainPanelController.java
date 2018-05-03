@@ -175,7 +175,7 @@ public class MainPanelController implements Initializable {
         //Online_LV.getItems().add(Online_LV.setItems().size(),x);
         //Online_LV.scrollTo(x);
         for (int i = 0; i < x.size(); i++) {
-            //items;
+            items.add(x.get(i));
         }
     }
     
