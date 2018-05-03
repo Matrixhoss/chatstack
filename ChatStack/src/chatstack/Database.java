@@ -65,11 +65,9 @@ public class Database {
      public int getID(String Username) throws SQLException {
         String id = "";
         s = stmt.executeQuery("SELECT `id` FROM `Users` WHERE `username` LIKE '" +Username + "'");
-
         while (s.next()) {
             id = s.getString("id");
         }return Integer.parseInt(id);
-
     }
 
     public boolean checkEmail(String Email) throws SQLException {
