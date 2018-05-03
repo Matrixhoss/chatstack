@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
@@ -101,7 +103,12 @@ public class MainPanelController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-
+        
+        try {
+            showmembers();
+        } catch (Exception ex) {
+            Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -168,8 +175,7 @@ public class MainPanelController implements Initializable {
 
     }
 
-    @FXML
-    void showmembers(ActionEvent event) throws Exception{
+    void showmembers() throws Exception{
         ArrayList<String> x = new ArrayList<String>();
         x = ChatStack.db.getOnlineMemebers();
         //Online_LV.getItems().add(Online_LV.setItems().size(),x);
