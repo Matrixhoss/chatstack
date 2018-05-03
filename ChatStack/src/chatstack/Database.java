@@ -1,5 +1,9 @@
 package chatstack;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -119,10 +123,38 @@ public class Database {
         String IP = "N/A";
         s = stmt.executeQuery("SELECT `IP` FROM `Server` WHERE `online` LIKE '1'");
         IP = s.getString("IP");
-        
-        if(IP.equals(""))
+        boolean online = false;
+        try{
+        online = CheckIfOnline();
+        }
+        catch(IOException ex){
+        System.out.println(ex);
+        }
+        if(IP.equals("") || !online)
             return "0";
         return IP;
+    }
+    
+    public String getGroup(String Username) throws SQLException{
+        s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
+        String Group="";
+        while (s.next()) {
+            Group = s.getString("Group");
+        }
+        return Group;
+    }
+    
+    public boolean CheckIfOnline() throws IOException {
+        Socket s=new Socket("127.0.0.1",4520);
+            DataInputStream in=new DataInputStream(s.getInputStream());
+            DataOutputStream out=new DataOutputStream(s.getOutputStream());
+            out.writeUTF("online ?");
+            String response=new String(in.readUTF());
+            
+            if(response.equals("yes"))
+                return true;
+            else 
+                return false;
     }
     
 
