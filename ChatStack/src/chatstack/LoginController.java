@@ -56,12 +56,13 @@ public class LoginController implements Initializable {
 
     @FXML
     void handeLogin(ActionEvent event) {
+        String IP = "0";
         if (!userText.getText().equals("") && !passText.getText().equals("")) {
             try {
                 boolean check = false;
                 boolean databaseCheck = ChatStack.db.checkLogin(userText.getText(), passText.getText());
                 if(databaseCheck){
-                    String IP = ChatStack.db.CheckServerIP();
+                    IP = ChatStack.db.CheckServerIP();
                     if(IP.equals("0"))
                         check = false;
                     else check = true;
@@ -81,7 +82,7 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException e) {
-                System.err.println("Error in database Connection Login ");
+                System.err.println(e);
             }
         } else {
             LoginError.setText("Enter Username and password ");

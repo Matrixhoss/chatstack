@@ -18,6 +18,7 @@ public class Database {
     protected Connection con;
     protected ResultSet s = null;
     protected Statement stmt;
+    public String IP = "0";
 
     public Database() {
         try {
@@ -120,9 +121,14 @@ public class Database {
     }
     
     public String CheckServerIP() throws SQLException{
-        String IP = "N/A";
-        s = stmt.executeQuery("SELECT `IP` FROM `Server` WHERE `online` LIKE '1'");
-        IP = s.getString("IP");
+        
+        s = stmt.executeQuery("SELECT ip FROM `Server` WHERE online=1");
+        
+        while (s.next()) {
+            IP = s.getString("IP");
+        }
+        
+        System.out.println(IP);
         boolean online = false;
         try{
         online = CheckIfOnline(IP);
