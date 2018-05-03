@@ -5,6 +5,7 @@ import static chatstack.ChatStack.StageOpened;
 import static chatstack.ChatStack.root;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
@@ -65,7 +67,7 @@ public class MainPanelController implements Initializable {
     private Button xIcon;
 
     @FXML
-    private JFXListView<String> Online_LV;
+    private JFXListView<Label> Online_LV;
 
     @FXML
     private AnchorPane AP;
@@ -176,14 +178,23 @@ public class MainPanelController implements Initializable {
     }
 
     void showmembers() throws Exception{
-        ArrayList<String> x = new ArrayList<String>();
-        x = ChatStack.db.getOnlineMemebers();
-        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
-        //Online_LV.scrollTo(x);
-        for (int i = 0; i < x.size(); i++) {
-            items.add(x.get(i));
+//        ArrayList<String> x = new ArrayList<String>();
+//        x = ChatStack.db.getOnlineMemebers();
+//        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
+//        //Online_LV.scrollTo(x);
+//        for (int i = 0; i < x.size(); i++) {
+//            items.add(x.get(i));
+//        }
+//        Online_LV.setItems(items);
+
+        for (int i = 0; i < 10; i++) {
+            Label x = new Label("Test +" + i);
+            x.setGraphic(new ImageView(new Image(new FileInputStream("test.png"))));
+            Online_LV.getItems().add(x);
+            
         }
-        Online_LV.setItems(items);
+
+       
     }
     
     @FXML

@@ -32,7 +32,7 @@
          </items>
       </ToolBar>
       <JFXListView fx:id="Channel_LV" layoutX="65.0" layoutY="116.0" prefHeight="592.0" prefWidth="637.0" style="-fx-background-color: #495572; -fx-background-radius: 3%;" />
-      <JFXListView fx:id="Online_LV" layoutX="918.0" layoutY="116.0" prefHeight="592.0" prefWidth="299.0" style="-fx-background-color: #495572; -fx-background-radius: 3%;" />
+      <JFXListView fx:id="Online_LV" layoutX="918.0" layoutY="116.0" prefHeight="592.0" prefWidth="299.0" style="-fx-background-color: #495572; -fx-background-radius: 3%; -fx-vertical-gap: 10;" />
       <JFXButton fx:id="Create_Btn" layoutX="94.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#createClicked" style="-fx-background-color: #03add7;" text="Create" />
       <JFXButton fx:id="Join_btn" layoutX="569.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#joinClicked" style="-fx-background-color: #03add7;" text="Join" />
       <JFXButton fx:id="Chat_btn" layoutX="1018.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#chatClicked" style="-fx-background-color: #03add7;" text="Chat" />
