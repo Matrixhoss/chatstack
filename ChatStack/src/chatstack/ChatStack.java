@@ -7,6 +7,7 @@ package chatstack;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import javafx.application.Application;
@@ -15,6 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -26,7 +29,7 @@ public class ChatStack extends Application {
     public static Scene sc;
     public static Database db;
     public static Parent root;
-    
+    public static Clip clip1;
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -41,7 +44,19 @@ public class ChatStack extends Application {
         
        
     }
-
+ public void playback(){
+        try{
+           
+                File file = new File("Menu_Theme.wav");
+                clip1 = AudioSystem.getClip();
+                clip1.open(AudioSystem.getAudioInputStream(file));
+                clip1.loop(Clip.LOOP_CONTINUOUSLY);
+                clip1.start();
+        }
+        catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
