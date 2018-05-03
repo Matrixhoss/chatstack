@@ -82,7 +82,9 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException e) {
-                System.err.println(e);
+                SQLException f = e;
+                System.err.println(f);
+                
             }
         } else {
             LoginError.setText("Enter Username and password ");
