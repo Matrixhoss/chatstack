@@ -94,6 +94,7 @@ public class LoginController implements Initializable {
                 if (check == true) {
                     ChatStack.db.setMemeberOnline(userText.getText());
                     ChatStack.client = new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
+                    ChatStack.client.sendPacket(1);
                     root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
                     sc = new Scene(root);
                     StageOpened.setScene(sc);

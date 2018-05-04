@@ -1,10 +1,10 @@
 package chatstack;
 
 import java.net.Socket;
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import protocol.chatStackProtocol;
 
 /**
  *
@@ -15,6 +15,8 @@ public class Client {
     private String Name;
     private int ID;
     Socket client;
+   
+
 
     public String getName() {
         return Name;
@@ -46,6 +48,16 @@ public class Client {
     public void closeConnection() throws IOException {
         client.close();
 
+    }
+
+    public void sendPacket(int id) throws IOException {
+        chatStackProtocol sp = new chatStackProtocol(id, Name, "");
+         ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream()) ;
+         os.writeObject(sp);
+    }
+
+    public void sendPacket(int id,String msg) {
+        chatStackProtocol sp = new chatStackProtocol(id, Name,msg);
     }
 
 }
