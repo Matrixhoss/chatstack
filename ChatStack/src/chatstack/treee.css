@@ -99,6 +99,41 @@
 }
 
 
-.List2:hover{
-    -fx-background-color: #000000
+.List .list-cell:selected{
+    -fx-background-color:   #03add7
+}
+.List .list-cell{
+    -fx-background-color: #2D3447
+    }
+
+.List .list-cell:hover{
+    -fx-background-color:   #414b66
+}
+
+.List .list-cell:hover:selected{
+    -fx-background-color:  #03add7
+}
+
+
+.ChatScroll .list-cell:selected{
+    -fx-background-color:   #03add7
+}
+.ChatScroll .list-cell{
+    -fx-background-color:  #495572
+    }
+
+.ChatScroll .list-cell:hover{
+    -fx-background-color:   #414b66
+}
+
+.ChatScroll .list-cell:hover:selected{
+    -fx-background-color:  #03add7
+}
+
+
+.label
+{
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-font-size: 14;
 }
