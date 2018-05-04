@@ -147,7 +147,7 @@ public class GroupChatController implements Initializable {
         
         for (int i = 0; i < 10; i++) {
             Label x = new Label("Test +" + i);
-            x.getStyleClass().add("label");
+            x.getStyleClass().add("Label11");
             Image image = new Image(getClass().getResourceAsStream("test.png"));
             x.setGraphic(new ImageView(image));
             member_LV.getItems().add(x);

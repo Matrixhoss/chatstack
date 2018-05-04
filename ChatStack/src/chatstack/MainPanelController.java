@@ -201,7 +201,7 @@ public class MainPanelController implements Initializable {
         //Online_LV.scrollTo(x);
         for (int i = 0; i < x.size(); i++) {
             Label l = new Label(x.get(i));
-            l.getStyleClass().add("label");
+            l.getStyleClass().add("Label11");
             Image image = new Image(getClass().getResourceAsStream("test.png"));
             l.setGraphic(new ImageView(image));
             Online_LV.getItems().add(l);
