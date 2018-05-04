@@ -32,6 +32,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -76,7 +77,7 @@ public class GroupChatController implements Initializable {
     private AnchorPane AP;
 
     @FXML
-    private JFXListView<?> member_LV;
+    private JFXListView<Label> member_LV;
 
     @FXML
     private Separator Seperator;
@@ -141,7 +142,16 @@ public class GroupChatController implements Initializable {
         adjustNodes();
         
         ChatScroll.getStyleClass().add("ChatScroll");
+        member_LV.getStyleClass().add("List");
+        member_LV.getStyleClass().add("List2");
+        
+        for (int i = 0; i < 10; i++) {
+            Label x = new Label("Test +" + i);
+            Image image = new Image(getClass().getResourceAsStream("test.png"));
+            x.setGraphic(new ImageView(image));
+            member_LV.getItems().add(x);
 
+        }
         //
 
     }

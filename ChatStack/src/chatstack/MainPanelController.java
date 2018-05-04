@@ -119,6 +119,9 @@ public class MainPanelController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
+        
+        Online_LV.getStyleClass().add("ChatScroll");
+        Channel_LV.getStyleClass().add("ChatScroll");
 
         try {
             showmembers();
