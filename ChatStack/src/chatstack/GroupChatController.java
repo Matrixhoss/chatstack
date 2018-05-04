@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
@@ -137,7 +138,7 @@ public class GroupChatController implements Initializable {
         init.setFont(new Font("Verdana", 14));
         init.setTextFill(Color.web("#6c7a9d"));
         Vbox.getChildren().add(init);
-        
+        adjustNodes();
         sc.getStylesheets().add(getClass().getResource("scroll.css").toExternalForm());
 
         //
@@ -192,7 +193,8 @@ public class GroupChatController implements Initializable {
     }
     //
     @FXML
-            void Enterhand(KeyEvent event) {this.playback3();
+            void Enterhand(KeyEvent event) {
+                this.playback3();
                 ChatScroll.setVvalue(1.0);
                 sc.setOnKeyPressed(e -> {
                     if (e.getCode() == KeyCode.ENTER) {
@@ -208,8 +210,8 @@ public class GroupChatController implements Initializable {
                     }
                 });
             }
-        });
-    }
+      
+    
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="SpeechBox">
