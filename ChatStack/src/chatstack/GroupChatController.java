@@ -128,7 +128,7 @@ public class GroupChatController implements Initializable {
         init.setTextFill(Color.web("#6c7a9d"));
         Vbox.getChildren().add(init);
         
-        sc.getStylesheets().add("scroll.css");
+        sc.getStylesheets().add(getClass().getResource("scroll1.css").toExternalForm());
 
         //
 
