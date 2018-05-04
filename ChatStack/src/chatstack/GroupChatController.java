@@ -117,7 +117,7 @@ public class GroupChatController implements Initializable {
         adjustNodes();
 
         Vbox.setAlignment(Pos.TOP_CENTER);
-        Label init = new Label("--- Groub Chat Start ---");
+        Label init = new Label("--- Group Chat Start ---");
         init.setAlignment(Pos.CENTER);
         init.setFont(new Font("Verdana", 14));
         init.setTextFill(Color.web("#6c7a9d"));
