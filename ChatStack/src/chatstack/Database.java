@@ -141,9 +141,9 @@ public class Database {
 
 
 //<editor-fold defaultstate="collapsed" desc="Groups">
-    public boolean createGroup(String name,String pass,String owner) throws SQLException{
+    public boolean createGroup(String name,String pass,String owner,int nOfUsers) throws SQLException{
         if(pass.length()<=8){
-            con.prepareStatement("INSERT INTO `Groups` (`name`, `owner`, `password`) VALUES ('"+name+"', '" + owner + "', '" + pass + "'); ").executeUpdate();
+            con.prepareStatement("INSERT INTO `Groups` (`name`, `owner`, `password`,`numOfUsers`) VALUES ('"+name+"', '" + owner + "', '" + pass + "', '" + nOfUsers + "'); ").executeUpdate();
             return true;
         }
         return false;
