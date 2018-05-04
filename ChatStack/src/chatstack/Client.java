@@ -14,6 +14,7 @@ public class Client {
 
     private String Name;
     private int ID;
+    Socket client;
 
     public String getName() {
         return Name;
@@ -35,12 +36,16 @@ public class Client {
         this.Name = Name;
         this.ID = ID;
         try {
-            Socket client = new Socket("127.0.0.1", 4520);
+            client = new Socket("127.0.0.1", 4520);
         } catch (Exception ex) {
             ex.getStackTrace();
         }
 
     }
-    
+
+    public void closeConnection() throws IOException {
+        client.close();
+
+    }
 
 }

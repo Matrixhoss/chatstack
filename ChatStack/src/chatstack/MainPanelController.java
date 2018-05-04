@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXListView;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -17,10 +18,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -77,6 +82,9 @@ public class MainPanelController implements Initializable {
 
     @FXML
     private Label Channel_label;
+    
+    @FXML
+    private MenuButton Menu;
 
     double oldW;
     double oldH;
@@ -99,7 +107,9 @@ public class MainPanelController implements Initializable {
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
-
+        
+        Menu.setText(ChatStack.client.getName());
+        
         AP.setPrefHeight(800);
         AP.setPrefWidth(1280);
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
@@ -216,7 +226,6 @@ public class MainPanelController implements Initializable {
         root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
-        items.add("asdasd");
     }
 
     @FXML
@@ -312,6 +321,26 @@ public class MainPanelController implements Initializable {
             }
         }
         adjustNodes();
+    }
+    
+    
+    @FXML
+    void menuLogout(ActionEvent event) throws IOException, SQLException {
+        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.client.closeConnection();
+        root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        sc = new Scene(root);
+        StageOpened.setWidth(500);
+        StageOpened.setHeight(375);
+        StageOpened.setScene(sc);
+    }
+
+    @FXML
+    void menuExit(ActionEvent event) throws SQLException, IOException {
+        StageOpened.close();
+        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.client.closeConnection();
+       
     }
 
     //end of title bar code

@@ -31,6 +31,12 @@
                   <Font size="6.0" />
                </font>
             </Button>
+            <MenuButton mnemonicParsing="false" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
          </items>
       </ToolBar>
       <TextField fx:id="txt_field" layoutX="277.0" layoutY="498.0" onKeyPressed="#Enterhand" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />

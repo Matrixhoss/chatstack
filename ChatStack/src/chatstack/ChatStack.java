@@ -32,6 +32,7 @@ public class ChatStack extends Application {
     public static Database db;
     public static Parent root;
     public static Clip clip1;
+    public static Client client;
     @Override
     public void start(Stage stage) throws Exception {
         //this.playback();

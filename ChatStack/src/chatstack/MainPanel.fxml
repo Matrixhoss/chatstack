@@ -29,6 +29,12 @@
                   <Font size="6.0" />
                </font>
             </Button>
+            <MenuButton fx:id="Menu" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #495572;" text="ESC">
+              <items>
+                <MenuItem fx:id="M_Logout" mnemonicParsing="false" onAction="#menuLogout" text="Logout" />
+                <MenuItem fx:id="M_Exit" mnemonicParsing="false" onAction="#menuExit" text="Exit" />
+              </items>
+            </MenuButton>
          </items>
       </ToolBar>
       <JFXListView fx:id="Channel_LV" layoutX="65.0" layoutY="116.0" prefHeight="592.0" prefWidth="637.0" style="-fx-background-color: #495572; -fx-background-radius: 3%;" />
@@ -36,7 +42,7 @@
       <JFXButton fx:id="Create_Btn" layoutX="94.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#createClicked" style="-fx-background-color: #03add7;" text="Create" />
       <JFXButton fx:id="Join_btn" layoutX="569.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#joinClicked" style="-fx-background-color: #03add7;" text="Join" />
       <JFXButton fx:id="Chat_btn" layoutX="1018.0" layoutY="725.0" minHeight="30.0" minWidth="100.0" onAction="#chatClicked" style="-fx-background-color: #03add7;" text="Chat" />
-      <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="600.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iv_stack" fitHeight="45.0" fitWidth="174.0" layoutX="600.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@StackLogo.png" />
          </image>
