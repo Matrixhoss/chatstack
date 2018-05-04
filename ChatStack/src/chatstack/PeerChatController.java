@@ -125,15 +125,20 @@ public class PeerChatController implements Initializable {
     }
     @FXML
     public void hand(ActionEvent e) {
-        if (testChat) {
-            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-            testChat = false;
-        } else {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-            testChat = true;
-        }
          ChatScroll.setVvalue(1.0);  
         
+    }
+    
+        @FXML
+    public void hand2(ActionEvent e) {
+            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+         ChatScroll.setVvalue(1.0);  
+    }
+    
+    public void recieveGUI(String s) {
+            Vbox.getChildren().add(new SpeechBox(s, SpeechDirection.LEFT));
+         ChatScroll.setVvalue(1.0);  
     }
 
     public void adjustNodes() {
