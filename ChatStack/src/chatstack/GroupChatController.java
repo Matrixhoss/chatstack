@@ -171,7 +171,7 @@ public class GroupChatController implements Initializable {
         }
         
     }
-    
+    //
     @FXML
             void Enterhand(KeyEvent event) {this.playback3();
                 ChatScroll.setVvalue(1.0);
