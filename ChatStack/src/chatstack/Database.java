@@ -108,9 +108,9 @@ public class Database {
 
     public void setMemeberOffline(String Username) throws SQLException {
 
-       stmt.executeUpdate("UPDATE `Users` SET `online` = 0 WHERE `username` LIKE '" + Username + "'");
+        stmt.executeUpdate("UPDATE `Users` SET `online` = 0 WHERE `username` LIKE '" + Username + "'");
         System.out.println("SET to 0");
- 
+
     }
 
     public ArrayList<String> getOnlineMemebers() throws SQLException {
@@ -123,8 +123,8 @@ public class Database {
         return OM;
 
     }
-    
-     public ArrayList<String> getGroups() throws SQLException {
+
+    public ArrayList<String> getGroups() throws SQLException {
 
         ArrayList<String> OM = new ArrayList<String>();
         s = stmt.executeQuery("SELECT `name` FROM `Groups` ");
@@ -132,6 +132,13 @@ public class Database {
             OM.add("Group: " + (s.getString("name")));
         }
         return OM;
+
+    }
+
+    public void updatetIP(String ip, String Username) throws SQLException {
+
+        stmt.executeUpdate("UPDATE `Users` SET `ip`= '" + ip + "' WHERE `username` LIKE '" + Username + "'");
+
 
     }
 
@@ -169,14 +176,16 @@ public class Database {
         }
         return Group;
     }
-    
-    public boolean checkGroupname(String group) throws SQLException{
-        String g="";
+
+    public boolean checkGroupname(String group) throws SQLException {
+        String g = "";
         s = stmt.executeQuery("SELECT `name` FROM `Groups` WHERE `name` LIKE '" + group + "'");
-        while(s.next())
-            g=s.getString("name");
-        if(g.equals("group"))
+        while (s.next()) {
+            g = s.getString("name");
+        }
+        if (g.equals("group")) {
             return true;
+        }
         return false;
     }
 //</editor-fold>

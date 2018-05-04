@@ -125,7 +125,7 @@ public class GroupChatController implements Initializable {
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
         
-        Menu.setText(ChatStack.client.getName());
+        Menu.setText(ChatStack.client.getUserName());
         
         AP.setPrefHeight(800);
         AP.setPrefWidth(1280);
@@ -431,7 +431,7 @@ public class GroupChatController implements Initializable {
     void close(MouseEvent event) throws SQLException, IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
     }
 
@@ -502,7 +502,7 @@ public class GroupChatController implements Initializable {
 
     @FXML
     void menuLogout(ActionEvent event) throws IOException, SQLException {
-        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         sc = new Scene(root);
@@ -514,7 +514,7 @@ public class GroupChatController implements Initializable {
     @FXML
     void menuExit(ActionEvent event) throws SQLException, IOException {
         StageOpened.close();
-        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
 
     }

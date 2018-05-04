@@ -62,9 +62,13 @@ public class CreateGroupController implements Initializable {
                 } else if (ChatStack.db.checkGroupname(grpName.getText())) {
                     createError.setText("This Username already exists");
                 } else {
-                    ChatStack.db.createGroup(grpName.getText(), passText.getText(), ChatStack.client.getName(),Integer.parseInt(maxNumber.getText()));
+                    ChatStack.db.createGroup(grpName.getText(), passText.getText(), ChatStack.client.getUserName(), Integer.parseInt(maxNumber.getText()));
+                    ChatStack.client.sendPacket(2);
+                    MainPanelController.showGroups();
                     createError.setTextFill(Color.web("#00C853"));
                     createError.setText("Sign Up Success");
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
                 }
 
             } else {

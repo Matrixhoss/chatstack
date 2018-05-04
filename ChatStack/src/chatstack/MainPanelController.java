@@ -41,8 +41,8 @@ import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
 
-    ObservableList<String> Onlineitems = FXCollections.observableArrayList();
-    ObservableList<String> Groupitems = FXCollections.observableArrayList();
+//    ObservableList<String> Onlineitems = FXCollections.observableArrayList();
+//    ObservableList<String> Groupitems = FXCollections.observableArrayList();
 //    JFXListView<Object>list=JFXListView<Object>;
     @FXML
     private JFXButton Join_btn;
@@ -84,7 +84,7 @@ public class MainPanelController implements Initializable {
     private Button minIcon;
 
     @FXML
-    private Label Channel_label;
+     private Label Channel_label;
 
     @FXML
     private MenuButton Menu;
@@ -98,6 +98,7 @@ public class MainPanelController implements Initializable {
     private double xOffset;
     private double yOffset;
     boolean clicked = false;
+    public static Image image;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -111,14 +112,16 @@ public class MainPanelController implements Initializable {
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
 
-        Menu.setText(ChatStack.client.getName());
+        image = new Image(getClass().getResourceAsStream("test.png"));
+        Menu.setText(ChatStack.client.getUserName());
 
         AP.setPrefHeight(800);
         AP.setPrefWidth(1280);
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-
+        Online_LV.setItems(ChatStack.Onlineitems);
+        Channel_LV.setItems(ChatStack.Groupitems);
         Online_LV.getStyleClass().add("ChatScroll");
         Channel_LV.getStyleClass().add("ChatScroll");
 
@@ -194,28 +197,26 @@ public class MainPanelController implements Initializable {
 
     }
 
-    void showmembers() throws Exception {
-        ArrayList<String> x = new ArrayList<String>();
-        x = ChatStack.db.getOnlineMemebers();
-        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
-        //Online_LV.scrollTo(x);
-        for (int i = 0; i < x.size(); i++) {
-            Label l = new Label(x.get(i));
+    public static void showmembers() throws Exception {
+        ChatStack.Onlineitems.clear();
+        ChatStack.users = ChatStack.db.getOnlineMemebers();
+
+        for (int i = 0; i < ChatStack.users.size(); i++) {
+            Label l = new Label(ChatStack.users.get(i));
             l.getStyleClass().add("Label11");
-            Image image = new Image(getClass().getResourceAsStream("test.png"));
+
             l.setGraphic(new ImageView(image));
-            Online_LV.getItems().add(l);
-        }
-
-    }
-
-    void showGroups() throws SQLException {
-        ArrayList<String> x = new ArrayList<String>();
-        x = ChatStack.db.getGroups();
-        for (int i = 0; i < x.size(); i++) {
-        Channel_LV.getItems().add(x.get(i));
+            ChatStack.Onlineitems.add(l);
         }
         
+    }
+
+    static void showGroups() throws SQLException {
+        ChatStack.Groupitems.clear();
+        ChatStack.groups = ChatStack.db.getGroups();
+        ChatStack.Groupitems.addAll(ChatStack.groups);
+        
+
     }
 
     @FXML
@@ -266,7 +267,7 @@ public class MainPanelController implements Initializable {
     void close(MouseEvent event) throws SQLException, IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
     }
 
@@ -336,7 +337,7 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void menuLogout(ActionEvent event) throws IOException, SQLException {
-        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         sc = new Scene(root);
@@ -348,7 +349,7 @@ public class MainPanelController implements Initializable {
     @FXML
     void menuExit(ActionEvent event) throws SQLException, IOException {
         StageOpened.close();
-        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
 
     }
