@@ -34,11 +34,13 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
+
     ObservableList<String> items = FXCollections.observableArrayList("test1", "test2");
 //    JFXListView<Object>list=JFXListView<Object>;
     @FXML
@@ -82,9 +84,11 @@ public class MainPanelController implements Initializable {
 
     @FXML
     private Label Channel_label;
-    
+
     @FXML
     private MenuButton Menu;
+
+
 
     double oldW;
     double oldH;
@@ -107,15 +111,15 @@ public class MainPanelController implements Initializable {
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
-        
+
         Menu.setText(ChatStack.client.getName());
-        
+
         AP.setPrefHeight(800);
         AP.setPrefWidth(1280);
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-        
+
         try {
             showmembers();
         } catch (Exception ex) {
@@ -127,10 +131,6 @@ public class MainPanelController implements Initializable {
     public void adjustNodes() {
 //        AP.setPrefHeight(1080);
 //        AP.setPrefWidth(2560);
-
-        System.out.println("old Height: " + oldH);
-        System.out.println("New Height: " + AP.getPrefHeight());
-        System.out.println("old X Online_LV: " + Online_LV.getLayoutX());
         Channel_LV.setPrefHeight(AP.getPrefHeight() * (Channel_LV.getPrefHeight() / oldH));
         Channel_LV.setPrefWidth(AP.getPrefWidth() * (Channel_LV.getPrefWidth() / oldW));
         Channel_LV.setLayoutY(AP.getPrefHeight() * (Channel_LV.getLayoutY() / oldH));
@@ -145,6 +145,11 @@ public class MainPanelController implements Initializable {
         Channel_label.setPrefWidth(AP.getPrefWidth() * (Channel_label.getPrefWidth() / oldW));
         Channel_label.setLayoutY(AP.getPrefHeight() * (Channel_label.getLayoutY() / oldH));
         Channel_label.setLayoutX(AP.getPrefWidth() * (Channel_label.getLayoutX() / oldW));
+
+//        MenuBox.setPrefHeight(AP.getPrefHeight() * (MenuBox.getPrefHeight() / oldH));
+//        MenuBox.setPrefWidth(AP.getPrefWidth() * (MenuBox.getPrefWidth() / oldW));
+        Menu.setLayoutY(AP.getPrefHeight() * (Menu.getLayoutY() / oldH));
+        Menu.setLayoutX(AP.getPrefWidth() * (Menu.getLayoutX() / oldW));
 
         Online_Label.setPrefHeight(AP.getPrefHeight() * (Online_Label.getPrefHeight() / oldH));
         Online_Label.setPrefWidth(AP.getPrefWidth() * (Online_Label.getPrefWidth() / oldW));
@@ -181,13 +186,12 @@ public class MainPanelController implements Initializable {
         iv_stack.setLayoutY(AP.getPrefHeight() * (iv_stack.getLayoutY() / oldH));
         iv_stack.setLayoutX(AP.getPrefWidth() * (iv_stack.getLayoutX() / oldW));
 
-        System.out.println("new X Online_LV: " + Online_LV.getLayoutX());
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
 
     }
 
-    void showmembers() throws Exception{
+    void showmembers() throws Exception {
 //        ArrayList<String> x = new ArrayList<String>();
 //        x = ChatStack.db.getOnlineMemebers();
 //        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
@@ -202,12 +206,11 @@ public class MainPanelController implements Initializable {
             Image image = new Image(getClass().getResourceAsStream("test.png"));
             x.setGraphic(new ImageView(image));
             Online_LV.getItems().add(x);
-            
+
         }
 
-       
     }
-    
+
     @FXML
     void createClicked(ActionEvent event) throws IOException {
         Stage newWindow = new Stage();
@@ -229,7 +232,7 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void chatClicked(ActionEvent event) throws IOException{
+    void chatClicked(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("PeerChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
@@ -254,9 +257,11 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void close(MouseEvent event) {
+    void close(MouseEvent event) throws SQLException, IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+        ChatStack.db.setMemeberOffline(ChatStack.client.getName());
+        ChatStack.client.closeConnection();
     }
 
     @FXML
@@ -322,8 +327,7 @@ public class MainPanelController implements Initializable {
         }
         adjustNodes();
     }
-    
-    
+
     @FXML
     void menuLogout(ActionEvent event) throws IOException, SQLException {
         ChatStack.db.setMemeberOffline(ChatStack.client.getName());
@@ -340,7 +344,7 @@ public class MainPanelController implements Initializable {
         StageOpened.close();
         ChatStack.db.setMemeberOffline(ChatStack.client.getName());
         ChatStack.client.closeConnection();
-       
+
     }
 
     //end of title bar code
