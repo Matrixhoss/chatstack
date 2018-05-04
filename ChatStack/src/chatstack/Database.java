@@ -124,22 +124,11 @@ public class Database {
 
     }
 
-    public ArrayList<String> getGroups() throws SQLException {
-
-        ArrayList<String> OM = new ArrayList<String>();
-        s = stmt.executeQuery("SELECT `name` FROM `Groups` ");
-        while (s.next()) {
-            OM.add("Group: " + (s.getString("name")));
-        }
-        return OM;
-
-    }
+ 
 
     public void updatetIP(String ip, String Username) throws SQLException {
 
         stmt.executeUpdate("UPDATE `Users` SET `ip`= '" + ip + "' WHERE `username` LIKE '" + Username + "'");
-
-
     }
 
     public void CloseDatabaseConnection() throws SQLException {
@@ -166,6 +155,34 @@ public class Database {
             return true;
         }
         return false;
+    }
+
+       public ArrayList<String> getGroups() throws SQLException {
+
+        ArrayList<String> OM = new ArrayList<String>();
+        s = stmt.executeQuery("SELECT `name` FROM `Groups` ");
+        while (s.next()) {
+            OM.add((s.getString("name")));
+        }
+        return OM;
+
+    }
+       
+        public int getGroup(String Username) throws SQLException {
+
+        int OM = 0;
+        s = stmt.executeQuery("SELECT `numOfUsers` FROM `Groups` WHERE `username` LIKE '" + Username + "'");
+        while (s.next()) {
+            OM=s.getInt("numOfUsers");
+        }
+        return OM;
+
+    }
+    
+    public void setUserGroup(String Username, String Groupname) throws SQLException {
+        stmt.executeUpdate("UPDATE `Users` SET `group` = '" + Groupname + "' WHERE `username` LIKE '" + Username + "'");
+        System.out.println("updatedededededeed");
+
     }
 
     public String getUserGroup(String Username) throws SQLException {

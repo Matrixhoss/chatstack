@@ -84,7 +84,7 @@ public class MainPanelController implements Initializable {
     private Button minIcon;
 
     @FXML
-     private Label Channel_label;
+    private Label Channel_label;
 
     @FXML
     private MenuButton Menu;
@@ -208,14 +208,13 @@ public class MainPanelController implements Initializable {
             l.setGraphic(new ImageView(image));
             ChatStack.Onlineitems.add(l);
         }
-        
+
     }
 
     static void showGroups() throws SQLException {
         ChatStack.Groupitems.clear();
         ChatStack.groups = ChatStack.db.getGroups();
         ChatStack.Groupitems.addAll(ChatStack.groups);
-        
 
     }
 
@@ -232,11 +231,16 @@ public class MainPanelController implements Initializable {
     }
 
     @FXML
-    void joinClicked(ActionEvent event) throws IOException {
+    void joinClicked(ActionEvent event) throws SQLException, IOException {
+            
+            //TODO count number of users in group
+            System.out.println(Channel_LV.getSelectionModel().getSelectedItem());
+            ChatStack.db.setUserGroup(ChatStack.client.getUserName(), Channel_LV.getSelectionModel().getSelectedItem());
+            root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
+            sc = new Scene(root);
+            StageOpened.setScene(sc);
+       
 
-        root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
-        sc = new Scene(root);
-        StageOpened.setScene(sc);
     }
 
     @FXML
