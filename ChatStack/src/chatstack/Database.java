@@ -139,14 +139,35 @@ public class Database {
         }
     }
 
+
+//<editor-fold defaultstate="collapsed" desc="Groups">
+    public boolean createGroup(String name,String pass,String owner) throws SQLException{
+        if(pass.length()<=8){
+            con.prepareStatement("INSERT INTO `Groups` (`name`, `owner`, `password`) VALUES ('"+name+"', '" + owner + "', '" + pass + "'); ").executeUpdate();
+            return true;
+        }
+        return false;
+    }
+    
+    public String getGroup(String Username) throws SQLException {
+        s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
+        String Group = "";
+        while (s.next()) {
+            Group = s.getString("Group");
+        }
+        return Group;
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="Server">
     public String CheckServerIP() throws SQLException {
-
+        
         s = stmt.executeQuery("SELECT ip FROM `Server` WHERE online=1");
-
+        
         while (s.next()) {
             IP = s.getString("IP");
         }
-
+        
         System.out.println(IP);
         boolean online = false;
         try {
@@ -159,18 +180,10 @@ public class Database {
         }
         return IP;
     }
-
-    public String getGroup(String Username) throws SQLException {
-        s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
-        String Group = "";
-        while (s.next()) {
-            Group = s.getString("Group");
-        }
-        return Group;
-    }
-
+    
+    
     public boolean CheckIfOnline(String IP) throws IOException {
-
+        
         Socket s = new Socket(IP, 55555);
         DataInputStream in = new DataInputStream(s.getInputStream());
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
@@ -185,5 +198,6 @@ public class Database {
             return false;
         }
     }
+//</editor-fold>
 
 }
