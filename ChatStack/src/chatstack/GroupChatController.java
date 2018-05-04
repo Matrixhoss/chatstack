@@ -148,6 +148,16 @@ public class GroupChatController implements Initializable {
             System.err.println(e);
         }
     }
+    public void playback5() {
+        try {
+            clip1 = AudioSystem.getClip();
+            InputStream audioSrc = getClass().getResourceAsStream("recieve.wav");
+            clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+            clip1.start();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     //<editor-fold defaultstate="collapsed" desc="Send message">
     @FXML
     public void hand(ActionEvent e) {
@@ -168,10 +178,10 @@ public class GroupChatController implements Initializable {
                 sc.setOnKeyPressed(e -> {
                     if (e.getCode() == KeyCode.ENTER) {
                         System.out.println("ENTER PRESSED");
-                        if (testChat) {
+                        if (testChat) {this.playback5();
                             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
                             testChat = false;
-                        } else {
+                        } else {this.playback4();
                             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
                             testChat = true;
                         }
