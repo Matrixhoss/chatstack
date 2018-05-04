@@ -41,7 +41,8 @@ import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
 
-    ObservableList<String> items = FXCollections.observableArrayList("test1", "test2");
+    ObservableList<String> Onlineitems = FXCollections.observableArrayList();
+    ObservableList<String> Groupitems = FXCollections.observableArrayList();
 //    JFXListView<Object>list=JFXListView<Object>;
     @FXML
     private JFXButton Join_btn;
@@ -88,8 +89,6 @@ public class MainPanelController implements Initializable {
     @FXML
     private MenuButton Menu;
 
-
-
     double oldW;
     double oldH;
 
@@ -119,12 +118,13 @@ public class MainPanelController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-        
+
         Online_LV.getStyleClass().add("ChatScroll");
         Channel_LV.getStyleClass().add("ChatScroll");
 
         try {
             showmembers();
+            showGroups();
         } catch (Exception ex) {
             Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -195,23 +195,26 @@ public class MainPanelController implements Initializable {
     }
 
     void showmembers() throws Exception {
-//        ArrayList<String> x = new ArrayList<String>();
-//        x = ChatStack.db.getOnlineMemebers();
-//        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
-//        //Online_LV.scrollTo(x);
-//        for (int i = 0; i < x.size(); i++) {
-//            items.add(x.get(i));
-//        }
-//        Online_LV.setItems(items);
-
-        for (int i = 0; i < 10; i++) {
-            Label x = new Label("Test +" + i);
+        ArrayList<String> x = new ArrayList<String>();
+        x = ChatStack.db.getOnlineMemebers();
+        //Online_LV.getItems().add(Online_LV.setItems().size(),x);
+        //Online_LV.scrollTo(x);
+        for (int i = 0; i < x.size(); i++) {
+            Label l = new Label(x.get(i));
             Image image = new Image(getClass().getResourceAsStream("test.png"));
-            x.setGraphic(new ImageView(image));
-            Online_LV.getItems().add(x);
-
+            l.setGraphic(new ImageView(image));
+            Online_LV.getItems().add(l);
         }
 
+    }
+
+    void showGroups() throws SQLException {
+        ArrayList<String> x = new ArrayList<String>();
+        x = ChatStack.db.getGroups();
+        for (int i = 0; i < x.size(); i++) {
+        Channel_LV.getItems().add(x.get(i));
+        }
+        
     }
 
     @FXML
@@ -239,7 +242,6 @@ public class MainPanelController implements Initializable {
         root = FXMLLoader.load(getClass().getResource("PeerChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
-        items.add("test");
     }
 
     //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">

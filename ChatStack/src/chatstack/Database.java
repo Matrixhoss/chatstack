@@ -123,6 +123,17 @@ public class Database {
         return OM;
 
     }
+    
+     public ArrayList<String> getGroups() throws SQLException {
+
+        ArrayList<String> OM = new ArrayList<String>();
+        s = stmt.executeQuery("SELECT `name` FROM `Groups` ");
+        while (s.next()) {
+            OM.add("Group: " + (s.getString("name")));
+        }
+        return OM;
+
+    }
 
     public void CloseDatabaseConnection() throws SQLException {
         this.con.close();

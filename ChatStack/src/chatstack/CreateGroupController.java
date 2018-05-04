@@ -28,19 +28,19 @@ public class CreateGroupController implements Initializable {
 
     @FXML
     JFXPasswordField passText;
-    
+
     @FXML
     private JFXTextField maxNumber;
-    
+
     @FXML
     private JFXTextField grpName;
-    
+
     @FXML
     private JFXRadioButton passRadio;
-    
+
     @FXML
     private Label createError;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -48,18 +48,18 @@ public class CreateGroupController implements Initializable {
 
     @FXML
     void handleCreate(ActionEvent event) {
+        createError.setTextFill(Color.web("#f53030"));
         try {
             if (!grpName.getText().equals("") && !maxNumber.getText().equals("")) {
-                if ((passRadio.isSelected() && !passText.getText().equals(""))) {
+                if ((passRadio.isSelected() && passText.getText().equals(""))) {
                     createError.setText("Please Enter a Password");
-                } else if (!grpName.getText().matches("\\b[a-zA-Z][a-zA-Z0-9\\-._]{3,}\\b")) {
+                } else if (!(grpName.getText().matches("\\b[a-zA-Z][a-zA-Z0-9\\-._]{3,}\\b"))) {
                     createError.setText("The group name is not Valid");
                 } else if (!maxNumber.getText().matches("-?([1-9][0-9]*)?")) {
-                    if(Integer.parseInt(maxNumber.getText())>20){
-                    createError.setText("Number must be smaller than 20");
-                    }
                     createError.setText("Number of user must be a number.");
-                } else if (ChatStack.db.checkGroupname(grpName.getText()) == false) {
+                } else if (Integer.parseInt(maxNumber.getText()) > 20) {
+                    createError.setText("Number must be smaller than 20");
+                } else if (ChatStack.db.checkGroupname(grpName.getText())) {
                     createError.setText("This Username already exists");
                 } else {
                     ChatStack.db.createGroup(grpName.getText(), passText.getText(), ChatStack.client.getName(),Integer.parseInt(maxNumber.getText()));
@@ -74,7 +74,6 @@ public class CreateGroupController implements Initializable {
             System.err.println("Error while create a group");
         }
     }
-    
 
     @FXML
     void enablePassword(ActionEvent event) {
