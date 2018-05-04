@@ -29,12 +29,16 @@
                   <Font size="6.0" />
                </font>
             </Button>
-            <MenuButton fx:id="Menu" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #495572;" text="ESC">
-              <items>
-                <MenuItem fx:id="M_Logout" mnemonicParsing="false" onAction="#menuLogout" text="Logout" />
-                <MenuItem fx:id="M_Exit" mnemonicParsing="false" onAction="#menuExit" text="Exit" />
-              </items>
-            </MenuButton>
+            <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="894.0">
+               <children>
+                  <MenuButton fx:id="Menu" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #495572;" text="ESC">
+                    <items>
+                      <MenuItem fx:id="M_Logout" mnemonicParsing="false" onAction="#menuLogout" text="Logout" />
+                      <MenuItem fx:id="M_Exit" mnemonicParsing="false" onAction="#menuExit" text="Exit" />
+                    </items>
+                  </MenuButton>
+               </children>
+            </HBox>
          </items>
       </ToolBar>
       <JFXListView fx:id="Channel_LV" layoutX="65.0" layoutY="116.0" prefHeight="592.0" prefWidth="637.0" style="-fx-background-color: #495572; -fx-background-radius: 3%;" />
