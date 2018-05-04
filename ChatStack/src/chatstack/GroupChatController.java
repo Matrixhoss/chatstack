@@ -6,9 +6,12 @@
 package chatstack;
 
 import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.clip1;
 import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -38,6 +41,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javax.sound.sampled.AudioSystem;
 
 public class GroupChatController implements Initializable {
 
@@ -124,7 +128,26 @@ public class GroupChatController implements Initializable {
         Vbox.getChildren().add(init);
 
     }
-
+    public void playback3() {
+        try {
+            clip1 = AudioSystem.getClip();
+            InputStream audioSrc = getClass().getResourceAsStream("text.wav");
+            clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+            clip1.start();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    public void playback4() {
+        try {
+            clip1 = AudioSystem.getClip();
+            InputStream audioSrc = getClass().getResourceAsStream("send.wav");
+            clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+            clip1.start();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     //<editor-fold defaultstate="collapsed" desc="Send message">
     @FXML
     public void hand(ActionEvent e) {
@@ -140,7 +163,7 @@ public class GroupChatController implements Initializable {
     }
     
     @FXML
-            void Enterhand(KeyEvent event) {
+            void Enterhand(KeyEvent event) {this.playback3();
                 ChatScroll.setVvalue(1.0);
                 sc.setOnKeyPressed(e -> {
                     if (e.getCode() == KeyCode.ENTER) {
