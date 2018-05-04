@@ -11,8 +11,17 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" fx:id="AP" onMouseDragged="#adjustWindow" onMousePressed="#getCords" prefHeight="538.0" prefWidth="870.0" style="-fx-background-color: #414b66;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.GroupChatController">
+        <stylesheets>
+        <URL value="@treee.css" />
+    </stylesheets>
    <children>
       <TextField fx:id="txt_field" layoutX="277.0" layoutY="498.0" onKeyPressed="#Enterhand" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />
       <Pane fx:id="pane" layoutY="26.0" prefHeight="510.0" prefWidth="262.0" style="-fx-background-color: #2D3447;">
