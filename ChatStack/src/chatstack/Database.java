@@ -150,13 +150,23 @@ public class Database {
         return false;
     }
 
-    public String getGroup(String Username) throws SQLException {
+    public String getUserGroup(String Username) throws SQLException {
         s = stmt.executeQuery("SELECT `Group` FROM `Users` WHERE `username` LIKE '" + Username + "'");
         String Group = "";
         while (s.next()) {
             Group = s.getString("Group");
         }
         return Group;
+    }
+    
+    public boolean checkGroupname(String group) throws SQLException{
+        String g="";
+        s = stmt.executeQuery("SELECT `name` FROM `Groups` WHERE `name` LIKE '" + group + "'");
+        while(s.next())
+            g=s.getString("name");
+        if(g.equals("group"))
+            return true;
+        return false;
     }
 //</editor-fold>
 
