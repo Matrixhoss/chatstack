@@ -29,6 +29,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
+import javafx.application.Platform;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
@@ -94,7 +95,13 @@ public class LoginController implements Initializable {
                 if (check == true) {
                     ChatStack.db.setMemeberOnline(userText.getText());
                     ChatStack.client = new Client(userText.getText(), ChatStack.db.getID(userText.getText()));
-                    ChatStack.client.start();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ChatStack.client.start();
+                        }
+                    });
+
 //                    ChatStack.client.sendPacket(1);
                     root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
                     sc = new Scene(root);

@@ -26,6 +26,7 @@ public class Client extends Thread {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
+        
     @Override
     public void run() {
         try {
@@ -33,7 +34,7 @@ public class Client extends Thread {
                 p = (chatStackProtocol) in.readObject();
                 System.out.println("ID : " + p.getId() + "From User : " + p.getUser());
                 if (p.getId() == 1) {
-                    ChatStack.users = ChatStack.db.getOnlineMemebers();
+                    
                     MainPanelController.showmembers();
                 }
                 if (p.getId() == 2) {

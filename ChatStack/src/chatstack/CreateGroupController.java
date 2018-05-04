@@ -69,13 +69,16 @@ public class CreateGroupController implements Initializable {
                     createError.setText("Sign Up Success");
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.close();
+                    root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
+                    sc = new Scene(root);
+                    StageOpened.setScene(sc);
                 }
 
             } else {
                 createError.setText("Please fill all fields");
             }
         } catch (Exception e) {
-            System.err.println("Error while create a group");
+            System.err.println("Error while creating group");
         }
     }
 
