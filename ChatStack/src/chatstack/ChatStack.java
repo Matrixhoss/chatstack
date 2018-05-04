@@ -34,7 +34,7 @@ public class ChatStack extends Application {
     public static Clip clip1;
     @Override
     public void start(Stage stage) throws Exception {
-        this.playback();
+        //this.playback();
         StageOpened=stage;
         StageOpened.initStyle(StageStyle.UNDECORATED);
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -49,7 +49,7 @@ public class ChatStack extends Application {
  public void playback(){
         try{
                 clip1 = AudioSystem.getClip();
-                InputStream audioSrc = getClass().getResourceAsStream("Menu_Theme.wav");
+                InputStream audioSrc = getClass().getResourceAsStream("bac.wav");
                 clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
                 clip1.loop(Clip.LOOP_CONTINUOUSLY);
                 clip1.start();

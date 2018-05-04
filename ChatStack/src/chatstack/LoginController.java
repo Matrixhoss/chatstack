@@ -21,11 +21,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.clip1;
 import static chatstack.ChatStack.root;
 import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.sql.SQLException;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 
 
@@ -54,9 +59,19 @@ public class LoginController implements Initializable {
     @FXML
     private JFXPasswordField passText;
 
+    public void playback2() {
+        try {
+            clip1 = AudioSystem.getClip();
+            InputStream audioSrc = getClass().getResourceAsStream("login.wav");
+            clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+            clip1.start();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     @FXML
     void handeLogin(ActionEvent event) {
-        
+        this.playback2();
         String IP = "0";
         if (!userText.getText().equals("") && !passText.getText().equals("")) {
             try {

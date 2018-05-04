@@ -24,6 +24,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -35,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PeerChatController implements Initializable {
@@ -111,9 +113,17 @@ public class PeerChatController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-
+        
+       
+        
+        Vbox.setAlignment(Pos.TOP_CENTER);
+        Label init = new Label("--- Groub Chat Start ---");
+            init.setAlignment(Pos.CENTER);
+            init.setFont(new Font("Verdana", 14));
+            init.setTextFill(Color.web("#6c7a9d"));
+            Vbox.getChildren().add(init);
     }
-
+    @FXML
     public void hand(ActionEvent e) {
         if (testChat) {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
@@ -122,7 +132,8 @@ public class PeerChatController implements Initializable {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
             testChat = true;
         }
-        System.out.println(testChat);
+         ChatScroll.setVvalue(1.0);  
+        
     }
 
     public void adjustNodes() {
@@ -202,11 +213,27 @@ public class PeerChatController implements Initializable {
     enum SpeechDirection {
         LEFT, RIGHT
     }
+    @FXML
+    void Enterhand(KeyEvent event) {
+        sc.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                System.out.println("ENTER PRESSED");
+                if (testChat) {
+                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+                    testChat = false;
+                } else {
+                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+                    testChat = true;
+                }
+                 ChatScroll.setVvalue(1.0);  
+            }
+        });
+    }
 
-    class SpeechBox extends HBox {
+        class SpeechBox extends HBox {
 
-        private Color DEFAULT_SENDER_COLOR = Color.CHOCOLATE;
-        private Color DEFAULT_RECEIVER_COLOR = Color.LIMEGREEN;
+        private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
+        private Color DEFAULT_RECEIVER_COLOR = Color.web("#6c7a9d");
         private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
 
         private String message;
@@ -245,6 +272,7 @@ public class PeerChatController implements Initializable {
         private void configureForSender() {
             displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
             displayedText.setAlignment(Pos.CENTER_RIGHT);
+            displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
             directionIndicator.setFill(DEFAULT_SENDER_COLOR);
 
@@ -258,6 +286,7 @@ public class PeerChatController implements Initializable {
         private void configureForReceiver() {
             displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
             displayedText.setAlignment(Pos.CENTER_LEFT);
+            displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
             directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
 
@@ -268,8 +297,9 @@ public class PeerChatController implements Initializable {
             setAlignment(Pos.CENTER_LEFT);
         }
     }
-
-    //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
+        
+        //
+        //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">
     //Start of title bar code
     double x, y;
 
