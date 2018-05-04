@@ -77,6 +77,7 @@ public class Client extends Thread {
         this.ID = ID;
         try {
             client = new Socket("127.0.0.1", 4520);
+            ChatStack.db.updatetIP(getPublicIp(), Name);
         } catch (Exception ex) {
             ex.getStackTrace();
         }
@@ -102,6 +103,20 @@ public class Client extends Thread {
     public void sendMsgPacket(int id, String msg) throws IOException {
         chatStackProtocol sp = new chatStackProtocol(id, Name, msg);
         out.writeObject(sp);
+    }
+    private String getPublicIp() {
+        String ip = "";
+        try {
+            URL connection = new URL("http://checkip.amazonaws.com/");
+            URLConnection con = connection.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            ip = reader.readLine();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ip;
     }
 
 }
