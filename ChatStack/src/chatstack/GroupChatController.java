@@ -11,6 +11,7 @@ import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -126,8 +127,14 @@ public class GroupChatController implements Initializable {
         init.setFont(new Font("Verdana", 14));
         init.setTextFill(Color.web("#6c7a9d"));
         Vbox.getChildren().add(init);
+        
+        sc.getStylesheets().add("scroll.css");
+
+        //
 
     }
+    
+    //<editor-fold defaultstate="collapsed" desc="sound">
     public void playback3() {
         try {
             clip1 = AudioSystem.getClip();
@@ -158,6 +165,8 @@ public class GroupChatController implements Initializable {
             System.err.println(e);
         }
     }
+//</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Send message">
     @FXML
     public void hand(ActionEvent e) {
