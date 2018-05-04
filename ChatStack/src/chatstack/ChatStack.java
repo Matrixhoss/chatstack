@@ -12,10 +12,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.sound.sampled.AudioSystem;
@@ -26,39 +30,44 @@ import javax.sound.sampled.Clip;
  * @author Hesham-Desktop
  */
 public class ChatStack extends Application {
-    
+
     public static Stage StageOpened;
     public static Scene sc;
     public static Database db;
     public static Parent root;
     public static Clip clip1;
     public static Client client;
+    public static ArrayList<String> users = new ArrayList<String>();
+    public static ArrayList<String> groups = new ArrayList<String>();
+    public static ObservableList<Label> Onlineitems = FXCollections.observableArrayList();
+    public static ObservableList<String> Groupitems = FXCollections.observableArrayList();
+
     @Override
     public void start(Stage stage) throws Exception {
         //this.playback();
-        StageOpened=stage;
+        StageOpened = stage;
         StageOpened.initStyle(StageStyle.UNDECORATED);
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 //        StageOpened.setResizable(false);
         sc = new Scene(root);
         StageOpened.setScene(sc);
         StageOpened.show();
-        
-        
-       
+
     }
- public void playback(){
-        try{
-                clip1 = AudioSystem.getClip();
-                InputStream audioSrc = getClass().getResourceAsStream("bac.wav");
-                clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
-                clip1.loop(Clip.LOOP_CONTINUOUSLY);
-                clip1.start();
-        }
-        catch(Exception e){
+
+
+    public void playback() {
+        try {
+            clip1 = AudioSystem.getClip();
+            InputStream audioSrc = getClass().getResourceAsStream("bac.wav");
+            clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+            clip1.loop(Clip.LOOP_CONTINUOUSLY);
+            clip1.start();
+        } catch (Exception e) {
             System.err.println(e);
         }
     }
+
     /**
      * @param args the command line arguments
      */

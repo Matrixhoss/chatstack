@@ -32,14 +32,11 @@ import java.sql.SQLException;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-
-
 /**
  *
  * @author Hesham-Desktop
  */
 public class LoginController implements Initializable {
-
 
     @FXML
     private JFXButton singup_btn;
@@ -69,6 +66,7 @@ public class LoginController implements Initializable {
             System.err.println(e);
         }
     }
+
     @FXML
     void handeLogin(ActionEvent event) {
         this.playback2();
@@ -77,31 +75,33 @@ public class LoginController implements Initializable {
             try {
                 boolean check = false;
                 boolean databaseCheck = ChatStack.db.checkLogin(userText.getText(), passText.getText());
-                if(databaseCheck){
+                if (databaseCheck) {
                     IP = ChatStack.db.CheckServerIP();
-                    if(IP.equals("0"))
+                    if (IP.equals("0")) {
                         check = false;
-                    else check = true;
+                    } else {
+                        check = true;
+                    }
                 }
-                
+
                 //Leave this part TO TEST DATABASE only
-                if(databaseCheck)
-                    check=true;
-                
+                if (databaseCheck) {
+                    check = true;
+                }
+
                 //Leave this part to donot test anything
                 //check = true;
-                
                 if (check == true) {
                     ChatStack.db.setMemeberOnline(userText.getText());
-                    ChatStack.client = new Client(userText.getText(),ChatStack.db.getID(userText.getText()));
-                    ChatStack.client.sendPacket(1);
+                    ChatStack.client = new Client(userText.getText(), ChatStack.db.getID(userText.getText()));
+                    ChatStack.client.start();
+//                    ChatStack.client.sendPacket(1);
                     root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
                     sc = new Scene(root);
                     StageOpened.setScene(sc);
-                } else if(databaseCheck){
+                } else if (databaseCheck) {
                     LoginError.setText("server offline");
-                }
-                else {
+                } else {
                     LoginError.setText("Invalid Username or password");
                 }
 
@@ -110,14 +110,14 @@ public class LoginController implements Initializable {
             } catch (SQLException e) {
                 SQLException f = e;
                 System.err.println(f);
-                
+
             }
         } else {
-            try{
-                    root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
-                    sc = new Scene(root);
-                    StageOpened.setScene(sc);
-            }catch(Exception e){
+            try {
+                root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                sc = new Scene(root);
+                StageOpened.setScene(sc);
+            } catch (Exception e) {
                 System.out.println("Error in test");
             }
             LoginError.setText("Enter Username and password ");
@@ -178,9 +178,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        
-        
 
     }
 
