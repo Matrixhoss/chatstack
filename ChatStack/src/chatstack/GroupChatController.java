@@ -153,6 +153,7 @@ public class GroupChatController implements Initializable {
             member_LV.getItems().add(x);
 
         }
+        
         //
 
     }
@@ -201,6 +202,7 @@ public class GroupChatController implements Initializable {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
             testChat = true;
         }
+        txt_field.setText("");
 
     }
     //
@@ -237,6 +239,7 @@ public class GroupChatController implements Initializable {
         private SpeechDirection direction;
 
         private Label displayedText;
+        private Label name ;
         private SVGPath directionIndicator;
 
         public SpeechBox(String message, SpeechDirection direction) {
@@ -244,6 +247,17 @@ public class GroupChatController implements Initializable {
             this.direction = direction;
             initialiseDefaults();
             setupElements();
+            
+
+        }
+        
+         public SpeechBox(String message, SpeechDirection direction , String name) {
+            this.message = message;
+            this.direction = direction;
+            initialiseDefaults();
+            setupElements();
+            this.name = new Label(name);
+
         }
 
         private void initialiseDefaults() {
@@ -267,13 +281,21 @@ public class GroupChatController implements Initializable {
         }
 
         private void configureForSender() {
+            name = new Label("You:");
+            name.setPadding(new Insets(0, 0, 0, 5));
+            name.getStyleClass().add("name");
+            name.setTextFill(Color.web("#414b66"));
             displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
             displayedText.setAlignment(Pos.CENTER_RIGHT);
             displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
             directionIndicator.setFill(DEFAULT_SENDER_COLOR);
-
-            HBox container = new HBox(displayedText, directionIndicator);
+            
+            VBox msgWithName = new VBox(name , displayedText);
+            msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
+            msgWithName.setBackground(DEFAULT_SENDER_BACKGROUND);
+            HBox container = new HBox(msgWithName, directionIndicator);
+            
             //Use at most 75% of the width provided to the SpeechBox for displaying the message
             container.maxWidthProperty().bind(widthProperty().multiply(0.75));
             getChildren().setAll(container);
@@ -281,13 +303,21 @@ public class GroupChatController implements Initializable {
         }
 
         private void configureForReceiver() {
+            name = new Label("Test:");
+            name.setPadding(new Insets(0, 0, 0, 5));
+            name.getStyleClass().add("name");
+            name.setTextFill(Color.web("#3e50b4"));
             displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
             displayedText.setAlignment(Pos.CENTER_LEFT);
             displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
             directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
 
-            HBox container = new HBox(directionIndicator, displayedText);
+            VBox msgWithName = new VBox(name , displayedText);
+              msgWithName.setBackground(DEFAULT_RECEIVER_BACKGROUND);
+            msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
+            
+            HBox container = new HBox(directionIndicator, msgWithName);
             //Use at most 75% of the width provided to the SpeechBox for displaying the message
             container.maxWidthProperty().bind(widthProperty().multiply(0.75));
             getChildren().setAll(container);

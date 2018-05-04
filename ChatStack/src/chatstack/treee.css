@@ -137,3 +137,10 @@
    -fx-font-weight: bold;
    -fx-font-size: 14;
 }
+
+.name{
+
+     -fx-font-weight: bold;
+   -fx-font-size: 12;
+    
+}
