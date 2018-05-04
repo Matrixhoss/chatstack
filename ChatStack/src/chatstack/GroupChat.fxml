@@ -33,11 +33,11 @@
             </Button>
          </items>
       </ToolBar>
-      <TextField fx:id="txt_field" layoutX="277.0" layoutY="498.0" onKeyPressed="#Enterhand" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572;" />
+      <TextField fx:id="txt_field" layoutX="277.0" layoutY="498.0" onKeyPressed="#Enterhand" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />
       <Pane fx:id="pane" layoutY="26.0" prefHeight="510.0" prefWidth="262.0" style="-fx-background-color: #2D3447;">
          <children>
             <JFXListView fx:id="member_LV" layoutY="89.0" prefHeight="422.0" prefWidth="262.0" style="-fx-background-color: #2D3447;" />
-            <TextField fx:id="Search_txt" layoutX="50.0" layoutY="14.0" prefHeight="25.0" prefWidth="162.0" promptText="Search" style="-fx-background-color: #495572;" />
+            <TextField fx:id="Search_txt" layoutX="50.0" layoutY="14.0" prefHeight="25.0" prefWidth="162.0" promptText="Search" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />
             <Label fx:id="members_label" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="55.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" stylesheets="@test.css" text="Channel members " textFill="#03add7">
                <font>
                   <Font name="Trebuchet MS" size="18.0" />
@@ -59,7 +59,7 @@
          </padding>
       </Label>
       <Separator fx:id="Seperator" blendMode="MULTIPLY" layoutX="277.0" layoutY="475.0" prefHeight="14.0" prefWidth="578.0" />
-      <ScrollPane fx:id="ChatScroll" hbarPolicy="NEVER" hmax="0.0" layoutX="262.0" layoutY="78.0" prefHeight="400.0" prefViewportHeight="398.0" prefViewportWidth="608.0" prefWidth="610.0" style="-fx-background: #414b66; -fx-border-color: #414b66;">
+      <ScrollPane fx:id="ChatScroll" hbarPolicy="NEVER" hmax="0.0" layoutX="262.0" layoutY="78.0" prefHeight="400.0" prefViewportHeight="398.0" prefViewportWidth="608.0" prefWidth="610.0" style="-fx-background: #414b66; -fx-border-color: #414b66;" styleClass="ChatScroll" stylesheets="@../../scrollbar.css">
          <content>
             <VBox fx:id="Vbox" layoutX="262.0" layoutY="78.0" prefHeight="396.0" prefWidth="610.0" spacing="5.0" style="-fx-background-color: #414b66;">
                <padding>
@@ -74,6 +74,5 @@
          </image>
       </ImageView>
       <Separator fx:id="Seperator_3" blendMode="MULTIPLY" layoutX="270.0" layoutY="65.0" prefHeight="14.0" prefWidth="591.0" />
-      <Pane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
