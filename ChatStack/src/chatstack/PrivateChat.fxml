@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="619.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.PrivateChatController">
+        <stylesheets>
+        <URL value="@treee.css" />
+    </stylesheets>
+   <children>
+      <JFXButton fx:id="Send_btn" layoutX="566.0" layoutY="360.0" onAction="#send" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: #03add7;" text="Send" textFill="#495572" />
+      <TextField fx:id="txt_field" layoutX="23.0" layoutY="360.0" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />
+      <Label layoutX="9.0" layoutY="25.0" prefHeight="25.0" prefWidth="92.0" text="Name : " textFill="#03add7">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="chatScroll" layoutX="11.0" layoutY="50.0" prefViewportHeight="291.0" prefViewportWidth="600.0" style="-fx-background: #2D3447; -fx-border-color: #2D3447;">
+         <content>
+            <VBox fx:id="chat" layoutX="11.0" layoutY="50.0" prefHeight="291.0" prefWidth="600.0" spacing="5.0" />
+         </content>
+      </ScrollPane>
+      <ToolBar layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="maxIcon" disable="true" mnemonicParsing="false" onMouseClicked="#maximize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f7ea13; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#f7ea13">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+            <Button fx:id="minIcon" mnemonicParsing="false" onMouseClicked="#minimize" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #09ee15; -fx-background-radius: 50; -fx-border-radius: 50;" stylesheets="@hoverStyle.css" textFill="#09ee15">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
+         </items>
+      </ToolBar>
+   </children>
+</AnchorPane>

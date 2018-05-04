@@ -144,3 +144,52 @@
    -fx-font-size: 12;
     
 }
+
+
+
+
+
+.PChat .scroll-bar:horizontal .track,
+.PChat .scroll-bar:vertical .track{
+	-fx-background-color: #2D3447;
+	-fx-border-color:transparent;
+	-fx-background-radius: 0em;
+	-fx-border-radius:2em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.PChat .scroll-bar:horizontal .increment-button ,
+.PChat .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #2D3447;
+	-fx-background-radius: 0em;
+	-fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.PChat .scroll-bar:vertical .increment-button ,
+.PChat .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color: #2D3447;
+	-fx-background-radius: 0em;
+	-fx-padding:0 10 0 0;
+
+}
+
+.PChat  .scroll-bar .increment-arrow,
+.PChat  .scroll-bar .decrement-arrow
+ {
+	-fx-shape: " ";	
+	-fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.PChat .scroll-bar:horizontal .thumb,
+.PChat .scroll-bar:vertical .thumb {
+    -fx-background-color:derive(#2D3447,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 2em;
+
+}
+
