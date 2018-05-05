@@ -279,9 +279,13 @@ public class MainPanelController implements Initializable {
         try{
         chatWithUsername = Online_LV.getSelectionModel().getSelectedItem().getText();
         System.out.println("Username is:"+chatWithUsername);
-        root = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
-        sc = new Scene(root);
-        StageOpened.setScene(sc);
+                Parent root2 = FXMLLoader.load(getClass().getResource("PrivateChat_1.fxml"));
+                Stage st2 = new Stage();
+                st2.setTitle("Private Chat");
+                st2.initStyle(StageStyle.UNDECORATED);
+                Scene sc2 = new Scene(root2);
+                st2.setScene(sc2);
+                st2.show();
         }
         catch(NullPointerException ex){
             
@@ -402,9 +406,13 @@ public class MainPanelController implements Initializable {
 
         Platform.runLater(() -> {
             try {
-                root = FXMLLoader.load(getClass().getResource("PrivateChat_1.fxml"));
-                sc = new Scene(root);
-                StageOpened.setScene(sc);
+                Parent root2 = FXMLLoader.load(getClass().getResource("PrivateChat_1.fxml"));
+                Stage st2 = new Stage();
+                st2.setTitle("Private Chat");
+                st2.initStyle(StageStyle.UNDECORATED);
+                Scene sc2 = new Scene(root2);
+                st2.setScene(sc2);
+                st2.show();
             } catch (IOException ex) {
                 Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);
             }
