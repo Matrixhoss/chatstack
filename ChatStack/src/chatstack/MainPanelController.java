@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
@@ -104,16 +105,14 @@ public class MainPanelController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-         try{
-          pcts = new PeerChatThreadServer(new ServerSocket(55554),this);
-          pcts.start();
-        }
-        catch(IOException ex){
+
+        try {
+            pcts = new PeerChatThreadServer(new ServerSocket(55554), this);
+            pcts.start();
+        } catch (IOException ex) {
             System.out.println(ex);
         }
-		
-        
+
         StageOpened.setWidth(970);
         StageOpened.setHeight(600);
         StageOpened.setX(850);
@@ -244,14 +243,13 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void joinClicked(ActionEvent event) throws SQLException, IOException {
-            
-            //TODO count number of users in group
-            System.out.println(Channel_LV.getSelectionModel().getSelectedItem());
-            ChatStack.db.setUserGroup(ChatStack.client.getUserName(), Channel_LV.getSelectionModel().getSelectedItem());
-            root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
-            sc = new Scene(root);
-            StageOpened.setScene(sc);
-       
+
+        //TODO count number of users in group
+        System.out.println(Channel_LV.getSelectionModel().getSelectedItem());
+        ChatStack.db.setUserGroup(ChatStack.client.getUserName(), Channel_LV.getSelectionModel().getSelectedItem());
+        root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
+        sc = new Scene(root);
+        StageOpened.setScene(sc);
 
     }
 
@@ -369,12 +367,21 @@ public class MainPanelController implements Initializable {
         ChatStack.client.closeConnection();
 
     }
-    
+
     @FXML
-        void chatClicked() throws IOException {
-        root = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
-        sc = new Scene(root);
-        StageOpened.setScene(sc);
+    void chatClicked() throws IOException {
+
+        Platform.runLater(() -> {
+            try {
+                root = FXMLLoader.load(getClass().getResource("PrivateChat_1.fxml"));
+                sc = new Scene(root);
+                StageOpened.setScene(sc);
+            } catch (IOException ex) {
+                Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+
     }
 
     //end of title bar code

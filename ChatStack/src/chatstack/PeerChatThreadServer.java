@@ -46,22 +46,21 @@ public class PeerChatThreadServer extends Thread {
     public void run() {
         try {
             //recive any protcol
-            while (ThreadOpen) {
-                System.out.println("waiting for 5ra");
-                s = ss.accept();
-                System.out.println("el 5ra geh");
+            System.out.println("waiting for 5ra");
+            s = ss.accept();
+            System.out.println("el 5ra geh");
+            mpc.chatClicked();
+            this.out = new ObjectOutputStream(s.getOutputStream());
+            this.in = new ObjectInputStream(s.getInputStream());
+            
 
-                
-                mpc.chatClicked();
+            while (ThreadOpen) {
 
                 System.out.println("fata7t el 5ra el gui");
-
-                this.out = new ObjectOutputStream(s.getOutputStream());
-                this.in = new ObjectInputStream(s.getInputStream());
-
                 System.out.println("Peer Chat: Recieved Connection, waiting for message ...");
                 String message = in.readUTF();
                 System.out.println("Peer Chat: Recieved Message ...");
+                System.out.print(message);
                 RecieveMessage(message);
             }
             this.out.close();

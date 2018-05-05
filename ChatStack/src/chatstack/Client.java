@@ -77,7 +77,7 @@ public class Client extends Thread {
         this.Name = Name;
         this.ID = ID;
         try {
-            client = new Socket("127.0.0.1", 4520);
+            client = new Socket("51.255.35.210", 4520);
             ChatStack.db.updatetIP(getPublicIp(), Name);
         } catch (Exception ex) {
             ex.getStackTrace();
