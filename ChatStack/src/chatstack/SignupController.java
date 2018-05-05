@@ -79,7 +79,7 @@ public class SignupController implements Initializable {
                 } else if (ChatStack.db.checkEmail(Email) == false) {
                     SignupError.setText("This Email already exists");
                 } else {
-                    ChatStack.db.addUser(UserName, PassWord, Email);
+                    ChatStack.db.addUser(UserName, PassWord, Email,"0","0",0);
                     SignupError.setTextFill(Color.web("#00C853"));
                     SignupError.setText("Sign Up Success");
                     root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -91,7 +91,7 @@ public class SignupController implements Initializable {
                 SignupError.setText("Please fill all fields");
             }
         } catch (Exception e) {
-            System.err.println("Error in signup");
+            System.err.println(e);
         }
     }
 
