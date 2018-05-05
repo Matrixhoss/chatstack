@@ -87,6 +87,7 @@
          <items>
             <MenuItem fx:id="M_Logout" mnemonicParsing="false" onAction="#menuLogout" text="Logout" />
             <MenuItem fx:id="M_Exit" mnemonicParsing="false" onAction="#menuExit" text="Exit" />
+            <MenuItem fx:id="M_Leavegrp" mnemonicParsing="false" onAction="#menuLeavegrp" text="Close Group" />
          </items>
       </MenuButton>
    </children>

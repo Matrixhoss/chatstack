@@ -28,13 +28,15 @@ public class Client extends Thread {
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private VBox v;
-        
+    private boolean inGroup = false;
+    private String curruntGroup;
+
     @Override
     public void run() {
         try {
             while (ThreadOpen) {
                 p = (chatStackProtocol) in.readObject();
-                System.out.println("ID : " + p.getId() + " From User : " + p.getUser()+" Group: "+p.getGroup()+"Message: "+p.getMessage());
+                System.out.println("ID : " + p.getId() + " From User : " + p.getUser() + " Group: " + p.getGroup() + "Message: " + p.getMessage());
                 if (p.getId() == 1) {
                     MainPanelController.showmembers();
                 }
@@ -45,12 +47,12 @@ public class Client extends Thread {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                          v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT,p.getUser()));
+                            v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT, p.getUser()));
                         }
                     });
-                    
+
                 }
-               
+
             }
             this.out.close();
         } catch (ClassNotFoundException ex) {
@@ -82,19 +84,19 @@ public class Client extends Thread {
     }
 
     public Client(String Name, int ID) throws IOException {
-        
+
         this.Name = Name;
         this.ID = ID;
         try {
+            //"127.0.0.1"
             client = new Socket("51.255.35.210", 4520);
             ChatStack.db.updatetIP(getPublicIp(), Name);
         } catch (Exception ex) {
             ex.getStackTrace();
         }
-        
+
         in = new ObjectInputStream(client.getInputStream());
         out = new ObjectOutputStream(client.getOutputStream());
-
 
     }
 
@@ -102,6 +104,7 @@ public class Client extends Thread {
         chatStackProtocol sp = new chatStackProtocol(0, Name, "");
         out.writeObject(sp);
         client.close();
+        ThreadOpen = false;
         this.stop();
 
     }
@@ -112,9 +115,10 @@ public class Client extends Thread {
     }
 
     public void sendGroupMsgPacket(int id, String msg) throws IOException, SQLException {
-        chatStackProtocol sp = new chatStackProtocol(id, Name, msg,ChatStack.db.getUserGroup(Name));
+        chatStackProtocol sp = new chatStackProtocol(id, Name, msg, ChatStack.db.getUserGroup(Name));
         out.writeObject(sp);
     }
+
     private String getPublicIp() {
         String ip = "";
         try {
@@ -129,11 +133,22 @@ public class Client extends Thread {
         }
         return ip;
     }
-    
-    public void setVbox(VBox v){
-        this.v=v;
+
+    public void setVbox(VBox v) {
+        this.v = v;
+    }
+
+    public void joinGroup(String Groupname) {
+       this.curruntGroup=Groupname;
+       this.inGroup=true;
+       
     }
     
+    public void leaveGroup() {
+       this.curruntGroup="";
+       this.inGroup=false;
+       
+    }
     
 
 }

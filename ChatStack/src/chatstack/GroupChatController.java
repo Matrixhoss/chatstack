@@ -422,6 +422,12 @@ public class GroupChatController implements Initializable {
         ChatStack.client.closeConnection();
 
     }
+
+    @FXML
+    void menuLeavegrp(ActionEvent event) throws SQLException, IOException {
+        ChatStack.client.leaveGroup();
+
+    }
     //end of title bar code
 //</editor-fold>
 
@@ -450,11 +456,11 @@ class SpeechBox extends HBox {
     }
 
     public SpeechBox(String message, SpeechDirection direction, String name) {
+        this.name = new Label(name);
         this.message = message;
         this.direction = direction;
         initialiseDefaults();
         setupElements();
-        this.name = new Label(name);
 
     }
 
@@ -501,7 +507,7 @@ class SpeechBox extends HBox {
     }
 
     private void configureForReceiver() {
-        name = new Label("");
+//        name = new Label();
         name.setPadding(new Insets(0, 0, 0, 5));
         name.getStyleClass().add("name");
         name.setTextFill(Color.web("#3e50b4"));
