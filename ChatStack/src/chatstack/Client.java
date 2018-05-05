@@ -92,6 +92,7 @@ public class Client extends Thread {
         this.ID = ID;
         try {
             //"127.0.0.1"
+            //"51.255.35.210"
             client = new Socket("51.255.35.210", 4520);
             ChatStack.db.updatetIP(getPublicIp(), Name);
         } catch (Exception ex) {

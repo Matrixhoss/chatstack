@@ -266,7 +266,7 @@ public class MainPanelController implements Initializable {
 
         //TODO count number of users in group
         System.out.println(Channel_LV.getSelectionModel().getSelectedItem());
-        ChatStack.client.joinGroup(chatWithUsername);
+        ChatStack.client.joinGroup(Channel_LV.getSelectionModel().getSelectedItem());
         root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
