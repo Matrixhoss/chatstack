@@ -107,6 +107,7 @@ public class Client extends Thread {
     public void closeConnection() throws IOException {
         chatStackProtocol sp = new chatStackProtocol(0, Name, "");
         out.writeObject(sp);
+        MainPanelController.pcts.closeConnection();
         client.close();
         this.stop();
         ThreadOpen = false;
