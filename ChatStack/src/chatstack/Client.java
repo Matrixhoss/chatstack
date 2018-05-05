@@ -63,10 +63,11 @@ public class Client extends Thread {
                 if (p.getId() == 3) {
                     GroupChatController.showGroupMemebers();
                 }
-                if (p.getId() == 4) {
+                if (p.getId() == 4 && getGroup().equals(p.getGroup())) {
+                    
                     Platform.runLater(new Runnable() {
                         @Override
-                        public void run() {
+                        public void run() {  
                             v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT, p.getUser()));
                         }
                     });
@@ -124,8 +125,8 @@ public class Client extends Thread {
         out.writeObject(sp);
     }
 
-    public void sendGroupMsgPacket(int id, String msg) throws IOException, SQLException {
-        chatStackProtocol sp = new chatStackProtocol(id, Name, msg, ChatStack.db.getUserGroup(Name));
+    public void sendGroupMsgPacket(int id, String msg ,String Groupname ) throws IOException, SQLException {
+        chatStackProtocol sp = new chatStackProtocol(id, Name, msg, Groupname);
         out.writeObject(sp);
     }
 

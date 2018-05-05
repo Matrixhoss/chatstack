@@ -235,7 +235,7 @@ public class GroupChatController implements Initializable {
         ChatScroll.setVvalue(1.0);
         this.playback4();
         Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
+        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText(),ChatStack.client.getGroup());
 //            testChat = true;
         txt_field.setText("");
 
@@ -252,7 +252,7 @@ public class GroupChatController implements Initializable {
                 this.playback4();
                 Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
                 try {
-                    ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
+                    ChatStack.client.sendGroupMsgPacket(4, txt_field.getText(),ChatStack.client.getGroup());
                 } catch (IOException ex) {
                     Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
@@ -362,6 +362,7 @@ public class GroupChatController implements Initializable {
 
     @FXML
     void close(MouseEvent event) throws SQLException, IOException {
+        ChatStack.client.leaveGroup();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
         ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
@@ -434,6 +435,7 @@ public class GroupChatController implements Initializable {
 
     @FXML
     void menuLogout(ActionEvent event) throws IOException, SQLException {
+        ChatStack.client.leaveGroup();
         ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -445,6 +447,7 @@ public class GroupChatController implements Initializable {
 
     @FXML
     void menuExit(ActionEvent event) throws SQLException, IOException {
+        ChatStack.client.leaveGroup();
         StageOpened.close();
         ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
