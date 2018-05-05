@@ -66,10 +66,9 @@ public class GroupChatController implements Initializable {
     //<editor-fold defaultstate="collapsed" desc="Variables">
     double oldW;
     double oldH;
-    
-    
-   public static ArrayList<UserColor> us = new ArrayList<>();
-   public static Color Rs ;
+
+    public static ArrayList<UserColor> us = new ArrayList<>();
+    public static Color Rs;
 
     private Boolean resizebottom = false;
     private double dx;
@@ -144,7 +143,7 @@ public class GroupChatController implements Initializable {
         System.out.println("New Height: " + AP.getPrefHeight());
 
         UserColor.setColors();
-        
+
         Menu.setText(ChatStack.client.getUserName());
         Kickbtn.setDisable(false);
 //        try {
@@ -186,10 +185,12 @@ public class GroupChatController implements Initializable {
 
     @FXML
     public void handleKick() throws SQLException, IOException, InterruptedException {
-        if (ChatStack.client.getUserName().equals(ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup()))&&!member_LV.getSelectionModel().getSelectedItem().getText().equals("")) {
+        String owner = ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup());
+        String user = ChatStack.client.getUserName();
+        if (user.equals(owner) && !member_LV.getSelectionModel().getSelectedItem().getText().equals("")&&!member_LV.getSelectionModel().getSelectedItem().getText().equals(owner)) {
             ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
             ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
-            Thread.sleep(5);
+//            Thread.sleep(5);
             showGroupMemebers();
         }
 
@@ -219,7 +220,7 @@ public class GroupChatController implements Initializable {
 
     }
 
-    public  void playback3() {
+    public void playback3() {
         try {
             clip1 = AudioSystem.getClip();
             InputStream audioSrc = getClass().getResourceAsStream("text.wav");
@@ -496,7 +497,6 @@ public class GroupChatController implements Initializable {
     //end of title bar code
 //</editor-fold>
 
-  
 }
 //<editor-fold defaultstate="collapsed" desc="SpeechBox">
 
@@ -529,7 +529,6 @@ class SpeechBox extends HBox {
         this.message = message;
         this.direction = direction;
         initialiseDefaults();
-       
 
         boolean testColor = true;
         for (int i = 0; i < GroupChatController.us.size(); i++) {
@@ -548,8 +547,8 @@ class SpeechBox extends HBox {
             us.add(u);
             Rs = u.getC();
         }
-        
-         setupElements();
+
+        setupElements();
 
     }
 

@@ -69,6 +69,8 @@ public class CreateGroupController implements Initializable {
                     createError.setText("Sign Up Success");
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.close();
+                    ChatStack.client.joinGroup(grpName.getText());
+                    ChatStack.client.sendPacket(3);
                     root = FXMLLoader.load(getClass().getResource("GroupChat.fxml"));
                     sc = new Scene(root);
                     StageOpened.setScene(sc);
