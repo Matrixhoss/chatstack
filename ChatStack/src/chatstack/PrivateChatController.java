@@ -59,19 +59,13 @@ public class PrivateChatController implements Initializable {
     
  public void send(ActionEvent e){
         chatScroll.setVvalue(1.0);
-        if (testChat) {
-            chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-            testChat = false;
-        } else {
-            chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-            testChat = true;
-        }
+        chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
         pct.SendMessage(txt_field.getText());
  }
  
      public void recieveGUI(String s) {
          Platform.runLater(() -> {
-         chat.getChildren().add(new SpeechBox(s, SpeechDirection.LEFT));
+         chat.getChildren().add(new SpeechBox(s, SpeechDirection.RIGHT));
                  });
     }
 

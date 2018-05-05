@@ -64,6 +64,7 @@ public class PrivateChatController1 implements Initializable {
     
  public void send(ActionEvent e){
         chatScroll.setVvalue(1.0);
+        chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
         Platform.runLater(() -> {
         MainPanelController.pcts.SendMessage(txt_field.getText());
         });
@@ -71,7 +72,7 @@ public class PrivateChatController1 implements Initializable {
  
      public void recieveGUI(String s) {
          Platform.runLater(() -> {
-                chat.getChildren().add(new SpeechBox(s, SpeechDirection.LEFT));
+                chat.getChildren().add(new SpeechBox(s, SpeechDirection.RIGHT));
         });
          
     }
