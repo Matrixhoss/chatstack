@@ -188,7 +188,6 @@ public class GroupChatController implements Initializable {
         String owner = ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup());
         String user = ChatStack.client.getUserName();
         if (user.equals(owner) && !member_LV.getSelectionModel().getSelectedItem().getText().equals("")&&!member_LV.getSelectionModel().getSelectedItem().getText().equals(owner)) {
-            playback6();
             ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
             ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
 //            Thread.sleep(5);
@@ -303,6 +302,7 @@ public class GroupChatController implements Initializable {
                     Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            txt_field.setText("");
 
         });
     }
