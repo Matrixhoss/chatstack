@@ -277,8 +277,8 @@ public class MainPanelController implements Initializable {
     @FXML
     void chatClicked(ActionEvent event) throws IOException {
         try{
-        chatWithUsername = Online_LV.getSelectionModel().getSelectedItem().toString();
-        System.out.println(chatWithUsername);
+        chatWithUsername = Online_LV.getSelectionModel().getSelectedItem().getText();
+        System.out.println("Username is:"+chatWithUsername);
         root = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
