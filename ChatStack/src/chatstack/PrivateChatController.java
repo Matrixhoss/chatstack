@@ -76,7 +76,10 @@ public class PrivateChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try{
-        pct = new PeerChatThread(new Socket("127.0.0.1", 55554),this);
+        MainPanelController.pcts.closeConnection();
+        System.out.println("Opening Connection");
+        pct = new PeerChatThread(new Socket("41.176.48.84", 55554),this);
+        System.out.println("Opening Thread");
         pct.start();
         }
         catch(IOException ex){

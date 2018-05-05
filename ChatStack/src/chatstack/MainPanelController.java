@@ -257,7 +257,7 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void chatClicked(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("PeerChat.fxml"));
+        root = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
     }

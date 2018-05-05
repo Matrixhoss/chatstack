@@ -34,11 +34,14 @@ public class PeerChatThread extends Thread {
         this.pcc = pcc;
         this.s = s;
         try {
+            System.out.println("before this.s");
             this.s = s;
+            System.out.println("before this.out");
             this.out = new ObjectOutputStream(s.getOutputStream());
+            System.out.println("before this.in");
             this.in = new ObjectInputStream(s.getInputStream());
 
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }

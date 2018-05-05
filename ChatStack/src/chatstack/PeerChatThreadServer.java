@@ -87,10 +87,20 @@ public class PeerChatThreadServer extends Thread {
     public void closeConnection() {
         try {
             this.in.close();
+            }
+        catch (Exception ex) {
+            System.out.println(ex);
+        }
+         try {
             this.out.close();
+            }
+        catch (Exception ex) {
+            System.out.println(ex);
+        }
+         try {
             this.s.close();
-
-        } catch (IOException ex) {
+            }
+        catch (Exception ex) {
             System.out.println(ex);
         }
     }
