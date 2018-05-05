@@ -5,18 +5,26 @@
  */
 package chatstack;
 
+import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.root;
+import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -69,7 +77,10 @@ public class PrivateChatController1 implements Initializable {
  }
  
      public void recieveGUI(String s) {
-         chat.getChildren().add(new SpeechBox(s, SpeechDirection.LEFT));
+         Platform.runLater(() -> {
+                chat.getChildren().add(new SpeechBox(s, SpeechDirection.LEFT));
+        });
+         
     }
 
     
