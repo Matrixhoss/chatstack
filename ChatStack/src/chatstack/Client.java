@@ -29,7 +29,7 @@ public class Client extends Thread {
     private ObjectOutputStream out;
     private VBox v;
     private boolean inGroup = false;
-    private String curruntGroup;
+    private String curruntGroup="";
 
     @Override
     public void run() {
@@ -104,8 +104,9 @@ public class Client extends Thread {
         chatStackProtocol sp = new chatStackProtocol(0, Name, "");
         out.writeObject(sp);
         client.close();
-        ThreadOpen = false;
+        MainPanelController.pcts.stop();
         this.stop();
+        ThreadOpen = false;
 
     }
 
@@ -138,18 +139,18 @@ public class Client extends Thread {
         this.v = v;
     }
 
-    public void joinGroup(String Groupname) {
-       this.curruntGroup=Groupname;
-       this.inGroup=true;
-       
+    public void joinGroup(String Groupname) throws SQLException {
+        this.curruntGroup = Groupname;
+        ChatStack.db.setUserGroup(ChatStack.client.getUserName(), Groupname);
+        this.inGroup = true;
+
     }
-    
+
     public void leaveGroup() throws SQLException {
-       this.curruntGroup="";
-       ChatStack.db.setUserGroup(getUserName(),"");
-       this.inGroup=false;
-       
+        this.curruntGroup = "";
+        ChatStack.db.setUserGroup(getUserName(), "");
+        this.inGroup = false;
+
     }
-    
 
 }
