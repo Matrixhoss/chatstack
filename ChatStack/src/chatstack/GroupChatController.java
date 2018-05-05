@@ -180,7 +180,7 @@ public class GroupChatController implements Initializable {
         if (!member_LV.getSelectionModel().getSelectedItem().getText().equals("")) {
 //            ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
             ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
-
+           showGroupMemebers();
         }
 
     }

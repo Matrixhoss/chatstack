@@ -81,9 +81,18 @@ public class Client extends Thread {
                 if (p.getId() == 5) {
                     if (getUserName().equals(p.getMessage())) {
                         leaveGroup();
-                        root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
-                        sc = new Scene(root);
-                        StageOpened.setScene(sc);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                sc = new Scene(root);
+                                StageOpened.setScene(sc);
+                            }
+                        });
 
                     } else {
                         GroupChatController.showGroupMemebers();
