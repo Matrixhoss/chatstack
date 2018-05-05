@@ -40,6 +40,7 @@ public class PeerChatThreadServer extends Thread {
     private MainPanelController mpc;
 
     public PeerChatThreadServer(ServerSocket ss, MainPanelController mpc) {
+        this.setName("Server Connection Waiting");
         this.mpc = mpc;
         this.ss = ss;
     }
@@ -66,6 +67,8 @@ public class PeerChatThreadServer extends Thread {
                 RecieveMessage(message);
             }
             this.out.close();
+            this.in.close();
+            this.stop();
         } catch (Exception ex) {
             System.out.println(ex);
             ex.printStackTrace();
@@ -87,6 +90,9 @@ public class PeerChatThreadServer extends Thread {
     }
 
     public void closeConnection() {
+        System.out.println("CLOSING SERVER CONNECTION THREAD");
+        this.ThreadOpen = false;
+        this.stop();
         try {
             this.in.close();
             }
@@ -100,12 +106,14 @@ public class PeerChatThreadServer extends Thread {
             System.out.println(ex);
         }
          try {
-            this.s.close();
+            this.ss.close();
             }
         catch (Exception ex) {
             System.out.println(ex);
         }
-         this.ThreadOpen = false;
+         System.out.println("CLOSING SERVER CONNECTION THREAD FINISH");
+         this.stop();
+         
     }
 
     public void setGUI(PrivateChatController1 pcc) {
