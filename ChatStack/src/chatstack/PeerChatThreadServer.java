@@ -52,12 +52,12 @@ public class PeerChatThreadServer extends Thread {
             s = ss.accept();
             System.out.println("el 5ra geh");
             mpc.chatClicked();
-            this.out = new DataOutputStream(s.getOutputStream());
-            this.in = new DataInputStream(s.getInputStream());
+            
             
 
             while (ThreadOpen) {
-
+                this.in = new DataInputStream(s.getInputStream());
+                this.out = new DataOutputStream(s.getOutputStream());
                 System.out.println("fata7t el 5ra el gui");
                 System.out.println("Peer Chat: Recieved Connection, waiting for message ...");
                 String message = in.readUTF();

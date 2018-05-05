@@ -70,6 +70,7 @@ public class PeerChatThread extends Thread {
     public void SendMessage(String s) {
         try {
             out.writeUTF(s);
+            out.flush();
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -77,6 +78,7 @@ public class PeerChatThread extends Thread {
 
     public void RecieveMessage(String s) {
         pcc.recieveGUI(s);
+        
     }
 
     public void closeConnection() {
