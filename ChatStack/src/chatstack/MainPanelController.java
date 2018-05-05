@@ -114,6 +114,8 @@ public class MainPanelController implements Initializable {
             System.out.println(ex);
         }
 
+        Channel_LV.getStyleClass().add("Label1");
+        
         StageOpened.setWidth(970);
         StageOpened.setHeight(600);
         StageOpened.setX(850);
@@ -239,6 +241,7 @@ public class MainPanelController implements Initializable {
                 try {
                     Groupitems.clear();
                     ChatStack.groups = ChatStack.db.getGroups();
+                    
                     Groupitems.addAll(ChatStack.groups);
                 } catch (SQLException ex) {
                     Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);

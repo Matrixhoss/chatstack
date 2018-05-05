@@ -145,6 +145,17 @@
     
 }
 
+.Label1
+{
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-font-size: 16;
+}
+.Label1 .list-cell{
+    
+       -fx-text-fill: white;
+}
+
 
 
 
@@ -192,4 +203,6 @@
 	-fx-background-radius: 2em;
 
 }
+
+
 
