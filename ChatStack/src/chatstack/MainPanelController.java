@@ -279,7 +279,7 @@ public class MainPanelController implements Initializable {
         try{
         chatWithUsername = Online_LV.getSelectionModel().getSelectedItem().getText();
         System.out.println("Username is:"+chatWithUsername);
-                Parent root2 = FXMLLoader.load(getClass().getResource("PrivateChat_1.fxml"));
+                Parent root2 = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
                 Stage st2 = new Stage();
                 st2.setTitle("Private Chat");
                 st2.initStyle(StageStyle.UNDECORATED);
