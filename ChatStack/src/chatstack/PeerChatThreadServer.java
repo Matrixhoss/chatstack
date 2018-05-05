@@ -8,6 +8,8 @@ package chatstack;
 import static chatstack.ChatStack.StageOpened;
 import static chatstack.ChatStack.root;
 import static chatstack.ChatStack.sc;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -27,8 +29,8 @@ public class PeerChatThreadServer extends Thread {
 
     private String userName;
     private boolean ThreadOpen = true;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
+    private DataInputStream in;
+    private DataOutputStream out;
     private ServerSocket ss;
     private Socket s;
     boolean Sending;
@@ -50,8 +52,8 @@ public class PeerChatThreadServer extends Thread {
             s = ss.accept();
             System.out.println("el 5ra geh");
             mpc.chatClicked();
-            this.out = new ObjectOutputStream(s.getOutputStream());
-            this.in = new ObjectInputStream(s.getInputStream());
+            this.out = new DataOutputStream(s.getOutputStream());
+            this.in = new DataInputStream(s.getInputStream());
             
 
             while (ThreadOpen) {
@@ -74,6 +76,7 @@ public class PeerChatThreadServer extends Thread {
     public void SendMessage(String s) {
         try {
             out.writeUTF(s);
+            out.flush();
         } catch (IOException ex) {
             System.out.println(ex);
         }

@@ -5,6 +5,8 @@
  */
 package chatstack;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,8 +24,8 @@ public class PeerChatThread extends Thread {
 
     private String userName;
     private boolean ThreadOpen = true;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
+    private DataInputStream in;
+    private DataOutputStream out;
     private Socket s;
     boolean Sending;
     private String messageOUT;
@@ -37,9 +39,9 @@ public class PeerChatThread extends Thread {
             System.out.println("before this.s");
             this.s = s;
             System.out.println("before this.out");
-            this.out = new ObjectOutputStream(s.getOutputStream());
+            this.out = new DataOutputStream(s.getOutputStream());
             System.out.println("before this.in");
-            this.in = new ObjectInputStream(s.getInputStream());
+            this.in = new DataInputStream(s.getInputStream());
 
         } catch (Exception ex) {
             System.out.println(ex);
