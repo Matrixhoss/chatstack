@@ -12,6 +12,9 @@ import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.io.BufferedInputStream;
+import static chatstack.GroupChatController.Rs;
+import static chatstack.GroupChatController.us;
+import static chatstack.UserColor.thecolors;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,6 +66,10 @@ public class GroupChatController implements Initializable {
     //<editor-fold defaultstate="collapsed" desc="Variables">
     double oldW;
     double oldH;
+    
+    
+   public static ArrayList<UserColor> us = new ArrayList<>();
+   public static Color Rs ;
 
     private Boolean resizebottom = false;
     private double dx;
@@ -136,6 +143,8 @@ public class GroupChatController implements Initializable {
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
 
+        UserColor.setColors();
+        
         Menu.setText(ChatStack.client.getUserName());
         Kickbtn.setDisable(false);
 //        try {
@@ -493,8 +502,11 @@ public class GroupChatController implements Initializable {
 
 class SpeechBox extends HBox {
 
+    public static Color RColor;
+
     private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
     private Color DEFAULT_RECEIVER_COLOR = Color.web("#6c7a9d");
+
     private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
 
     private String message;
@@ -517,7 +529,27 @@ class SpeechBox extends HBox {
         this.message = message;
         this.direction = direction;
         initialiseDefaults();
-        setupElements();
+       
+
+        boolean testColor = true;
+        for (int i = 0; i < GroupChatController.us.size(); i++) {
+            if (us.get(i).getName().equals(name)) {
+                Rs = us.get(i).getC();
+                testColor = false;
+                break;
+            }
+        }
+
+        if (testColor == true) {
+
+            UserColor u = new UserColor(name, UserColor.nameColors());
+            RColor = u.getC();
+            thecolors.remove(0);
+            us.add(u);
+            Rs = u.getC();
+        }
+        
+         setupElements();
 
     }
 
@@ -539,6 +571,7 @@ class SpeechBox extends HBox {
         } else {
             configureForSender();
         }
+
     }
 
     private void configureForSender() {
@@ -567,7 +600,8 @@ class SpeechBox extends HBox {
 //        name = new Label();
         name.setPadding(new Insets(0, 0, 0, 5));
         name.getStyleClass().add("name");
-        name.setTextFill(Color.web("#3e50b4"));
+        name.setTextFill(Rs);
+
         displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
         displayedText.setAlignment(Pos.CENTER_LEFT);
         displayedText.setFont(new Font("Verdana", 13));
@@ -583,6 +617,62 @@ class SpeechBox extends HBox {
         container.maxWidthProperty().bind(widthProperty().multiply(0.75));
         getChildren().setAll(container);
         setAlignment(Pos.CENTER_LEFT);
+    }
+
+    public Color setNameColor() {
+
+        return Color.RED;
+    }
+}
+
+class UserColor {
+
+    String name;
+    Color c;
+    public static ArrayList<Color> thecolors = new ArrayList<>();
+
+    public UserColor(String name, Color c) {
+        this.name = name;
+        this.c = c;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Color getC() {
+        return c;
+    }
+
+    public void setC(Color c) {
+        this.c = c;
+    }
+
+    public UserColor getObject() {
+        return this;
+    }
+
+    public static Color nameColors() {
+        if (thecolors.size() != 0) {
+            Color cc = thecolors.get(0);
+
+            return cc;
+        }
+
+        return Color.BLUE;
+    }
+
+    public static void setColors() {
+        thecolors.add(Color.web("#3e50b4"));
+        thecolors.add(Color.web("#FF3F80"));
+        thecolors.add(Color.web("#087099"));
+        thecolors.add(Color.web("#B7B327"));
+        thecolors.add(Color.GREEN);
+
     }
 }
 
