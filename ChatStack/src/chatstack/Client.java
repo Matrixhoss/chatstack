@@ -30,7 +30,24 @@ public class Client extends Thread {
     private VBox v;
     private boolean inGroup = false;
     private String curruntGroup = "";
+    
+      public Client(String Name, int ID) throws IOException {
 
+        this.Name = Name;
+        this.ID = ID;
+        try {
+            //"127.0.0.1"
+            //"51.255.35.210"
+            client = new Socket("51.255.35.210", 4520);
+            ChatStack.db.updatetIP(getPublicIp(), Name);
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        }
+        in = new ObjectInputStream(client.getInputStream());
+        out = new ObjectOutputStream(client.getOutputStream());
+
+    }
+    
     @Override
     public void run() {
         try {
@@ -86,23 +103,7 @@ public class Client extends Thread {
         this.ID = ID;
     }
 
-    public Client(String Name, int ID) throws IOException {
-
-        this.Name = Name;
-        this.ID = ID;
-        try {
-            //"127.0.0.1"
-            //"51.255.35.210"
-            client = new Socket("51.255.35.210", 4520);
-            ChatStack.db.updatetIP(getPublicIp(), Name);
-        } catch (Exception ex) {
-            ex.getStackTrace();
-        }
-
-        in = new ObjectInputStream(client.getInputStream());
-        out = new ObjectOutputStream(client.getOutputStream());
-
-    }
+  
 
     public void closeConnection() throws IOException {
         chatStackProtocol sp = new chatStackProtocol(0, Name, "");
