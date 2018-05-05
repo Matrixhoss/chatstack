@@ -58,6 +58,7 @@ import javafx.stage.Stage;
 import javax.sound.sampled.AudioSystem;
 
 public class GroupChatController implements Initializable {
+
     static ObservableList<Label> OnlineMembers = FXCollections.observableArrayList();
     //<editor-fold defaultstate="collapsed" desc="Variables">
     double oldW;
@@ -112,12 +113,14 @@ public class GroupChatController implements Initializable {
     public VBox Vbox;
     @FXML
     private ImageView iv_stack;
-
+    @FXML
+    private JFXButton Kickbtn;
+    
     @FXML
     private MenuButton Menu;
 
     public static Image image;
-    
+
     boolean testChat = true;
 //</editor-fold>
 
@@ -132,8 +135,16 @@ public class GroupChatController implements Initializable {
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
-   
+
         Menu.setText(ChatStack.client.getUserName());
+         Kickbtn.setDisable(false);
+//        try {
+//            if (ChatStack.client.getUserName().equals(ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup()))) {
+//                Kickbtn.setDisable(false);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         AP.setPrefHeight(800);
         AP.setPrefWidth(1280);
@@ -148,13 +159,13 @@ public class GroupChatController implements Initializable {
         Vbox.getChildren().add(init);
 
         ChatScroll.getStyleClass().add("ChatScroll");
-         adjustNodes();
+        adjustNodes();
         member_LV.setItems(OnlineMembers);
         member_LV.getStyleClass().add("List");
         member_LV.getStyleClass().add("List2");
 
         ChatStack.client.setVbox(Vbox);
-       
+
         try {
             showGroupMemebers();
 
@@ -162,6 +173,16 @@ public class GroupChatController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    public void handleKick() throws SQLException, IOException {
+        if (!member_LV.getSelectionModel().getSelectedItem().getText().equals("")) {
+//            ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
+            ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
+
+        }
+
     }
 
     public static void showGroupMemebers() throws SQLException {
@@ -188,6 +209,8 @@ public class GroupChatController implements Initializable {
 
     }
 
+  
+    
     public void playback3() {
         try {
             clip1 = AudioSystem.getClip();
@@ -235,7 +258,7 @@ public class GroupChatController implements Initializable {
         ChatScroll.setVvalue(1.0);
         this.playback4();
         Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText(),ChatStack.client.getGroup());
+        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText(), ChatStack.client.getGroup());
 //            testChat = true;
         txt_field.setText("");
 
@@ -252,7 +275,7 @@ public class GroupChatController implements Initializable {
                 this.playback4();
                 Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
                 try {
-                    ChatStack.client.sendGroupMsgPacket(4, txt_field.getText(),ChatStack.client.getGroup());
+                    ChatStack.client.sendGroupMsgPacket(4, txt_field.getText(), ChatStack.client.getGroup());
                 } catch (IOException ex) {
                     Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {

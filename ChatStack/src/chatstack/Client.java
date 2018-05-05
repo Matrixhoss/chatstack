@@ -30,8 +30,8 @@ public class Client extends Thread {
     private VBox v;
     private boolean inGroup = false;
     private String curruntGroup = "";
-    
-      public Client(String Name, int ID) throws IOException {
+
+    public Client(String Name, int ID) throws IOException {
 
         this.Name = Name;
         this.ID = ID;
@@ -47,7 +47,7 @@ public class Client extends Thread {
         out = new ObjectOutputStream(client.getOutputStream());
 
     }
-    
+
     @Override
     public void run() {
         try {
@@ -64,14 +64,19 @@ public class Client extends Thread {
                     GroupChatController.showGroupMemebers();
                 }
                 if (p.getId() == 4 && getGroup().equals(p.getGroup())) {
-                    
+
                     Platform.runLater(new Runnable() {
                         @Override
-                        public void run() {  
+                        public void run() {
                             v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT, p.getUser()));
                         }
                     });
 
+                }
+                if (p.getId() == 5 && getUserName().equals(p.getUser())) {
+                    leaveGroup();
+                    GroupChatController.showGroupMemebers();
+                    
                 }
 
             }
@@ -104,8 +109,6 @@ public class Client extends Thread {
         this.ID = ID;
     }
 
-  
-
     public void closeConnection() throws IOException {
         chatStackProtocol sp = new chatStackProtocol(0, Name, "");
         out.writeObject(sp);
@@ -125,7 +128,12 @@ public class Client extends Thread {
         out.writeObject(sp);
     }
 
-    public void sendGroupMsgPacket(int id, String msg ,String Groupname ) throws IOException, SQLException {
+    public void sendPacket(int id, String Username) throws IOException {
+        chatStackProtocol sp = new chatStackProtocol(id, Name, Username);
+        out.writeObject(sp);
+    }
+
+    public void sendGroupMsgPacket(int id, String msg, String Groupname) throws IOException, SQLException {
         chatStackProtocol sp = new chatStackProtocol(id, Name, msg, Groupname);
         out.writeObject(sp);
     }

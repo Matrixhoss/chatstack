@@ -26,7 +26,7 @@
       <TextField fx:id="txt_field" layoutX="277.0" layoutY="498.0" onKeyPressed="#Enterhand" prefHeight="25.0" prefWidth="536.0" promptText="Enter Text" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />
       <Pane fx:id="pane" layoutY="26.0" prefHeight="510.0" prefWidth="262.0" style="-fx-background-color: #2D3447;">
          <children>
-            <JFXListView fx:id="member_LV" layoutY="90.0" prefHeight="422.0" prefWidth="262.0" style="-fx-background-color: #2D3447;" />
+            <JFXListView fx:id="member_LV" layoutY="90.0" prefHeight="368.0" prefWidth="262.0" style="-fx-background-color: #2D3447;" />
             <TextField fx:id="Search_txt" layoutX="50.0" layoutY="14.0" prefHeight="25.0" prefWidth="162.0" promptText="Search" style="-fx-background-color: #495572; -fx-text-fill: #ffffff;" />
             <Label fx:id="members_label" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="55.0" prefHeight="33.0" prefWidth="172.0" style="-fx-border-radius: 5%; -fx-border-color: #495572;" stylesheets="@test.css" text="Channel members " textFill="#03add7">
                <font>
@@ -37,6 +37,7 @@
                </padding>
             </Label>
             <Separator fx:id="Seperator_1" blendMode="MULTIPLY" layoutX="31.0" layoutY="39.0" prefHeight="14.0" prefWidth="200.0" />
+            <JFXButton fx:id="Kickbtn" disable="true" layoutX="84.0" layoutY="458.0" onAction="#handleKick" prefHeight="33.0" prefWidth="88.0" style="-fx-background-color: #03add7;" text="Kick" textFill="#d70000" />
          </children>
       </Pane>
       <JFXButton fx:id="Send_btn" layoutX="817.0" layoutY="498.0" onAction="#hand" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: #03add7;" text="Send" textFill="#495572" />
@@ -87,7 +88,7 @@
          <items>
             <MenuItem fx:id="M_Logout" mnemonicParsing="false" onAction="#menuLogout" text="Logout" />
             <MenuItem fx:id="M_Exit" mnemonicParsing="false" onAction="#menuExit" text="Exit" />
-            <MenuItem fx:id="M_Leavegrp" mnemonicParsing="false" onAction="#menuLeavegrp" text="Close Group" />
+            <MenuItem fx:id="M_Leavegrp" mnemonicParsing="false" onAction="#menuLeavegrp" text="Leave Group" />
          </items>
       </MenuButton>
    </children>
