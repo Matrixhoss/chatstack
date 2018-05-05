@@ -176,11 +176,12 @@ public class GroupChatController implements Initializable {
     }
 
     @FXML
-    public void handleKick() throws SQLException, IOException {
+    public void handleKick() throws SQLException, IOException, InterruptedException {
         if (ChatStack.client.getUserName().equals(ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup()))&&!member_LV.getSelectionModel().getSelectedItem().getText().equals("")) {
 //            ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
             ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
-           showGroupMemebers();
+            Thread.sleep(5);
+            showGroupMemebers();
         }
 
     }
