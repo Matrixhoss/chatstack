@@ -71,12 +71,12 @@ public class Database {
     }
     
         public String getIP(String Username) throws SQLException {
-        String id = "";
+        String ip = "";
         s = stmt.executeQuery("SELECT `ip` FROM `Users` WHERE `username` LIKE '" + Username + "'");
         while (s.next()) {
-            id = s.getString("id");
+            ip = s.getString("ip");
         }
-        return id;
+        return ip;
     }
 
     public boolean checkEmail(String Email) throws SQLException {
