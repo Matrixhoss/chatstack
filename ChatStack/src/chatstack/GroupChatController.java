@@ -115,7 +115,7 @@ public class GroupChatController implements Initializable {
     private ImageView iv_stack;
     @FXML
     private JFXButton Kickbtn;
-    
+
     @FXML
     private MenuButton Menu;
 
@@ -137,7 +137,7 @@ public class GroupChatController implements Initializable {
         System.out.println("New Height: " + AP.getPrefHeight());
 
         Menu.setText(ChatStack.client.getUserName());
-         Kickbtn.setDisable(false);
+        Kickbtn.setDisable(false);
 //        try {
 //            if (ChatStack.client.getUserName().equals(ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup()))) {
 //                Kickbtn.setDisable(false);
@@ -209,8 +209,6 @@ public class GroupChatController implements Initializable {
 
     }
 
-  
-    
     public void playback3() {
         try {
             clip1 = AudioSystem.getClip();
@@ -488,6 +486,7 @@ public class GroupChatController implements Initializable {
     //end of title bar code
 //</editor-fold>
 
+  
 }
 //<editor-fold defaultstate="collapsed" desc="SpeechBox">
 

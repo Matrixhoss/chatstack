@@ -1,5 +1,8 @@
 package chatstack;
 
+import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.root;
+import static chatstack.ChatStack.sc;
 import java.net.Socket;
 import java.io.*;
 import java.net.*;
@@ -8,6 +11,8 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -73,10 +78,16 @@ public class Client extends Thread {
                     });
 
                 }
-                if (p.getId() == 5 && getUserName().equals(p.getUser())) {
-                    leaveGroup();
-                    GroupChatController.showGroupMemebers();
-                    
+                if (p.getId() == 5) {
+                    if (getUserName().equals(p.getMessage())) {
+                        leaveGroup();
+                        root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                        sc = new Scene(root);
+                        StageOpened.setScene(sc);
+
+                    } else {
+                        GroupChatController.showGroupMemebers();
+                    }
                 }
 
             }
