@@ -65,7 +65,7 @@ public class PrivateChatController implements Initializable {
             chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
             testChat = true;
         }
-        pct.SendMessage("fuck this shit");
+        pct.SendMessage(txt_field.getText());
  }
  
      public void recieveGUI(String s) {
