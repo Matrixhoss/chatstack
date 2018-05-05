@@ -209,23 +209,43 @@ public class MainPanelController implements Initializable {
     }
 
     public static void showmembers() throws Exception {
-        Onlineitems.clear();
-        ChatStack.users = ChatStack.db.getOnlineMemebers();
+        Platform.runLater(new Runnable() {
 
-        for (int i = 0; i < ChatStack.users.size(); i++) {
-            Label l = new Label(ChatStack.users.get(i));
-            l.getStyleClass().add("Label11");
+            @Override
+            public void run() {
+                try {
+                    Onlineitems.clear();
+                    ChatStack.users = ChatStack.db.getOnlineMemebers();
 
-            l.setGraphic(new ImageView(image));
-            Onlineitems.add(l);
-        }
+                    for (int i = 0; i < ChatStack.users.size(); i++) {
+                        Label l = new Label(ChatStack.users.get(i));
+                        l.getStyleClass().add("Label11");
+
+                        l.setGraphic(new ImageView(image));
+                        Onlineitems.add(l);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
     }
 
     static void showGroups() throws SQLException {
-        Groupitems.clear();
-        ChatStack.groups = ChatStack.db.getGroups();
-        Groupitems.addAll(ChatStack.groups);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Groupitems.clear();
+                    ChatStack.groups = ChatStack.db.getGroups();
+                    Groupitems.addAll(ChatStack.groups);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainPanelController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
 
     }
 
