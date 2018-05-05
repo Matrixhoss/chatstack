@@ -316,6 +316,7 @@ public class MainPanelController implements Initializable {
         stage.close();
         ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
+        pcts.closeConnection();
     }
 
     @FXML

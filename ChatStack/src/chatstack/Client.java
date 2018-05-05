@@ -29,7 +29,7 @@ public class Client extends Thread {
     private ObjectOutputStream out;
     private VBox v;
     private boolean inGroup = false;
-    private String curruntGroup="";
+    private String curruntGroup = "";
 
     @Override
     public void run() {
@@ -104,10 +104,13 @@ public class Client extends Thread {
         chatStackProtocol sp = new chatStackProtocol(0, Name, "");
         out.writeObject(sp);
         client.close();
-        MainPanelController.pcts.stop();
         this.stop();
         ThreadOpen = false;
 
+    }
+
+    public String getGroup() {
+        return this.curruntGroup;
     }
 
     public void sendPacket(int id) throws IOException {

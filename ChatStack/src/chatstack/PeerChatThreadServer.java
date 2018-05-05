@@ -105,6 +105,7 @@ public class PeerChatThreadServer extends Thread {
         catch (Exception ex) {
             System.out.println(ex);
         }
+         this.ThreadOpen = false;
     }
 
     public void setGUI(PrivateChatController1 pcc) {
