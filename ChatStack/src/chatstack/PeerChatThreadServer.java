@@ -49,9 +49,9 @@ public class PeerChatThreadServer extends Thread {
     public void run() {
         try {
             //recive any protcol
-            System.out.println("waiting for 5ra");
+            System.out.println("waiting for connection");
             s = ss.accept();
-            System.out.println("el 5ra geh");
+            System.out.println("connection successful");
             mpc.chatClicked();
             
             
@@ -59,7 +59,6 @@ public class PeerChatThreadServer extends Thread {
             while (ThreadOpen) {
                 this.in = new DataInputStream(s.getInputStream());
                 this.out = new DataOutputStream(s.getOutputStream());
-                System.out.println("fata7t el 5ra el gui");
                 System.out.println("Peer Chat: Recieved Connection, waiting for message ...");
                 String message = in.readUTF();
                 System.out.println("Peer Chat: Recieved Message ...");
