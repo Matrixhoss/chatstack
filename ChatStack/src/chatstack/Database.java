@@ -35,10 +35,10 @@ public class Database {
 
     }
 
-    public void addUser(String Username, String Password, String Email) throws SQLException {
+    public void addUser(String Username, String Password, String Email,String IP,String Group,int Online) throws SQLException {
 
         if (checkUsername(Username) && checkEmail(Email)) {
-            con.prepareStatement("INSERT INTO `Users` (`id`, `username`, `password`, `email`) VALUES (NULL, '" + Username + "', '" + Password + "', '" + Email + "'); ").executeUpdate();
+            con.prepareStatement("INSERT INTO `Users` (`id`, `username`, `password`, `email`, `group`, `ip` , `online`) VALUES (NULL, '" + Username + "', '" + Password + "', '" + Email + "', '" + IP + "', '" + Group + "', '" + Online + "'); ").executeUpdate();
             System.out.println("user added");
         } else {
             System.out.println("Username or email is arraly used");
