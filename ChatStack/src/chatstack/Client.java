@@ -45,7 +45,10 @@ public class Client extends Thread {
         try {
             //"127.0.0.1"
             //"51.255.35.210"
-            client = new Socket("51.255.35.210", 4520);
+            String ip=ChatStack.db.CheckServerIP();
+            System.out.println("Server ip : "+ip);
+            client = new Socket(ip, 4520);
+            
             ChatStack.db.updatetIP(getPublicIp(), Name);
         } catch (Exception ex) {
             ex.getStackTrace();
