@@ -145,9 +145,9 @@ public class GroupChatController implements Initializable {
         ChatScroll.getStyleClass().add("ChatScroll");
         member_LV.getStyleClass().add("List");
         member_LV.getStyleClass().add("List2");
-        
+
         ChatStack.client.setVbox(Vbox);
-        
+
         for (int i = 0; i < 10; i++) {
             Label x = new Label("Test +" + i);
             x.getStyleClass().add("Label11");
@@ -195,26 +195,20 @@ public class GroupChatController implements Initializable {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Send message">
-    public  void receiveMsg(String msg) {
+    public void receiveMsg(String msg) {
         this.playback5();
         Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-            testChat = false;
+        testChat = false;
     }
 
     @FXML
     public void hand(ActionEvent e) throws IOException, SQLException {
         this.playback3();
         ChatScroll.setVvalue(1.0);
-        if (testChat) {
-            this.playback5();
-            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-            testChat = false;
-        } else {
-            this.playback4();
-            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-            ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
+        this.playback4();
+        Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
 //            testChat = true;
-        }
         txt_field.setText("");
 
     }
@@ -227,29 +221,21 @@ public class GroupChatController implements Initializable {
         sc.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {
                 System.out.println("ENTER PRESSED");
-                if (testChat) {
-                    this.playback5();
-                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-                    testChat = false;
-                } else {
-                    this.playback4();
-                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-                    try {
-                        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
-                    } catch (IOException ex) {
-                        Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    testChat = true;
+                this.playback4();
+                Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+                try {
+                    ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
+                } catch (IOException ex) {
+                    Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
+
         });
     }
 
 //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Resize code">
     public void adjustNodes() {
 //        AP.setPrefHeight(1080);
@@ -440,104 +426,105 @@ public class GroupChatController implements Initializable {
 //</editor-fold>
 
 }
-    //<editor-fold defaultstate="collapsed" desc="SpeechBox">
-    class SpeechBox extends HBox {
+//<editor-fold defaultstate="collapsed" desc="SpeechBox">
 
-        private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
-        private Color DEFAULT_RECEIVER_COLOR = Color.web("#6c7a9d");
-        private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
+class SpeechBox extends HBox {
 
-        private String message;
-        private SpeechDirection direction;
+    private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
+    private Color DEFAULT_RECEIVER_COLOR = Color.web("#6c7a9d");
+    private Background DEFAULT_SENDER_BACKGROUND, DEFAULT_RECEIVER_BACKGROUND;
 
-        private Label displayedText;
-        private Label name;
-        private SVGPath directionIndicator;
+    private String message;
+    private SpeechDirection direction;
 
-        public SpeechBox(String message, SpeechDirection direction) {
-            this.message = message;
-            this.direction = direction;
-            initialiseDefaults();
-            setupElements();
+    private Label displayedText;
+    private Label name;
+    private SVGPath directionIndicator;
 
-        }
+    public SpeechBox(String message, SpeechDirection direction) {
+        this.message = message;
+        this.direction = direction;
+        initialiseDefaults();
+        setupElements();
 
-        public SpeechBox(String message, SpeechDirection direction, String name) {
-            this.message = message;
-            this.direction = direction;
-            initialiseDefaults();
-            setupElements();
-            this.name = new Label(name);
+    }
 
-        }
+    public SpeechBox(String message, SpeechDirection direction, String name) {
+        this.message = message;
+        this.direction = direction;
+        initialiseDefaults();
+        setupElements();
+        this.name = new Label(name);
 
-        private void initialiseDefaults() {
-            DEFAULT_SENDER_BACKGROUND = new Background(
-                    new BackgroundFill(DEFAULT_SENDER_COLOR, new CornerRadii(5, 0, 5, 5, false), Insets.EMPTY));
-            DEFAULT_RECEIVER_BACKGROUND = new Background(
-                    new BackgroundFill(DEFAULT_RECEIVER_COLOR, new CornerRadii(0, 5, 5, 5, false), Insets.EMPTY));
-        }
+    }
 
-        private void setupElements() {
-            displayedText = new Label(message);
-            displayedText.setPadding(new Insets(5));
-            displayedText.setWrapText(true);
-            directionIndicator = new SVGPath();
+    private void initialiseDefaults() {
+        DEFAULT_SENDER_BACKGROUND = new Background(
+                new BackgroundFill(DEFAULT_SENDER_COLOR, new CornerRadii(5, 0, 5, 5, false), Insets.EMPTY));
+        DEFAULT_RECEIVER_BACKGROUND = new Background(
+                new BackgroundFill(DEFAULT_RECEIVER_COLOR, new CornerRadii(0, 5, 5, 5, false), Insets.EMPTY));
+    }
 
-            if (direction == SpeechDirection.LEFT) {
-                configureForReceiver();
-            } else {
-                configureForSender();
-            }
-        }
+    private void setupElements() {
+        displayedText = new Label(message);
+        displayedText.setPadding(new Insets(5));
+        displayedText.setWrapText(true);
+        directionIndicator = new SVGPath();
 
-        private void configureForSender() {
-            name = new Label("You:");
-            name.setPadding(new Insets(0, 0, 0, 5));
-            name.getStyleClass().add("name");
-            name.setTextFill(Color.web("#414b66"));
-            displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
-            displayedText.setAlignment(Pos.CENTER_RIGHT);
-            displayedText.setFont(new Font("Verdana", 13));
-            directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
-            directionIndicator.setFill(DEFAULT_SENDER_COLOR);
-
-            VBox msgWithName = new VBox(name, displayedText);
-            msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
-            msgWithName.setBackground(DEFAULT_SENDER_BACKGROUND);
-            HBox container = new HBox(msgWithName, directionIndicator);
-
-            //Use at most 75% of the width provided to the SpeechBox for displaying the message
-            container.maxWidthProperty().bind(widthProperty().multiply(0.75));
-            getChildren().setAll(container);
-            setAlignment(Pos.CENTER_RIGHT);
-        }
-
-        private void configureForReceiver() {
-            name = new Label("Test:");
-            name.setPadding(new Insets(0, 0, 0, 5));
-            name.getStyleClass().add("name");
-            name.setTextFill(Color.web("#3e50b4"));
-            displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
-            displayedText.setAlignment(Pos.CENTER_LEFT);
-            displayedText.setFont(new Font("Verdana", 13));
-            directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
-            directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
-
-            VBox msgWithName = new VBox(name, displayedText);
-            msgWithName.setBackground(DEFAULT_RECEIVER_BACKGROUND);
-            msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
-
-            HBox container = new HBox(directionIndicator, msgWithName);
-            //Use at most 75% of the width provided to the SpeechBox for displaying the message
-            container.maxWidthProperty().bind(widthProperty().multiply(0.75));
-            getChildren().setAll(container);
-            setAlignment(Pos.CENTER_LEFT);
+        if (direction == SpeechDirection.LEFT) {
+            configureForReceiver();
+        } else {
+            configureForSender();
         }
     }
 
-    enum SpeechDirection {
-        LEFT, RIGHT
+    private void configureForSender() {
+        name = new Label("You:");
+        name.setPadding(new Insets(0, 0, 0, 5));
+        name.getStyleClass().add("name");
+        name.setTextFill(Color.web("#414b66"));
+        displayedText.setBackground(DEFAULT_SENDER_BACKGROUND);
+        displayedText.setAlignment(Pos.CENTER_RIGHT);
+        displayedText.setFont(new Font("Verdana", 13));
+        directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
+        directionIndicator.setFill(DEFAULT_SENDER_COLOR);
+
+        VBox msgWithName = new VBox(name, displayedText);
+        msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
+        msgWithName.setBackground(DEFAULT_SENDER_BACKGROUND);
+        HBox container = new HBox(msgWithName, directionIndicator);
+
+        //Use at most 75% of the width provided to the SpeechBox for displaying the message
+        container.maxWidthProperty().bind(widthProperty().multiply(0.75));
+        getChildren().setAll(container);
+        setAlignment(Pos.CENTER_RIGHT);
     }
+
+    private void configureForReceiver() {
+        name = new Label("");
+        name.setPadding(new Insets(0, 0, 0, 5));
+        name.getStyleClass().add("name");
+        name.setTextFill(Color.web("#3e50b4"));
+        displayedText.setBackground(DEFAULT_RECEIVER_BACKGROUND);
+        displayedText.setAlignment(Pos.CENTER_LEFT);
+        displayedText.setFont(new Font("Verdana", 13));
+        directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
+        directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
+
+        VBox msgWithName = new VBox(name, displayedText);
+        msgWithName.setBackground(DEFAULT_RECEIVER_BACKGROUND);
+        msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
+
+        HBox container = new HBox(directionIndicator, msgWithName);
+        //Use at most 75% of the width provided to the SpeechBox for displaying the message
+        container.maxWidthProperty().bind(widthProperty().multiply(0.75));
+        getChildren().setAll(container);
+        setAlignment(Pos.CENTER_LEFT);
+    }
+}
+
+enum SpeechDirection {
+    LEFT, RIGHT
+}
 //</editor-fold>
 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,7 +34,7 @@ public class Client extends Thread {
         try {
             while (ThreadOpen) {
                 p = (chatStackProtocol) in.readObject();
-                System.out.println("ID : " + p.getId() + "From User : " + p.getUser());
+                System.out.println("ID : " + p.getId() + " From User : " + p.getUser()+" Group: "+p.getGroup()+"Message: "+p.getMessage());
                 if (p.getId() == 1) {
                     MainPanelController.showmembers();
                 }
@@ -41,7 +42,13 @@ public class Client extends Thread {
                     MainPanelController.showGroups();
                 }
                 if (p.getId() == 4) {
-                    v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT));
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                          v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT,p.getUser()));
+                        }
+                    });
+                    
                 }
                
             }
