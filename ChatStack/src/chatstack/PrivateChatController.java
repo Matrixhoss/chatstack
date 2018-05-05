@@ -78,7 +78,7 @@ public class PrivateChatController implements Initializable {
         try{
         MainPanelController.pcts.closeConnection();
         System.out.println("Opening Connection");
-        pct = new PeerChatThread(new Socket("41.176.48.84", 55554),this);
+        pct = new PeerChatThread(new Socket("41.34.126.225", 55554),this);
         System.out.println("Opening Thread");
         pct.start();
         }
