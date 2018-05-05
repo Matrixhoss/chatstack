@@ -144,8 +144,9 @@ public class Client extends Thread {
        
     }
     
-    public void leaveGroup() {
+    public void leaveGroup() throws SQLException {
        this.curruntGroup="";
+       ChatStack.db.setUserGroup(getUserName(),"");
        this.inGroup=false;
        
     }

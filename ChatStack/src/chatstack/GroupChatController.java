@@ -426,7 +426,10 @@ public class GroupChatController implements Initializable {
     @FXML
     void menuLeavegrp(ActionEvent event) throws SQLException, IOException {
         ChatStack.client.leaveGroup();
-
+        
+        root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+        sc = new Scene(root);
+        StageOpened.setScene(sc);
     }
     //end of title bar code
 //</editor-fold>
