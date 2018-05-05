@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import protocol.chatStackProtocol;
 
 /**
@@ -25,7 +26,7 @@ public class Client extends Thread {
     private chatStackProtocol p;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-
+    private VBox v;
         
     @Override
     public void run() {
@@ -40,7 +41,7 @@ public class Client extends Thread {
                     MainPanelController.showGroups();
                 }
                 if (p.getId() == 4) {
-                   
+                    v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT));
                 }
                
             }
@@ -74,17 +75,19 @@ public class Client extends Thread {
     }
 
     public Client(String Name, int ID) throws IOException {
+        
         this.Name = Name;
         this.ID = ID;
         try {
-            client = new Socket("51.255.35.210", 4520);
+            client = new Socket("127.0.0.1", 4520);
             ChatStack.db.updatetIP(getPublicIp(), Name);
         } catch (Exception ex) {
             ex.getStackTrace();
         }
-
+        
         in = new ObjectInputStream(client.getInputStream());
         out = new ObjectOutputStream(client.getOutputStream());
+
 
     }
 
@@ -119,5 +122,11 @@ public class Client extends Thread {
         }
         return ip;
     }
+    
+    public void setVbox(VBox v){
+        this.v=v;
+    }
+    
+    
 
 }

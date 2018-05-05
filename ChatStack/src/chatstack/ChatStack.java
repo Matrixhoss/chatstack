@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.sound.sampled.AudioSystem;
@@ -39,7 +40,7 @@ public class ChatStack extends Application {
     public static Client client;
     public static ArrayList<String> users = new ArrayList<String>();
     public static ArrayList<String> groups = new ArrayList<String>();
-
+    public static VBox Vbox =new VBox();
 
     @Override
     public void start(Stage stage) throws Exception {
