@@ -1,6 +1,7 @@
 package chatstack;
 
 import static chatstack.ChatStack.StageOpened;
+import static chatstack.ChatStack.clip1;
 import static chatstack.ChatStack.root;
 import static chatstack.ChatStack.sc;
 import java.net.Socket;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javax.sound.sampled.AudioSystem;
 import protocol.chatStackProtocol;
 
 /**
@@ -73,45 +75,55 @@ public class Client extends Thread {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT, p.getUser()));
-                        }
-                    });
+                            try {
+                                clip1 = AudioSystem.getClip();
+                                InputStream audioSrc = getClass().getResourceAsStream("recieve.wav");
+                                clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+                                clip1.start();
+                            } catch (Exception e) {}
+                                v.getChildren().add(new SpeechBox(p.getMessage(), SpeechDirection.LEFT, p.getUser()));
 
-                }
-                if (p.getId() == 5) {
-                    if (getUserName().equals(p.getMessage())) {
-                        leaveGroup();
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
-                                } catch (IOException ex) {
-                                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                sc = new Scene(root);
-                                StageOpened.setScene(sc);
                             }
-                        });
+                        }
+                    );
 
-                    } else {
-                        GroupChatController.showGroupMemebers();
                     }
-                }
+                if (p.getId() == 5) {
+                        if (getUserName().equals(p.getMessage())) {
+                            leaveGroup();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    sc = new Scene(root);
+                                    StageOpened.setScene(sc);
+                                }
+                            });
 
-            }
-            this.out.close();
-        } catch (ClassNotFoundException ex) {
+                        } else {
+                            GroupChatController.showGroupMemebers();
+                        }
+                    }
+
+                }
+                this.out.close();
+            }catch (ClassNotFoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
+        }
+
+    
 
     public String getUserName() {
         return Name;

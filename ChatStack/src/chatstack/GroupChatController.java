@@ -188,6 +188,7 @@ public class GroupChatController implements Initializable {
         String owner = ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup());
         String user = ChatStack.client.getUserName();
         if (user.equals(owner) && !member_LV.getSelectionModel().getSelectedItem().getText().equals("")&&!member_LV.getSelectionModel().getSelectedItem().getText().equals(owner)) {
+            playback6();
             ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
             ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
 //            Thread.sleep(5);
@@ -246,6 +247,17 @@ public class GroupChatController implements Initializable {
         try {
             clip1 = AudioSystem.getClip();
             InputStream audioSrc = getClass().getResourceAsStream("recieve.wav");
+            clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
+            clip1.start();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
+     public void playback6() {
+        try {
+            clip1 = AudioSystem.getClip();
+            InputStream audioSrc = getClass().getResourceAsStream("kick.wav");
             clip1.open(AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc)));
             clip1.start();
         } catch (Exception e) {
