@@ -39,8 +39,7 @@ public class ChatStack extends Application {
     public static Client client;
     public static ArrayList<String> users = new ArrayList<String>();
     public static ArrayList<String> groups = new ArrayList<String>();
-    public static ObservableList<Label> Onlineitems = FXCollections.observableArrayList();
-    public static ObservableList<String> Groupitems = FXCollections.observableArrayList();
+
 
     @Override
     public void start(Stage stage) throws Exception {

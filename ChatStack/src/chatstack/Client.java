@@ -34,7 +34,6 @@ public class Client extends Thread {
                 p = (chatStackProtocol) in.readObject();
                 System.out.println("ID : " + p.getId() + "From User : " + p.getUser());
                 if (p.getId() == 1) {
-                    
                     MainPanelController.showmembers();
                 }
                 if (p.getId() == 2) {

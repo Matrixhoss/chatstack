@@ -42,8 +42,8 @@ import javafx.stage.StageStyle;
 
 public class MainPanelController implements Initializable {
 
-//    ObservableList<String> Onlineitems = FXCollections.observableArrayList();
-//    ObservableList<String> Groupitems = FXCollections.observableArrayList();
+    static ObservableList<Label> Onlineitems = FXCollections.observableArrayList();
+    static ObservableList<String> Groupitems = FXCollections.observableArrayList();
 //    JFXListView<Object>list=JFXListView<Object>;
     @FXML
     private JFXButton Join_btn;
@@ -132,8 +132,8 @@ public class MainPanelController implements Initializable {
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
         adjustNodes();
-        Online_LV.setItems(ChatStack.Onlineitems);
-        Channel_LV.setItems(ChatStack.Groupitems);
+        Online_LV.setItems(Onlineitems);
+        Channel_LV.setItems(Groupitems);
         Online_LV.getStyleClass().add("ChatScroll");
         Channel_LV.getStyleClass().add("ChatScroll");
 
@@ -210,7 +210,7 @@ public class MainPanelController implements Initializable {
     }
 
     public static void showmembers() throws Exception {
-        ChatStack.Onlineitems.clear();
+        Onlineitems.clear();
         ChatStack.users = ChatStack.db.getOnlineMemebers();
 
         for (int i = 0; i < ChatStack.users.size(); i++) {
@@ -218,15 +218,15 @@ public class MainPanelController implements Initializable {
             l.getStyleClass().add("Label11");
 
             l.setGraphic(new ImageView(image));
-            ChatStack.Onlineitems.add(l);
+            Onlineitems.add(l);
         }
 
     }
 
     static void showGroups() throws SQLException {
-        ChatStack.Groupitems.clear();
+        Groupitems.clear();
         ChatStack.groups = ChatStack.db.getGroups();
-        ChatStack.Groupitems.addAll(ChatStack.groups);
+        Groupitems.addAll(ChatStack.groups);
 
     }
 
