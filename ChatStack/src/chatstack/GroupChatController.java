@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,7 +80,7 @@ public class GroupChatController implements Initializable {
     private AnchorPane AP;
 
     @FXML
-    private JFXListView<Label> member_LV;
+    private static JFXListView<Label> member_LV;
 
     @FXML
     private Separator Seperator;
@@ -111,6 +112,8 @@ public class GroupChatController implements Initializable {
 
     @FXML
     private MenuButton Menu;
+    
+    public static Image image;
 
     boolean testChat = true;
 //</editor-fold>
@@ -133,7 +136,7 @@ public class GroupChatController implements Initializable {
         AP.setPrefWidth(1280);
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
-
+        image = new Image(getClass().getResourceAsStream("test.png"));
         Vbox.setAlignment(Pos.TOP_CENTER);
         Label init = new Label("--- Group Chat Start ---");
         init.setAlignment(Pos.CENTER);
@@ -148,16 +151,21 @@ public class GroupChatController implements Initializable {
 
         ChatStack.client.setVbox(Vbox);
 
-        for (int i = 0; i < 10; i++) {
-            Label x = new Label("Test +" + i);
+        showGroupMemebers();
+
+        //
+    }
+
+    public static void showGroupMemebers() {
+         ArrayList<String> members = new ArrayList<String>();
+         members=ChatStack.db.getMembersInGroup(ChatStack.client.getGroup());
+        for (int i = 0; i <members.size(); i++) {
+            Label x = new Label(members.get(i));
             x.getStyleClass().add("Label11");
-            Image image = new Image(getClass().getResourceAsStream("test.png"));
             x.setGraphic(new ImageView(image));
             member_LV.getItems().add(x);
 
         }
-
-        //
     }
 
     public void playback3() {
@@ -426,7 +434,7 @@ public class GroupChatController implements Initializable {
     @FXML
     void menuLeavegrp(ActionEvent event) throws SQLException, IOException {
         ChatStack.client.leaveGroup();
-        
+
         root = FXMLLoader.load(getClass().getResource("MainPanel.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
