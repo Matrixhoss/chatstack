@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,12 +78,15 @@ public class PrivateChatController implements Initializable {
         try{
         MainPanelController.pcts.closeConnection();
         System.out.println("Opening Connection");
-        pct = new PeerChatThread(new Socket("41.34.126.225", 55554),this);
+        String IP = ChatStack.db.getIP(MainPanelController.chatWithUsername);
+        pct = new PeerChatThread(new Socket(IP, 55554),this);
         System.out.println("Opening Thread");
         pct.start();
         }
         catch(IOException ex){
             System.out.println(ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrivateChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
            chatScroll.getStyleClass().add("PChat");
     }    

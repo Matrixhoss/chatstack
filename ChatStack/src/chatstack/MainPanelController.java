@@ -102,6 +102,7 @@ public class MainPanelController implements Initializable {
     boolean clicked = false;
     public static Image image;
     public static PeerChatThreadServer pcts;
+    public static String chatWithUsername;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -275,9 +276,17 @@ public class MainPanelController implements Initializable {
 
     @FXML
     void chatClicked(ActionEvent event) throws IOException {
+        try{
+        chatWithUsername = Online_LV.getSelectionModel().getSelectedItem().toString();
+        System.out.println(chatWithUsername);
         root = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
         sc = new Scene(root);
         StageOpened.setScene(sc);
+        }
+        catch(NullPointerException ex){
+            
+        }
+        
     }
 
     //<editor-fold defaultstate="collapsed" desc="TitleBar code DO NOT EDIT">

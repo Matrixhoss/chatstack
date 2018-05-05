@@ -69,6 +69,15 @@ public class Database {
         }
         return Integer.parseInt(id);
     }
+    
+        public String getIP(String Username) throws SQLException {
+        String id = "";
+        s = stmt.executeQuery("SELECT `ip` FROM `Users` WHERE `username` LIKE '" + Username + "'");
+        while (s.next()) {
+            id = s.getString("id");
+        }
+        return id;
+    }
 
     public boolean checkEmail(String Email) throws SQLException {
         String name = "";
