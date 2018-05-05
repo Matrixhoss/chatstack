@@ -18,6 +18,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,7 +105,7 @@ public class GroupChatController implements Initializable {
     private Label Name_Label;
 
     @FXML
-    private VBox Vbox;
+    public VBox Vbox;
     @FXML
     private ImageView iv_stack;
 
@@ -124,14 +126,13 @@ public class GroupChatController implements Initializable {
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
-        
+
         Menu.setText(ChatStack.client.getUserName());
-        
+
         AP.setPrefHeight(800);
         AP.setPrefWidth(1280);
         AP.prefHeightProperty().bind(sc.getWindow().heightProperty());
         AP.prefWidthProperty().bind(sc.getWindow().widthProperty());
-       
 
         Vbox.setAlignment(Pos.TOP_CENTER);
         Label init = new Label("--- Group Chat Start ---");
@@ -140,11 +141,11 @@ public class GroupChatController implements Initializable {
         init.setTextFill(Color.web("#6c7a9d"));
         Vbox.getChildren().add(init);
         adjustNodes();
-        
+
         ChatScroll.getStyleClass().add("ChatScroll");
         member_LV.getStyleClass().add("List");
         member_LV.getStyleClass().add("List2");
-        
+
         for (int i = 0; i < 10; i++) {
             Label x = new Label("Test +" + i);
             x.getStyleClass().add("Label11");
@@ -153,9 +154,8 @@ public class GroupChatController implements Initializable {
             member_LV.getItems().add(x);
 
         }
-        
-        //
 
+        //
     }
 
     public void playback3() {
@@ -179,6 +179,7 @@ public class GroupChatController implements Initializable {
             System.err.println(e);
         }
     }
+
     public void playback5() {
         try {
             clip1 = AudioSystem.getClip();
@@ -190,46 +191,64 @@ public class GroupChatController implements Initializable {
         }
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Send message">
+    public  void receiveMsg(String msg) {
+        this.playback5();
+        Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+            testChat = false;
+    }
+
     @FXML
-    public void hand(ActionEvent e) {
+    public void hand(ActionEvent e) throws IOException, SQLException {
+        this.playback3();
         ChatScroll.setVvalue(1.0);
         if (testChat) {
+            this.playback5();
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
             testChat = false;
         } else {
+            this.playback4();
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-            testChat = true;
+            ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
+//            testChat = true;
         }
         txt_field.setText("");
 
     }
+
     //
     @FXML
-            void Enterhand(KeyEvent event) {
-                this.playback3();
-                ChatScroll.setVvalue(1.0);
-                sc.setOnKeyPressed(e -> {
-                    if (e.getCode() == KeyCode.ENTER) {
-                        System.out.println("ENTER PRESSED");
-                        if (testChat) {this.playback5();
-                            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-                            testChat = false;
-                        } else {this.playback4();
-                            Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-                            testChat = true;
-                        }
-                        
+    void Enterhand(KeyEvent event) {
+        this.playback3();
+        ChatScroll.setVvalue(1.0);
+        sc.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                System.out.println("ENTER PRESSED");
+                if (testChat) {
+                    this.playback5();
+                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
+                    testChat = false;
+                } else {
+                    this.playback4();
+                    Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+                    try {
+                        ChatStack.client.sendGroupMsgPacket(4, txt_field.getText());
+                    } catch (IOException ex) {
+                        Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                });
-            }
-      
-    
-//</editor-fold>
+                    testChat = true;
+                }
 
+            }
+        });
+    }
+
+//</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="SpeechBox">
-    class SpeechBox extends HBox {
+    public class SpeechBox extends HBox {
 
         private Color DEFAULT_SENDER_COLOR = Color.web("#03add7");
         private Color DEFAULT_RECEIVER_COLOR = Color.web("#6c7a9d");
@@ -239,7 +258,7 @@ public class GroupChatController implements Initializable {
         private SpeechDirection direction;
 
         private Label displayedText;
-        private Label name ;
+        private Label name;
         private SVGPath directionIndicator;
 
         public SpeechBox(String message, SpeechDirection direction) {
@@ -247,11 +266,10 @@ public class GroupChatController implements Initializable {
             this.direction = direction;
             initialiseDefaults();
             setupElements();
-            
 
         }
-        
-         public SpeechBox(String message, SpeechDirection direction , String name) {
+
+        public SpeechBox(String message, SpeechDirection direction, String name) {
             this.message = message;
             this.direction = direction;
             initialiseDefaults();
@@ -290,12 +308,12 @@ public class GroupChatController implements Initializable {
             displayedText.setFont(new Font("Verdana", 13));
             directionIndicator.setContent("M10 0 L0 10 L0 0 Z");
             directionIndicator.setFill(DEFAULT_SENDER_COLOR);
-            
-            VBox msgWithName = new VBox(name , displayedText);
+
+            VBox msgWithName = new VBox(name, displayedText);
             msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
             msgWithName.setBackground(DEFAULT_SENDER_BACKGROUND);
             HBox container = new HBox(msgWithName, directionIndicator);
-            
+
             //Use at most 75% of the width provided to the SpeechBox for displaying the message
             container.maxWidthProperty().bind(widthProperty().multiply(0.75));
             getChildren().setAll(container);
@@ -313,10 +331,10 @@ public class GroupChatController implements Initializable {
             directionIndicator.setContent("M0 0 L10 0 L10 10 Z");
             directionIndicator.setFill(DEFAULT_RECEIVER_COLOR);
 
-            VBox msgWithName = new VBox(name , displayedText);
-              msgWithName.setBackground(DEFAULT_RECEIVER_BACKGROUND);
+            VBox msgWithName = new VBox(name, displayedText);
+            msgWithName.setBackground(DEFAULT_RECEIVER_BACKGROUND);
             msgWithName.maxHeightProperty().bind(heightProperty().multiply(0.75));
-            
+
             HBox container = new HBox(directionIndicator, msgWithName);
             //Use at most 75% of the width provided to the SpeechBox for displaying the message
             container.maxWidthProperty().bind(widthProperty().multiply(0.75));
@@ -402,10 +420,9 @@ public class GroupChatController implements Initializable {
 
         Menu.setLayoutY(AP.getPrefHeight() * (Menu.getLayoutY() / oldH));
         Menu.setLayoutX(AP.getPrefWidth() * (Menu.getLayoutX() / oldW));
-        
+
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
-        
 
     }
 //</editor-fold>
@@ -434,7 +451,6 @@ public class GroupChatController implements Initializable {
         ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
     }
-
 
     @FXML
     void maximize(ActionEvent event) {

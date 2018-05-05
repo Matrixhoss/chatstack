@@ -40,9 +40,10 @@ public class Client extends Thread {
                 if (p.getId() == 2) {
                     MainPanelController.showGroups();
                 }
-                for (int i = 0; i < ChatStack.users.size(); i++) {
-                    System.out.println(ChatStack.users.get(i));
+                if (p.getId() == 4) {
+                   
                 }
+               
             }
             this.out.close();
         } catch (ClassNotFoundException ex) {
@@ -101,8 +102,8 @@ public class Client extends Thread {
         out.writeObject(sp);
     }
 
-    public void sendMsgPacket(int id, String msg) throws IOException {
-        chatStackProtocol sp = new chatStackProtocol(id, Name, msg);
+    public void sendGroupMsgPacket(int id, String msg) throws IOException, SQLException {
+        chatStackProtocol sp = new chatStackProtocol(id, Name, msg,ChatStack.db.getUserGroup(Name));
         out.writeObject(sp);
     }
     private String getPublicIp() {
