@@ -60,20 +60,13 @@ public class PrivateChatController1 implements Initializable {
     @FXML
     private ScrollPane chatScroll;
     
-    PeerChatThread pct;
-    
      boolean testChat = false;
     
  public void send(ActionEvent e){
         chatScroll.setVvalue(1.0);
-        if (testChat) {
-            chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.LEFT));
-            testChat = false;
-        } else {
-            chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
-            testChat = true;
-        }
-        //pct.SendMessage("fuck this shit");
+        Platform.runLater(() -> {
+        MainPanelController.pcts.SendMessage(txt_field.getText());
+        });
  }
  
      public void recieveGUI(String s) {
