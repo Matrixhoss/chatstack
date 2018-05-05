@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +58,7 @@ import javafx.stage.Stage;
 import javax.sound.sampled.AudioSystem;
 
 public class GroupChatController implements Initializable {
-
+    static ObservableList<Label> OnlineMembers = FXCollections.observableArrayList();
     //<editor-fold defaultstate="collapsed" desc="Variables">
     double oldW;
     double oldH;
@@ -80,7 +83,7 @@ public class GroupChatController implements Initializable {
     private AnchorPane AP;
 
     @FXML
-    private static JFXListView<Label> member_LV;
+    private JFXListView<Label> member_LV;
 
     @FXML
     private Separator Seperator;
@@ -112,9 +115,9 @@ public class GroupChatController implements Initializable {
 
     @FXML
     private MenuButton Menu;
-    
-    public static Image image;
 
+    public static Image image;
+    
     boolean testChat = true;
 //</editor-fold>
 
@@ -129,7 +132,7 @@ public class GroupChatController implements Initializable {
         oldW = AP.getPrefWidth();
         oldH = AP.getPrefHeight();
         System.out.println("New Height: " + AP.getPrefHeight());
-
+   
         Menu.setText(ChatStack.client.getUserName());
 
         AP.setPrefHeight(800);
@@ -143,29 +146,46 @@ public class GroupChatController implements Initializable {
         init.setFont(new Font("Verdana", 14));
         init.setTextFill(Color.web("#6c7a9d"));
         Vbox.getChildren().add(init);
-        adjustNodes();
 
         ChatScroll.getStyleClass().add("ChatScroll");
+         adjustNodes();
+        member_LV.setItems(OnlineMembers);
         member_LV.getStyleClass().add("List");
         member_LV.getStyleClass().add("List2");
 
         ChatStack.client.setVbox(Vbox);
+       
+        try {
+            showGroupMemebers();
 
-        showGroupMemebers();
-
-        //
+            //
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void showGroupMemebers() {
-         ArrayList<String> members = new ArrayList<String>();
-         members=ChatStack.db.getMembersInGroup(ChatStack.client.getGroup());
-        for (int i = 0; i <members.size(); i++) {
-            Label x = new Label(members.get(i));
-            x.getStyleClass().add("Label11");
-            x.setGraphic(new ImageView(image));
-            member_LV.getItems().add(x);
+    public static void showGroupMemebers() throws SQLException {
+        Platform.runLater(new Runnable() {
 
+            @Override
+            public void run() {
+                ArrayList<String> members = new ArrayList<String>();
+                try {
+                    OnlineMembers.clear();
+                    members = ChatStack.db.getMemebrsInGroup(ChatStack.client.getGroup());
+                    for (int i = 0; i < members.size(); i++) {
+                        Label x = new Label(members.get(i));
+                        x.getStyleClass().add("Label11");
+                        x.setGraphic(new ImageView(image));
+                        OnlineMembers.add(x);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(GroupChatController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+        );
+
     }
 
     public void playback3() {

@@ -43,6 +43,9 @@ public class Client extends Thread {
                 if (p.getId() == 2) {
                     MainPanelController.showGroups();
                 }
+                if (p.getId() == 3) {
+                    GroupChatController.showGroupMemebers();
+                }
                 if (p.getId() == 4) {
                     Platform.runLater(new Runnable() {
                         @Override

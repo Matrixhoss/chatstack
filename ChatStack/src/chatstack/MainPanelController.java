@@ -221,7 +221,6 @@ public class MainPanelController implements Initializable {
                     for (int i = 0; i < ChatStack.users.size(); i++) {
                         Label l = new Label(ChatStack.users.get(i));
                         l.getStyleClass().add("Label11");
-
                         l.setGraphic(new ImageView(image));
                         Onlineitems.add(l);
                     }

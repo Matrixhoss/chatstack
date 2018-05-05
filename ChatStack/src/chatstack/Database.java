@@ -202,6 +202,17 @@ public class Database {
         }
         return Group;
     }
+    
+     public ArrayList<String> getMemebrsInGroup(String GroupName) throws SQLException {
+
+        ArrayList<String> OM = new ArrayList<String>();
+        s = stmt.executeQuery("SELECT `username` FROM `Users` WHERE `group` LIKE '" + GroupName + "'");
+        while (s.next()) {
+            OM.add((s.getString("username")));
+        }
+        return OM;
+
+    }
 
     public boolean checkGroupname(String group) throws SQLException {
         String g = "";
