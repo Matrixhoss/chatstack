@@ -12,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="500.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="500.0" style="-fx-background-color: #2D3447; -fx-border-color: #414b66;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatstack.LoginController">
    <children>
       <Pane layoutX="176.0" layoutY="32.0" />
       <JFXTextField fx:id="userText" blendMode="ADD" focusColor="#03add7" labelFloat="true" layoutX="178.0" layoutY="124.0" promptText="UserName" style="-fx-text-fill: #ffffff;" unFocusColor="WHITE" />
@@ -23,7 +23,7 @@
          <image>
             <Image url="@StackLogo.png" />
          </image></ImageView>
-      <ToolBar nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;">
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#dragToolBar" onMousePressed="#pressToolBar" prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: #abaaaa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="10.0" prefWidth="15.0" style="-fx-background-color: #f10505; -fx-border-radius: 50; -fx-background-radius: 50;" stylesheets="@hoverStyle.css" fx:id="xIcon">
                <font>
