@@ -28,6 +28,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -67,8 +69,23 @@ public class PrivateChatController1 implements Initializable {
         chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
         Platform.runLater(() -> {
         MainPanelController.pcts.SendMessage(txt_field.getText());
+        txt_field.setText("");
         });
  }
+ 
+     void Enterhand(KeyEvent event) {
+
+        chatScroll.setVvalue(1.0);
+        txt_field.getScene().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+        chat.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));
+        Platform.runLater(() -> {
+        MainPanelController.pcts.SendMessage(txt_field.getText());
+        });
+            }
+
+        });
+    }
  
      public void recieveGUI(String s) {
          Platform.runLater(() -> {
