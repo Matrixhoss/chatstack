@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -99,9 +100,20 @@ public class MainPanelController implements Initializable {
     private double yOffset;
     boolean clicked = false;
     public static Image image;
+    public static PeerChatThreadServer pcts;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+         try{
+          pcts = new PeerChatThreadServer(new ServerSocket(55554),this);
+          pcts.start();
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+		
+        
         StageOpened.setWidth(970);
         StageOpened.setHeight(600);
         StageOpened.setX(850);
@@ -356,6 +368,13 @@ public class MainPanelController implements Initializable {
         ChatStack.db.setMemeberOffline(ChatStack.client.getUserName());
         ChatStack.client.closeConnection();
 
+    }
+    
+    @FXML
+        void chatClicked() throws IOException {
+        root = FXMLLoader.load(getClass().getResource("PrivateChat.fxml"));
+        sc = new Scene(root);
+        StageOpened.setScene(sc);
     }
 
     //end of title bar code

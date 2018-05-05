@@ -9,7 +9,10 @@ import static chatstack.ChatStack.StageOpened;
 import static chatstack.ChatStack.sc;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -123,6 +126,8 @@ public class PeerChatController implements Initializable {
             init.setTextFill(Color.web("#6c7a9d"));
             Vbox.getChildren().add(init);
     }
+    
+
     @FXML
     public void hand(ActionEvent e) {
             Vbox.getChildren().add(new SpeechBox(txt_field.getText(), SpeechDirection.RIGHT));

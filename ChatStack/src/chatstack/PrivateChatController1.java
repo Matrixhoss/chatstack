@@ -38,7 +38,7 @@ import javafx.stage.Stage;
  *
  * @author Hossam
  */
-public class PrivateChatController implements Initializable {
+public class PrivateChatController1 implements Initializable {
 
     @FXML
     private TextField txt_field;
@@ -75,13 +75,7 @@ public class PrivateChatController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try{
-        pct = new PeerChatThread(new Socket("127.0.0.1", 55554),this);
-        pct.start();
-        }
-        catch(IOException ex){
-            System.out.println(ex);
-        }
+        MainPanelController.pcts.setGUI(this);
            chatScroll.getStyleClass().add("PChat");
     }    
     
