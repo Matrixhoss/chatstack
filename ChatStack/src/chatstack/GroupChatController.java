@@ -187,7 +187,7 @@ public class GroupChatController implements Initializable {
     @FXML
     public void handleKick() throws SQLException, IOException, InterruptedException {
         if (ChatStack.client.getUserName().equals(ChatStack.db.getAdminOfGroup(ChatStack.client.getGroup()))&&!member_LV.getSelectionModel().getSelectedItem().getText().equals("")) {
-//            ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
+            ChatStack.db.setUserGroup(member_LV.getSelectionModel().getSelectedItem().getText(), "");
             ChatStack.client.sendPacket(5, member_LV.getSelectionModel().getSelectedItem().getText());
             Thread.sleep(5);
             showGroupMemebers();
@@ -219,7 +219,7 @@ public class GroupChatController implements Initializable {
 
     }
 
-    public void playback3() {
+    public  void playback3() {
         try {
             clip1 = AudioSystem.getClip();
             InputStream audioSrc = getClass().getResourceAsStream("text.wav");
