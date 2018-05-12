@@ -68,7 +68,7 @@ public class PrivateChatController implements Initializable {
         pct.SendMessage(txt_field.getText());
         txt_field.setText("");
  }
- 
+ @FXML
       void Enterhand(KeyEvent event) {
 
         chatScroll.setVvalue(1.0);
@@ -95,7 +95,7 @@ public class PrivateChatController implements Initializable {
         MainPanelController.pcts.closeConnection();
         System.out.println("Opening Connection");
         String IP = ChatStack.db.getIP(MainPanelController.chatWithUsername);
-        pct = new PeerChatThread(new Socket(IP, 55554),this);
+        pct = new PeerChatThread(new Socket("192.168.43.126", 55554),this);
         System.out.println("Opening Thread");
         pct.start();
         }
