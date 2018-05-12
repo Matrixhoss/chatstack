@@ -72,7 +72,7 @@ public class PrivateChatController1 implements Initializable {
         txt_field.setText("");
         });
  }
- 
+ @FXML
      void Enterhand(KeyEvent event) {
 
         chatScroll.setVvalue(1.0);
